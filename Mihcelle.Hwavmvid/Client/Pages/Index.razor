@@ -1,0 +1,32 @@
+﻿@page "/"
+
+@inherits ComponentBase
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+@inject Applicationservice applicationservice
+
+<h1>Hello, world!</h1>
+<div>
+
+    @if (applicationservice._connection != null && applicationservice._connection.State == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+    {
+        <small>connected with id: @applicationservice._connection.ConnectionId</small>
+    }
+
+    <div>@applicationservice._connection?.ConnectionId</div>
+    <button type="button" onclick="@(() => this.StateHasChanged())">update ui</button>
+
+</div>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await applicationservice.Establishapplicationconnection();
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}
