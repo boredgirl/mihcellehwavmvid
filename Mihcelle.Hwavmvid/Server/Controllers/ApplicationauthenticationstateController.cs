@@ -42,7 +42,6 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     await usermanager.AddToRoleAsync(identityuser, "Administrator");
                 }
 
-                //string password = usermanager.PasswordHasher.HashPassword(identityuser, "!P4ssword");
                 var result = await signinmanager.PasswordSignInAsync(identityuser, "!P4ssword", true, false);
                 if (result.Succeeded)
                 {                   
@@ -51,23 +50,12 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     var claimsprincipal = new ClaimsPrincipal(claimsidentity);
                     var authenticationstate = new AuthenticationState(claimsprincipal);
 
-                    var serializeOptions = new JsonSerializerOptions();
-                    serializeOptions.WriteIndented = false;
-                    serializeOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
-                    serializeOptions.AllowTrailingCommas = true;
-                    serializeOptions.NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals;
-                    serializeOptions.DefaultBufferSize = 4096;
-                    serializeOptions.MaxDepth = 41;
-                    serializeOptions.ReferenceHandler = ReferenceHandler.Preserve;
-                    serializeOptions.PropertyNamingPolicy = null;
-
                     List<KeyValuePair<string, string>> claimslist = new();
                     foreach (var claim in HttpContext.User.Claims)
                     {
                         claimslist.Add(new KeyValuePair<string, string>(claim.Type, claim.Value));
                     }
 
-                    //var json = JsonSerializer.Serialize(claimslist);
                     return claimslist;
                 }
             }

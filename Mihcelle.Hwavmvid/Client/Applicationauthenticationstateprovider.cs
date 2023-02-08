@@ -21,19 +21,7 @@ namespace Mihcelle.Hwavmvid.Client
             
             try
             {
-                var serializeOptions = new JsonSerializerOptions();
-                serializeOptions.WriteIndented = false;
-                serializeOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
-                serializeOptions.AllowTrailingCommas = true;
-                serializeOptions.NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals;
-                serializeOptions.DefaultBufferSize = 4096;
-                serializeOptions.MaxDepth = 41;
-                serializeOptions.ReferenceHandler = ReferenceHandler.Preserve;
-                serializeOptions.PropertyNamingPolicy = null;
-
                 var claimsdic = await this._httpclient.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
-                //var items = JsonSerializer.Deserialize<List<Claim>>(claims, serializeOptions);
-
                 var claimslist = new List<Claim>();
                 foreach (var dicitem in claimsdic)
                 {
