@@ -1,0 +1,60 @@
+﻿@page "/"
+
+@inherits Authenticationbase
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using Mihcelle.Hwavmvid.Authentication.Models
+
+@inject NavigationManager navigationmanager
+
+<div>
+
+    @if (authenticationprovider._connection != null && authenticationprovider._connection.State == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+    {
+        <small>connected with id: @authenticationprovider._connection.ConnectionId</small>
+    }
+
+    <button type="button" onclick="@(() => this.StateHasChanged())">update ui</button>
+
+    username: @Context?.Applicationuser?.UserName
+
+</div>
+
+<div class="registration">
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="registration-username">@@</span>
+      <input type="text" @bind-value="Applicationuser.UserName" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="registration-username">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="registration-email">@@</span>
+      <input type="text" @bind-value="Applicationuser.Email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="registration-email">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="registration-password">@@</span>
+      <input type="text" @bind-value="Applicationuser.PasswordHash" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="registration-password">
+    </div>
+
+    <button type="button" @onclick="async () => await authenticationprovider.Register(Applicationuser)" class="btn btn-sm btn-primary">Send data</button>
+
+</div>
+
+@code {
+
+    public Applicationuser Applicationuser { get; set; } = new Applicationuser();
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Applicationuser.EmailConfirmed = true;
+        this.Applicationuser.TwoFactorEnabled = false;
+
+        return base.OnInitializedAsync();
+    }
+
+}

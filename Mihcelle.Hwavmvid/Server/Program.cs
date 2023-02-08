@@ -1,13 +1,53 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
+using Mihcelle.Hwavmvid.Authentication.Server;
 using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Server.Hubs;
+using Mihcelle.Hwavmvid.Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// mihcelle.hwavmvid
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<Applicationdbcontext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<Applicationdbcontext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+})
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = false;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                options.JsonSerializerOptions.AllowTrailingCommas = true;
+                options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+                options.JsonSerializerOptions.DefaultBufferSize = 4096;
+                options.JsonSerializerOptions.MaxDepth = 41;
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+// mihcelle.hwavmvid
 builder.Services.AddSignalR()
     .AddHubOptions<Applicationhub>(options =>
     {
@@ -48,6 +88,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
+// mihcelle.hwavmvid
 app.MapHub<Applicationhub>("/api/applicationhub", options =>
     {
         options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
@@ -56,6 +100,16 @@ app.MapHub<Applicationhub>("/api/applicationhub", options =>
         options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
         options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
     });
+
+// mihcelle.hwavmvid
+app.MapHub<Authenticationhub>("/api/authenticationhub", options =>
+{
+    options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
+    options.ApplicationMaxBufferSize = Int64.MaxValue;
+    options.TransportMaxBufferSize = Int64.MaxValue;
+    options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
+    options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
+});
 
 app.MapRazorPages();
 app.MapControllers();

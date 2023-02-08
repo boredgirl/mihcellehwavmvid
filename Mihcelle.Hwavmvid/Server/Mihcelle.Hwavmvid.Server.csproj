@@ -8,11 +8,26 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2" />
-	<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.2" />
-	<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.2" />
   </ItemGroup>
 
+	<ItemGroup>
+
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.2" />
+		
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.2" />
+		
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
+	</ItemGroup>
+
   <ItemGroup>
+    <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Authentication\Mihcelle.Hwavmvid.Authentication.csproj" />
     <ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
     <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>

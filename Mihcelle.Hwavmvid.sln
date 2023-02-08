@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Server", "Mihcelle.Hwavmvid\Server\Mihcelle.Hwavmvid.Server.csproj", "{A0C10692-CCE0-4CC1-8A0A-BA401A64C91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Server", "Mihcelle.Hwavmvid\Server\Mihcelle.Hwavmvid.Server.csproj", "{A0C10692-CCE0-4CC1-8A0A-BA401A64C91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Client", "Mihcelle.Hwavmvid\Client\Mihcelle.Hwavmvid.Client.csproj", "{105CDBD1-C7B9-45B2-A67D-68CAC26236C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Client", "Mihcelle.Hwavmvid\Client\Mihcelle.Hwavmvid.Client.csproj", "{105CDBD1-C7B9-45B2-A67D-68CAC26236C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Shared", "Mihcelle.Hwavmvid\Shared\Mihcelle.Hwavmvid.Shared.csproj", "{4226997F-386B-472D-969C-A57D2D07B43C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Shared", "Mihcelle.Hwavmvid\Shared\Mihcelle.Hwavmvid.Shared.csproj", "{4226997F-386B-472D-969C-A57D2D07B43C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Authentication", "Mihcelle.Hwavmvid.Authentication\Mihcelle.Hwavmvid.Authentication.csproj", "{D4F2FC51-0F43-4896-A844-B97C542E4943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
