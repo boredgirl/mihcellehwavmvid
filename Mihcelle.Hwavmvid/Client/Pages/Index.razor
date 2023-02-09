@@ -9,23 +9,29 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.AspNetCore.Http
+@using Mihcelle.Hwavmvid.Client.Authentication
 
 @inject NavigationManager navigationmanager
 @inject Applicationprovider applicationprovider
 
+<div class="py-3">
+    <h1>hello index page</h1>
+    <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
 
-<h1>hello index page</h1>
+    <AuthorizeView>
+        <Authorized>
+            authorized..
+        </Authorized>
+        <NotAuthorized>
+            not authorized..
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
 
-<button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
-
-<AuthorizeView>
-    <Authorized>
-        authorized..
-    </Authorized>
-    <NotAuthorized>
-        not authorized..
-    </NotAuthorized>
-</AuthorizeView>
+<div class="py-3" style="max-width: 410px;">
+    <h3>Registration</h3>
+    <Registrationcomponent></Registrationcomponent>
+</div>
 
 @code {
 

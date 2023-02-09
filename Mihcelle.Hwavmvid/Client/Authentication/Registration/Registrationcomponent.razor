@@ -11,17 +11,6 @@
 
 @inject NavigationManager navigationmanager
 
-<div>
-
-    @if (applicationprovider._connection != null && applicationprovider._connection.State == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
-    {
-        <small>connected with id: @applicationprovider._connection.ConnectionId</small>
-    }
-
-    <button type="button" onclick="@(() => this.StateHasChanged())">update ui</button>
-
-</div>
-
 <div class="registration">
 
     <div class="input-group mb-3">
