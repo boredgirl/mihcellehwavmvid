@@ -27,9 +27,12 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Authentication\Mihcelle.Hwavmvid.Authentication.csproj" />
     <ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
     <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Hubs\" />
   </ItemGroup>
 
 </Project>

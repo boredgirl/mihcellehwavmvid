@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@namespace Mihcelle.Hwavmvid.Client.Authentication
 
 @inherits Authenticationbase
 
@@ -7,20 +7,18 @@
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Http
-@using Mihcelle.Hwavmvid.Authentication.Models
+@using Mihcelle.Hwavmvid.Shared.Models
 
 @inject NavigationManager navigationmanager
 
 <div>
 
-    @if (authenticationprovider._connection != null && authenticationprovider._connection.State == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+    @if (applicationprovider._connection != null && applicationprovider._connection.State == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
     {
-        <small>connected with id: @authenticationprovider._connection.ConnectionId</small>
+        <small>connected with id: @applicationprovider._connection.ConnectionId</small>
     }
 
     <button type="button" onclick="@(() => this.StateHasChanged())">update ui</button>
-
-    username: @Context?.Applicationuser?.UserName
 
 </div>
 
@@ -41,7 +39,7 @@
       <input type="text" @bind-value="Applicationuser.PasswordHash" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="registration-password">
     </div>
 
-    <button type="button" @onclick="async () => await authenticationprovider.Register(Applicationuser)" class="btn btn-sm btn-primary">Send data</button>
+    <button type="button" @onclick="async () => await applicationprovider.Register(Applicationuser)" class="btn btn-sm btn-primary">Send data</button>
 
 </div>
 

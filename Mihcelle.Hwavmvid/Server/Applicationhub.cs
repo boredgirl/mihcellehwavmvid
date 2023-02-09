@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using Mihcelle.Hwavmvid.Authentication.Models;
+using Mihcelle.Hwavmvid.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mihcelle.Hwavmvid.Authentication.Server
+namespace Mihcelle.Hwavmvid.Server
 {
-    public class Authenticationhub : Hub
+    public class Applicationhub : Hub
     {
 
         public UserManager<Applicationuser> usermanager { get; set; }
         public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
 
-        public Authenticationhub(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
+        public Applicationhub(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;

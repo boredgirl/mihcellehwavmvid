@@ -11,7 +11,7 @@
 @using Microsoft.AspNetCore.Http
 
 @inject NavigationManager navigationmanager
-@inject Applicationservice applicationservice
+@inject Applicationprovider applicationprovider
 
 
 <h1>hello index page</h1>
@@ -34,7 +34,7 @@
 
         if (firstRender)
         {
-            await applicationservice.Establishapplicationconnection();
+            //await applicationprovider.Establishapplicationconnection();
         }
         await base.OnAfterRenderAsync(firstRender);
     }

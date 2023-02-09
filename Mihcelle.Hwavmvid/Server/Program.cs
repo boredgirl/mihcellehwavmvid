@@ -9,10 +9,9 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
-using Mihcelle.Hwavmvid.Authentication.Server;
 using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
-using Mihcelle.Hwavmvid.Server.Hubs;
 using Mihcelle.Hwavmvid.Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -95,21 +94,11 @@ app.UseAuthorization();
 app.MapHub<Applicationhub>("/api/applicationhub", options =>
     {
         options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
-        options.ApplicationMaxBufferSize = Int64.MaxValue;
-        options.TransportMaxBufferSize = Int64.MaxValue;
+        options.ApplicationMaxBufferSize = long.MaxValue;
+        options.TransportMaxBufferSize = long.MaxValue;
         options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
         options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
     });
-
-// mihcelle.hwavmvid
-app.MapHub<Authenticationhub>("/api/authenticationhub", options =>
-{
-    options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
-    options.ApplicationMaxBufferSize = Int64.MaxValue;
-    options.TransportMaxBufferSize = Int64.MaxValue;
-    options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
-    options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
-});
 
 app.MapRazorPages();
 app.MapControllers();

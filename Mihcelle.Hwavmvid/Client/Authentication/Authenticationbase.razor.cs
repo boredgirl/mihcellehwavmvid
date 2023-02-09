@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mihcelle.Hwavmvid.Client;
 
-namespace Mihcelle.Hwavmvid.Authentication.Client
+namespace Mihcelle.Hwavmvid.Client.Authentication
 {
     public class Authenticationbase : ComponentBase
     {
-        [Inject] public Authenticationprovider? authenticationprovider { get; set; }
-        public Authenticationcontext? Context { get; set; }
+        [Inject] public Applicationprovider? applicationprovider { get; set; }
 
     }
 }

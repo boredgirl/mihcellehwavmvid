@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Shared", "Mihcelle.Hwavmvid\Shared\Mihcelle.Hwavmvid.Shared.csproj", "{4226997F-386B-472D-969C-A57D2D07B43C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Authentication", "Mihcelle.Hwavmvid.Authentication\Mihcelle.Hwavmvid.Authentication.csproj", "{D4F2FC51-0F43-4896-A844-B97C542E4943}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4226997F-386B-472D-969C-A57D2D07B43C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4F2FC51-0F43-4896-A844-B97C542E4943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

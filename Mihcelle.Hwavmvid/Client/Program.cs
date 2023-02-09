@@ -20,6 +20,6 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
 
 // mihcelle.hwavmvid
-builder.Services.AddScoped<Applicationservice, Applicationservice>();
+builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
 
 await builder.Build().RunAsync();
