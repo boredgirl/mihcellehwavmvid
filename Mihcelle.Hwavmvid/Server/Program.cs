@@ -46,6 +46,18 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("Mihcelle.Hwavmvid.ServerAPI", (builder) =>
+    {
+        builder.SetIsOriginAllowedToAllowWildcardSubdomains()
+               .SetIsOriginAllowed(isOriginAllowed => true)
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials();
+    });
+});
+
 // mihcelle.hwavmvid
 builder.Services.AddSignalR()
     .AddHubOptions<Applicationhub>(options =>
@@ -86,7 +98,7 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors("Mihcelle.Hwavmvid.ServerAPI");
 app.UseAuthentication();
 app.UseAuthorization();
 

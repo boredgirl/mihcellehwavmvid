@@ -1,5 +1,4 @@
 ﻿@namespace Mihcelle.Hwavmvid.Client.Authentication
-
 @inherits Authenticationbase
 
 @using Microsoft.AspNetCore.Components
@@ -8,9 +7,10 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Http
 @using Mihcelle.Hwavmvid.Shared.Models
+@using System.Text.Json
 
+@inject IHttpClientFactory httpclientfactory
 @inject NavigationManager navigationmanager
-
 
 <div class="login">
 
@@ -21,14 +21,41 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text" id="login-password">@@</span>
-        <input type="text" @bind-value="Applicationuser.PasswordHash" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="login-password">
+        <input type="text" @bind-value="this.Applicationuser.PasswordHash" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="login-password">
     </div>
 
-    <button type="button" @onclick="async () => await applicationprovider.Login(Applicationuser)" class="btn btn-sm btn-primary">Send data</button>
+    <button type="button" @onclick="async () => await this.Loginuser()" class="btn btn-sm btn-primary">Send data</button>
 
 </div>
 
 @code {
 
-    public Applicationuser Applicationuser { get; set; } = new Applicationuser();
+    protected Applicationuser Applicationuser { get; set; } = new Applicationuser();
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Applicationuser.EmailConfirmed = true;
+        this.Applicationuser.TwoFactorEnabled = false;
+        this.Applicationuser.LockoutEnabled = true;
+
+        return base.OnInitializedAsync();
+    }
+
+    protected async Task Loginuser()
+    {
+        var dictitem = new Dictionary<string, string>();
+        dictitem.Add("Content-Type", "application/x-www-form-urlencoded");
+        var url = this.navigationmanager.BaseUri + "api/Loginuser/Signin?username=" + this.Applicationuser.UserName + "&password=" + this.Applicationuser.PasswordHash;
+        var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictitem) };
+
+        try
+        {
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
+            await client.GetAsync("Loginuser/" + this.Applicationuser.UserName + "/" + this.Applicationuser.PasswordHash);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
+    }
 }

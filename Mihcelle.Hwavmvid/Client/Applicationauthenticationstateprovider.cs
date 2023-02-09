@@ -10,10 +10,10 @@ namespace Mihcelle.Hwavmvid.Client
     public class Applicationauthenticationstateprovider : AuthenticationStateProvider
     {
 
-        private HttpClient _httpclient { get; set; }
-        public Applicationauthenticationstateprovider(HttpClient httpclient)
+        private IHttpClientFactory _httpclientfactory { get; set; }
+        public Applicationauthenticationstateprovider(IHttpClientFactory httpclientfactory)
         {
-            this._httpclient = httpclient;
+            this._httpclientfactory = httpclientfactory;
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -21,7 +21,8 @@ namespace Mihcelle.Hwavmvid.Client
             
             try
             {
-                var claimsdic = await this._httpclient.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
+                var client = this._httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
+                var claimsdic = await client.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
                 var claimslist = new List<Claim>();
                 foreach (var dicitem in claimsdic)
                 {
