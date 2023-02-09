@@ -33,19 +33,11 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         public async Task<List<KeyValuePair<string, string>>> Get()
         {
 
-            var identityuser = await usermanager.FindByEmailAsync("host7@mihcelle.hwavmvid.com");
-            if (identityuser != null)
+            if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name) && User.Identity.IsAuthenticated)
             {
-                if (!await this.rolemanager.RoleExistsAsync("Administrator"))
+                var identityuser = await usermanager.FindByNameAsync(User.Identity.Name);
+                if (identityuser != null)
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole("Administrator"));
-                    await usermanager.AddToRoleAsync(identityuser, "Administrator");
-                }
-
-                var result = await signinmanager.PasswordSignInAsync(identityuser, "!P4ssword", true, false);
-                if (result.Succeeded)
-                {                   
-
                     ClaimsIdentity claimsidentity = new ClaimsIdentity(HttpContext.User.Claims.ToList(), "requireauthenticateduser");
                     var claimsprincipal = new ClaimsPrincipal(claimsidentity);
                     var authenticationstate = new AuthenticationState(claimsprincipal);
@@ -56,10 +48,9 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                         claimslist.Add(new KeyValuePair<string, string>(claim.Type, claim.Value));
                     }
 
-                    return claimslist;
+                    return claimslist;                    
                 }
             }
-
             return null;
         }
     }
