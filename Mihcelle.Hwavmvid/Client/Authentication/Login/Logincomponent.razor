@@ -43,15 +43,10 @@
 
     protected async Task Loginuser()
     {
-        var dictitem = new Dictionary<string, string>();
-        dictitem.Add("Content-Type", "application/x-www-form-urlencoded");
-        var url = this.navigationmanager.BaseUri + "api/Loginuser/Signin?username=" + this.Applicationuser.UserName + "&password=" + this.Applicationuser.PasswordHash;
-        var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictitem) };
-
         try
         {
             var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
-            await client.GetAsync("Loginuser/" + this.Applicationuser.UserName + "/" + this.Applicationuser.PasswordHash);
+            await client.GetAsync("login/" + this.Applicationuser.UserName + "/" + this.Applicationuser.PasswordHash);
         }
         catch (Exception exception)
         {

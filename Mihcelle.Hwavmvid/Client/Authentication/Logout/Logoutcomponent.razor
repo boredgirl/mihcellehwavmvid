@@ -23,7 +23,7 @@
     {
         try
         {
-            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI");
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
             await client.GetAsync("logout");
         }
         catch (Exception exception)

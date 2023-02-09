@@ -21,19 +21,8 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
 builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
 
+// mihcelle.hwavmvid
 builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated",
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "base"));
-
-builder.Services.AddTransient<BaseAddressAuthorizationMessageHandler>();
-builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerAPI", client =>
-{
-    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-}).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-
-// Supply HttpClient instances that include access tokens when making requests to the server project
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Mihcelle.Hwavmvid.ServerAPI"));
-
-
 
 await builder.Build().RunAsync();

@@ -41,14 +41,12 @@ builder.Services.AddMvc(options =>
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
 
-builder.Services.AddHttpContextAccessor();
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddCors(option =>
 {
-    option.AddPolicy("Mihcelle.Hwavmvid.ServerAPI", (builder) =>
+    option.AddPolicy("mihcellehwavmvidcorspolicy", (builder) =>
     {
         builder.SetIsOriginAllowedToAllowWildcardSubdomains()
                .SetIsOriginAllowed(isOriginAllowed => true)
@@ -98,7 +96,7 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors("Mihcelle.Hwavmvid.ServerAPI");
+app.UseCors("mihcellehwavmvidcorspolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -13,17 +13,17 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
     public class LogoutController : ControllerBase
     {
 
-        public UserManager<IdentityUser> usermanager { get; set; }
-        public SignInManager<IdentityUser> signinmanager { get; set; }
+        public UserManager<Applicationuser> usermanager { get; set; }
+        public SignInManager<Applicationuser> signinmanager { get; set; }
 
-        public LogoutController(UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signinmanager)
+        public LogoutController(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public async Task Get()
         {
             await this.signinmanager.SignOutAsync();
