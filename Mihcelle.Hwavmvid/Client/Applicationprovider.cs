@@ -64,6 +64,54 @@ namespace Mihcelle.Hwavmvid.Client
             return false;
         }
 
+        public async Task Login(Applicationuser user)
+        {
+            try
+            {
+                if (_connection?.State == HubConnectionState.Disconnected
+                 || _connection?.State == HubConnectionState.Connecting
+                 || _connection?.State == HubConnectionState.Reconnecting)
+                {
+                    Console.WriteLine("User not connected..");
+                }
+
+                await _connection.SendAsync("Loginuser", user.UserName, user.PasswordHash).ContinueWith((task) =>
+                {
+                    if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
+                    {
+
+                    }
+                });
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
+        public async Task Logout()
+        {
+            try
+            {
+                if (_connection?.State == HubConnectionState.Disconnected
+                 || _connection?.State == HubConnectionState.Connecting
+                 || _connection?.State == HubConnectionState.Reconnecting)
+                {
+                    Console.WriteLine("User not connected..");
+                }
+
+                await _connection.SendAsync("Logoutuser").ContinueWith((task) =>
+                {
+                    if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
+                    {
+
+                    }
+                });
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
         public async Task Register(Applicationuser user)
         {
             try

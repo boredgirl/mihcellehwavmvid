@@ -36,7 +36,7 @@ namespace Mihcelle.Hwavmvid.Server
         }
 
         [AllowAnonymous]
-        public async Task Createuser(Applicationuser user, string password = "!P4ssword")
+        public async Task Createuser(Applicationuser user, string password)
         {
 
             if (user != null && !string.IsNullOrEmpty(password))
@@ -57,17 +57,23 @@ namespace Mihcelle.Hwavmvid.Server
                 }
             }
         }
-        public async Task Signin(string username, string password)
+        [AllowAnonymous]
+        public async Task Loginuser(string username, string password)
         {
             var user = await usermanager.FindByNameAsync(username);
             if (user != null)
             {
-                var result = await signinmanager.PasswordSignInAsync(user, "!P4ssword", true, false);
+                var result = await signinmanager.PasswordSignInAsync(user, password, true, false);
                 if (!result.Succeeded)
                 {
                     throw new HubException("user sign in failed..");
                 }
             }
+        }
+        [AllowAnonymous]
+        public async Task Logoutuser()
+        {
+            await this.signinmanager.SignOutAsync();
         }
         [AllowAnonymous]
         public async Task Establishapplicationconnection()

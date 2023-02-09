@@ -1,0 +1,23 @@
+﻿@namespace Mihcelle.Hwavmvid.Client.Authentication
+
+@inherits Authenticationbase
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using Mihcelle.Hwavmvid.Shared.Models
+
+@inject NavigationManager navigationmanager
+
+
+<div class="logout">
+
+    <button type="button" @onclick="async () => await applicationprovider.Logout()" class="btn btn-sm btn-primary">Send data</button>
+
+</div>
+
+@code {
+
+}
