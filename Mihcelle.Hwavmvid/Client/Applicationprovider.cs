@@ -31,7 +31,7 @@ namespace Mihcelle.Hwavmvid.Client
             try
             {
 
-                if (_connection?.State == HubConnectionState.Connected
+                if (_connection?.State == HubConnectionState.Disconnected
                  || _connection?.State == HubConnectionState.Connecting
                  || _connection?.State == HubConnectionState.Reconnecting)
                 {
@@ -68,7 +68,7 @@ namespace Mihcelle.Hwavmvid.Client
         {
             try
             {
-                if (_connection?.State == HubConnectionState.Connected
+                if (_connection?.State == HubConnectionState.Disconnected
                  || _connection?.State == HubConnectionState.Connecting
                  || _connection?.State == HubConnectionState.Reconnecting)
                 {

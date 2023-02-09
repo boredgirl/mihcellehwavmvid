@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mihcelle.Hwavmvid.Shared.Constants;
 
 namespace Mihcelle.Hwavmvid.Server
 {
@@ -35,19 +36,20 @@ namespace Mihcelle.Hwavmvid.Server
         }
 
         [AllowAnonymous]
-        public async Task Createuser(Applicationuser user, string password = "!P4ssword", string role = "Anonymous")
+        public async Task Createuser(Applicationuser user, string password = "!P4ssword")
         {
+
             if (user != null && !string.IsNullOrEmpty(password))
             {
                 var createuserresult = await this.usermanager.CreateAsync(user, password);
                 if (createuserresult.Succeeded)
                 {
-                    if (!await this.rolemanager.RoleExistsAsync(role))
+                    if (!await this.rolemanager.RoleExistsAsync(Authentication.Userrole))
                     {
-                        await this.rolemanager.CreateAsync(new IdentityRole(role));
+                        await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Userrole));
                     }
 
-                    var addtoroleresult = await usermanager.AddToRoleAsync(user, role);
+                    var addtoroleresult = await usermanager.AddToRoleAsync(user, Authentication.Userrole);
                     if (!addtoroleresult.Succeeded)
                     {
                         throw new HubException("Failed to add user to role..");
