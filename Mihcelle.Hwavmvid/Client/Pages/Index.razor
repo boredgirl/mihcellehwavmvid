@@ -13,6 +13,7 @@
 
 @inject NavigationManager navigationmanager
 @inject Applicationprovider applicationprovider
+@inject AuthenticationStateProvider authenticationstateprovider
 
 <div class="py-3">
 
@@ -22,7 +23,7 @@
 
     <AuthorizeView>
         <Authorized>
-            authorized..
+            <div><small>signedin user: @_context?.User?.Identity?.Name</small></div>
         </Authorized>
         <NotAuthorized>
             not authorized..
@@ -37,4 +38,16 @@
 
 @code {
 
+    public AuthenticationState? _context { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this._context = await this.authenticationstateprovider.GetAuthenticationStateAsync();
+            this.StateHasChanged();
+        }
+        
+        await base.OnAfterRenderAsync(firstRender);
+    }
 }
