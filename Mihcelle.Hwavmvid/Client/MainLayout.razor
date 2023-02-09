@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject Applicationprovider applicationprovider
 
 <div class="mihcelle-hwavmvid-container">
 
@@ -47,3 +48,13 @@
     </main>
 
 </div>
+
+@code{
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await this.applicationprovider.Establishapplicationconnection();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

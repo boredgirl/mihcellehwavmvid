@@ -15,7 +15,9 @@
 @inject Applicationprovider applicationprovider
 
 <div class="py-3">
+
     <h1>hello index page</h1>
+    <div><small>connectionid: @applicationprovider._connection?.ConnectionId</small></div>
     <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
 
     <AuthorizeView>
@@ -35,13 +37,4 @@
 
 @code {
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-
-        if (firstRender)
-        {
-            //await applicationprovider.Establishapplicationconnection();
-        }
-        await base.OnAfterRenderAsync(firstRender);
-    }
 }
