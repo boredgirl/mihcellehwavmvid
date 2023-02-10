@@ -4,3 +4,7 @@
 
 # mihcellehwavmvid application framework
 
+-open vs and clone the repository
+-in nuget package manager console run: add-migration [migrationname] and then run: update-database
+-build and start the application
+
