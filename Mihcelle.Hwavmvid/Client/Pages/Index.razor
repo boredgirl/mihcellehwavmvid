@@ -13,18 +13,28 @@
 
 <div class="py-3">
 
-    <h1>hello index page</h1>
-    <div><small>connectionid: @applicationprovider._connection?.ConnectionId</small></div>
-    <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
 
-    <AuthorizeView>
-        <Authorized>
-            <div><small>signedin user: @_context?.User?.Identity?.Name</small></div>
-        </Authorized>
-        <NotAuthorized>
-            not authorized..
-        </NotAuthorized>
-    </AuthorizeView>
+            <h1 class="display-4">asp .net core application framework</h1>
+            <p class="lead">
+
+                connectionid: @applicationprovider._connection?.ConnectionId
+                <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <div><small>signedin user: @_context?.User?.Identity?.Name</small></div>
+                    </Authorized>
+                    <NotAuthorized>
+                        not authorized..
+                    </NotAuthorized>
+                </AuthorizeView>
+
+            </p>
+        </div>
+    </div>
+
 </div>
 
 @code {
