@@ -1,0 +1,18 @@
+﻿@inherits MainLayoutBase
+@namespace Mihcelle.Hwavmvid.Client.Installation
+
+@inject IHttpClientFactory httpclientfactory
+
+<h3>Installationcomponent</h3>
+
+<div class="p-2 p-sm-5">
+    installation:<br />
+    open nuget package manager console<br />
+    run: add-migration [name]<br />
+    run: update-database<br />
+    go to server project -> wwwroot -> framework.json and set framework installed to true
+</div>
+
+@code {
+
+}

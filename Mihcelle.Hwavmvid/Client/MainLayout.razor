@@ -1,17 +1,13 @@
 ﻿@inherits MainLayoutBase
+@inject IHttpClientFactory httpclientfactory
 
-@if (!Convert.ToBoolean(Configuration["framework:installed"])) {
-
-    <div class="p-2 p-sm-5">
-        installation:<br />
-        open nuget package manager console<br />
-        run: add-migration [name]<br />
-        run: update-database<br />
-        go to server project -> wwwroot -> framework.json and set framework installed to true
-    </div>
+@if (!this.framework_installed)
+{
+    <h1>@this.framework_installed</h1><button type="button" @onclick="() => this.StateHasChanged()">statehaschanged()</button>
+    <Mihcelle.Hwavmvid.Client.Installation.Installationcomponent></Mihcelle.Hwavmvid.Client.Installation.Installationcomponent>
 }
 
-@if (Convert.ToBoolean(Configuration["framework:installed"]))
+@if (this.framework_installed)
 {
     <div class="mihcelle-hwavmvid-container">
 
@@ -57,6 +53,24 @@
 }
 
 @code{
+    protected override async Task OnInitializedAsync()
+    {
+
+        try
+        {
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            var response = await client.GetAsync("installation/");
+            var stng = await response.Content.ReadAsStringAsync();
+            this.framework_installed = Convert.ToBoolean(stng);
+            await this.Updatemainlayout();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
+
+        await base.OnInitializedAsync();
+    }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

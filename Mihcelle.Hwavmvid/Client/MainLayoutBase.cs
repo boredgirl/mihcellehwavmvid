@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Http;
 using Mihcelle.Hwavmvid.Client.Authentication;
 using Microsoft.Extensions.Configuration;
+using Mihcelle.Hwavmvid.Client.Installation;
 
 namespace Mihcelle.Hwavmvid.Client
 {
-    public class MainLayoutBase : LayoutComponentBase
+    public class MainLayoutBase : LayoutComponentBase, IDisposable
     {
 
         [Inject] public Applicationprovider applicationprovider { get; set; }
@@ -20,6 +21,13 @@ namespace Mihcelle.Hwavmvid.Client
         [Inject] public IConfiguration Configuration { get; set; }
 
         public AuthenticationState? _context { get; set; }
+        public bool framework_installed { get; set; }
+
+        protected override Task OnInitializedAsync()
+        {
+            return base.OnInitializedAsync();
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -29,6 +37,19 @@ namespace Mihcelle.Hwavmvid.Client
             }
 
             await base.OnAfterRenderAsync(firstRender);
+        }
+
+        public async Task Updatemainlayout()
+        {
+            await InvokeAsync(() =>
+            {
+                this.StateHasChanged();
+            });
+        }
+
+        public void Dispose()
+        {
+
         }
 
     }
