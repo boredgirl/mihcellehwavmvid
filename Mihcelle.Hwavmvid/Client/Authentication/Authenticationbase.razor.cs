@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Mihcelle.Hwavmvid.Client;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components.Authorization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net.Http;
 
 namespace Mihcelle.Hwavmvid.Client.Authentication
 {
@@ -14,6 +16,8 @@ namespace Mihcelle.Hwavmvid.Client.Authentication
     {
         [Inject] public Applicationprovider? applicationprovider { get; set; }
         [Inject] public AuthenticationStateProvider? authenticationstateprovider { get; set; }
+        [Inject] public IHttpClientFactory httpclientfactory { get; set; }
+        [Inject] public NavigationManager navigationmanager { get; set; }
 
         public JsonSerializerOptions jsonserializeroptions { get; set; } = new JsonSerializerOptions()
         {
