@@ -17,26 +17,27 @@ namespace Mihcelle.Hwavmvid.Client
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
-        {
-            
+        {            
             try
             {
                 var client = this._httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                var claimsdic = await client.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
-                var claimslist = new List<Claim>();
-                foreach (var dicitem in claimsdic)
-                {
-                    claimslist.Add(new Claim(dicitem.Key, dicitem.Value));
-                }
+                var claimsdictitems = await client.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
+                var authclaims = new List<Claim>();
 
-                var authenticationstate = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claimslist, "mihcelle.hwavmvid")));
-                return authenticationstate;
+                if (claimsdictitems != null && claimsdictitems.Any())
+                {
+                    foreach (var dicitem in claimsdictitems)
+                    {
+                        authclaims.Add(new Claim(dicitem.Key, dicitem.Value));
+                    }
+
+                    var authenticationstate = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(authclaims, "mihcelle.hwavmvid")));
+                    return authenticationstate;
+                }
             }
             catch(Exception exception)
             {
-                Console.WriteLine("----------------------------------------------------");
                 Console.WriteLine(exception.Message);
-                Console.WriteLine("----------------------------------------------------");
             }
 
             var anonymousid = new ClaimsIdentity();
