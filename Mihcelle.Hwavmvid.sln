@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Shared", "Mihcelle.Hwavmvid\Shared\Mihcelle.Hwavmvid.Shared.csproj", "{4226997F-386B-472D-969C-A57D2D07B43C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Cookies", "Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj", "{336AECF2-56A3-4C19-8121-D006D4ADCA3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Cookies", "Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj", "{336AECF2-56A3-4C19-8121-D006D4ADCA3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
