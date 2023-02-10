@@ -1,5 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.Net.NetworkInformation;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Http;
+using Mihcelle.Hwavmvid.Client.Authentication;
 
 namespace Mihcelle.Hwavmvid.Client
 {

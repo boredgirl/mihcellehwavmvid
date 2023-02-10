@@ -1,13 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Client.Authentication
 @inherits Authenticationbase
 
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Authorization
-@using System.Security.Claims
-@using Microsoft.AspNetCore.Http
-@using Mihcelle.Hwavmvid.Shared.Models
-
 <div class="logout">
 
     <button type="button" @onclick="async () => await this.Logoutuser()" class="btn btn-sm btn-link">Logout @_context?.User?.Identity?.Name</button>
