@@ -25,6 +25,7 @@
         {
             var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
             await client.GetAsync("logout");
+            this.navigationmanager.NavigateTo(navigationmanager.Uri, true);
         }
         catch (Exception exception)
         {

@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Mihcelle.Hwavmvid.Client;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Mihcelle.Hwavmvid.Client.Authentication
 {
     public class Authenticationbase : ComponentBase
     {
         [Inject] public Applicationprovider? applicationprovider { get; set; }
+        [Inject] public AuthenticationStateProvider? authenticationstateprovider { get; set; }
+
         public JsonSerializerOptions jsonserializeroptions { get; set; } = new JsonSerializerOptions()
         {
             WriteIndented = false,
