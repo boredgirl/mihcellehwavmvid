@@ -1,52 +1,66 @@
 ﻿@inherits MainLayoutBase
 
-<div class="mihcelle-hwavmvid-container">
+@if (!Convert.ToBoolean(Configuration["framework:installed"])) {
 
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
+    <div class="p-2 p-sm-5">
+        installation:<br />
+        open nuget package manager console<br />
+        run: add-migration [name]<br />
+        run: update-database<br />
+        go to server project -> wwwroot -> framework.json and set framework installed to true
+    </div>
+}
 
-                <a class="navbar-brand" href="#">Mihcellehwavmvid</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+@if (Convert.ToBoolean(Configuration["framework:installed"]))
+{
+    <div class="mihcelle-hwavmvid-container">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">developer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">documentation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">asp net core framework</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" style="left: auto !important; right: 0;">
-                                <li>
-                                    <div class="p-2 p-sm-4" style="min-width: 410px;">
-                                        <Navigationcomponent></Navigationcomponent>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand" href="#">@Configuration["framework:name"] @Configuration["framework:version"]</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">developer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">documentation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">asp net core framework</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                                    <li>
+                                        <div class="p-2 p-sm-4" style="min-width: 410px;">
+                                            <Navigationcomponent></Navigationcomponent>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <main class="container-fluid">
-        @Body
-    </main>
+        <main class="container-fluid">
+            @Body
+        </main>
 
-</div>
+    </div>
+}
 
 @code{
 

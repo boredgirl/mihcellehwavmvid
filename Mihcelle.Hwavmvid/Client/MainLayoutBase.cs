@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Http;
 using Mihcelle.Hwavmvid.Client.Authentication;
+using Microsoft.Extensions.Configuration;
 
 namespace Mihcelle.Hwavmvid.Client
 {
@@ -16,6 +17,7 @@ namespace Mihcelle.Hwavmvid.Client
         [Inject] public Applicationprovider applicationprovider { get; set; }
         [Inject] public NavigationManager navigationmanager { get; set; }
         [Inject] public AuthenticationStateProvider authenticationstateprovider { get; set; }
+        [Inject] public IConfiguration Configuration { get; set; }
 
         public AuthenticationState? _context { get; set; }
         protected override async Task OnAfterRenderAsync(bool firstRender)

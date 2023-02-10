@@ -25,4 +25,11 @@ builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
 builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated",
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api"));
 
+// mihcelle.hwavmvid
+var configclient = new HttpClient() { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+builder.Services.AddScoped(serviceprovider => configclient);
+using var response = await configclient.GetAsync("framework.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+builder.Configuration.AddJsonStream(stream);
+
 await builder.Build().RunAsync();
