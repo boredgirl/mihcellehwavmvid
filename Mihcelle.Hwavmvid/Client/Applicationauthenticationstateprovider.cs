@@ -21,7 +21,7 @@ namespace Mihcelle.Hwavmvid.Client
             
             try
             {
-                var client = this._httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
+                var client = this._httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                 var claimsdic = await client.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
                 var claimslist = new List<Claim>();
                 foreach (var dicitem in claimsdic)

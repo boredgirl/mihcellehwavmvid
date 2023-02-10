@@ -8,6 +8,7 @@
 @using Microsoft.AspNetCore.Http
 @using Mihcelle.Hwavmvid.Shared.Models
 
+@inject IHttpClientFactory httpclientfactory
 @inject NavigationManager navigationmanager
 
 <div class="registration">
@@ -27,7 +28,7 @@
       <input type="text" @bind-value="this.Applicationuser.PasswordHash" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="registration-password">
     </div>
 
-    <button type="button" @onclick="async () => await this.applicationprovider.Register(Applicationuser)" class="btn btn-sm btn-primary">Send data</button>
+    <button type="button" @onclick="async () => await this.Registeruser()" class="btn btn-sm btn-primary">Send data</button>
 
 </div>
 
@@ -36,12 +37,17 @@
 
     public Applicationuser Applicationuser { get; set; } = new Applicationuser();
 
-    protected override Task OnInitializedAsync()
+    protected async Task Registeruser()
     {
-        this.Applicationuser.EmailConfirmed = true;
-        this.Applicationuser.TwoFactorEnabled = false;
-        this.Applicationuser.LockoutEnabled = true;
-
-        return base.OnInitializedAsync();
+        try
+        {
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            await client.GetAsync("registration/" + this.Applicationuser.UserName + "/" + this.Applicationuser.Email + "/" + this.Applicationuser.PasswordHash);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
     }
+
 }

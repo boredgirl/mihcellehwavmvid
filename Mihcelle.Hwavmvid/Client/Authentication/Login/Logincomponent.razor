@@ -45,7 +45,7 @@
     {
         try
         {
-            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated");
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
             await client.GetAsync("login/" + this.Applicationuser.UserName + "/" + this.Applicationuser.PasswordHash);
         }
         catch (Exception exception)

@@ -24,8 +24,8 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.signinmanager = signinmanager;
         }
 
-        [HttpGet("{username}/{password}")]
         [AllowAnonymous]
+        [HttpGet("{username}/{password}")]
         public async Task Get(string username, string password)
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))

@@ -22,8 +22,8 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.signinmanager = signinmanager;
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public async Task Get()
         {
             await this.signinmanager.SignOutAsync();

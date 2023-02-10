@@ -22,7 +22,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticatio
 builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
 
 // mihcelle.hwavmvid
-builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerAPI.Unauthenticated",
-    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "base"));
+builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated",
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api"));
 
 await builder.Build().RunAsync();
