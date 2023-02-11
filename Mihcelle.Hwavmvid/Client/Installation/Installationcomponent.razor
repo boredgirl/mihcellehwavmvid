@@ -16,22 +16,22 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="sqlserverinstance">Sql server instance name</span>
-            <input type="text" class="form-control" placeholder=".\SQLExpress" aria-label="SQL Server Instance" aria-describedby="sqlserverinstance">
+            <input type="text" class="form-control" placeholder="@this.installationmodel.Sqlserverinstance" aria-label="SQL Server Instance" aria-describedby="sqlserverinstance">
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="database">Database name</span>
-          <input type="text" class="form-control" placeholder="mihcelle.hwavmvid" aria-label="Database name" aria-describedby="database">
+          <input type="text" class="form-control" placeholder="@this.installationmodel.Databasename" aria-label="Database name" aria-describedby="database">
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="databaseowner">Database owner</span>
-            <input type="text" class="form-control" placeholder="sa" aria-label="Database owner" aria-describedby="databaseowner">
+            <input type="text" class="form-control" placeholder="@this.installationmodel.Databaseowner" aria-label="Database owner" aria-describedby="databaseowner">
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text">Database owner password</span>
-            <input type="@this.databaseownerinputfieldtype" class="form-control" value="!default" aria-label="Database owner password">
+            <input type="@this.databaseownerinputfieldtype" class="form-control" value="@this.installationmodel.Databaseownerpassword" aria-label="Database owner password">
             <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggledatabaseownderpassword()">
                 👁
             </button>
@@ -39,12 +39,12 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="administratorusername">Administrator username</span>
-            <input type="text" class="form-control bg-dark text-light" placeholder="host" aria-label="Administrator username" aria-describedby="administratorusername" disabled>
+            <input type="text" class="form-control bg-dark text-light" placeholder="@this.installationmodel.Hostusername" aria-label="Administrator username" aria-describedby="administratorusername" disabled>
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text">Administrator password</span>
-            <input type="@this.administratorpasswordinputfieldtype" class="form-control" value="!administrator" aria-label="Administrator password">
+            <input type="@this.administratorpasswordinputfieldtype" class="form-control" value="@this.installationmodel.Hostpassword" aria-label="Administrator password">
             <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggleadministratorpassword()">
                 👁
             </button>
@@ -65,15 +65,17 @@
 @code {
 
 
-    public string databaseownerinputfieldtype { get; set; } = "password";
-    public void Toggledatabaseownderpassword()
+    protected Installationmodel installationmodel = new Installationmodel();
+
+    protected string databaseownerinputfieldtype { get; set; } = "password";
+    protected void Toggledatabaseownderpassword()
     {
         this.databaseownerinputfieldtype = this.databaseownerinputfieldtype == "text" ? "password" : this.databaseownerinputfieldtype == "password" ? "text" : "password";
         this.StateHasChanged();
     }
 
-    public string administratorpasswordinputfieldtype { get; set; } = "password";
-    public void Toggleadministratorpassword()
+    protected string administratorpasswordinputfieldtype { get; set; } = "password";
+    protected void Toggleadministratorpassword()
     {
         this.administratorpasswordinputfieldtype = this.administratorpasswordinputfieldtype == "text" ? "password" : this.administratorpasswordinputfieldtype == "password" ? "text" : "password";
         this.StateHasChanged();
