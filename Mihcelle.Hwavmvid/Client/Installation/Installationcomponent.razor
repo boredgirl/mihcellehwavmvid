@@ -3,14 +3,80 @@
 
 @inject IHttpClientFactory httpclientfactory
 
-<div class="p-2 p-sm-5">
-    installation:<br />
-    open nuget package manager console<br />
-    run: add-migration [name]<br />
-    run: update-database<br />
-    go to server project -> wwwroot -> framework.json and set framework installed to true
+<div class="container p-2 p-sm-5">
+    
+    <div style="max-width: 410px;">
+
+        <div class="p-2 p-sm-4 mb-2 bg-dark text-white">
+            installation not work yet:<br />
+            open nuget package manager console<br />
+            run: add-migration [name]<br />
+            run: update-database<br />
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="sqlserverinstance">Sql server instance name</span>
+            <input type="text" class="form-control" placeholder=".\SQLExpress" aria-label="SQL Server Instance" aria-describedby="sqlserverinstance">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="database">Database name</span>
+          <input type="text" class="form-control" placeholder="mihcelle.hwavmvid" aria-label="Database name" aria-describedby="database">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="databaseowner">Database owner</span>
+            <input type="text" class="form-control" placeholder="sa" aria-label="Database owner" aria-describedby="databaseowner">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Database owner password</span>
+            <input type="@this.databaseownerinputfieldtype" class="form-control" value="!default" aria-label="Database owner password">
+            <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggledatabaseownderpassword()">
+                👁
+            </button>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="administratorusername">Administrator username</span>
+            <input type="text" class="form-control bg-dark text-light" placeholder="host" aria-label="Administrator username" aria-describedby="administratorusername" disabled>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Administrator password</span>
+            <input type="@this.administratorpasswordinputfieldtype" class="form-control" value="!administrator" aria-label="Administrator password">
+            <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggleadministratorpassword()">
+                👁
+            </button>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" checked="checked" aria-label="Ssl connection enabled by default" disabled>
+            </div>
+
+            <input type="text" class="form-control bg-dark text-light" placeholder="Ssl connection enabled by default" aria-label="Ssl connection enabled by default" disabled>
+        </div>
+
+    </div>
+
 </div>
 
 @code {
+
+
+    public string databaseownerinputfieldtype { get; set; } = "password";
+    public void Toggledatabaseownderpassword()
+    {
+        this.databaseownerinputfieldtype = this.databaseownerinputfieldtype == "text" ? "password" : this.databaseownerinputfieldtype == "password" ? "text" : "password";
+        this.StateHasChanged();
+    }
+
+    public string administratorpasswordinputfieldtype { get; set; } = "password";
+    public void Toggleadministratorpassword()
+    {
+        this.administratorpasswordinputfieldtype = this.administratorpasswordinputfieldtype == "text" ? "password" : this.administratorpasswordinputfieldtype == "password" ? "text" : "password";
+        this.StateHasChanged();
+    }
 
 }
