@@ -17,7 +17,7 @@ using Mihcelle.Hwavmvid.Shared.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // mihcelle.hwavmvid
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");// ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<Applicationdbcontext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
