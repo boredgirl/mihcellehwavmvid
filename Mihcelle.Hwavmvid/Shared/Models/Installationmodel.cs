@@ -14,7 +14,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
         public string Databaseowner { get; set; } = "sa";
         public string Databaseownerpassword { get; set; } = "default";
         public string Hostusername { get; } = "host";
-        public string Hostpassword { get; set; } = "administrator";
+        public string Hostpassword { get; set; } = "admin";
         public bool? Usessl { get; } = true;
 
     }

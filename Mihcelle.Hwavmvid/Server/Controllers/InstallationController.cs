@@ -22,6 +22,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
     public class InstallationController : ControllerBase
     {
 
+        public IHostApplicationLifetime ihostapplicationlifetime { get; set; }
         public IWebHostEnvironment iwebhostenvironment { get; set; }
         public IConfiguration configuration { get; set; }
         public UserManager<Applicationuser> usermanager { get; set; }
@@ -29,8 +30,9 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         public RoleManager<IdentityRole> rolemanager { get; set; }
         public Applicationdbcontext context { get; set; }
 
-        public InstallationController(IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
+        public InstallationController(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
         {
+            this.ihostapplicationlifetime = ihostapplicationlifetime;
             this.iwebhostenvironment = environment;
             this.configuration = configuration;
             this.usermanager = usermanager;
@@ -54,6 +56,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpPost]
         public async Task Post([FromBody] Installationmodel model)
         {
+
             var connectionstring = $"Data Source={model.Sqlserverinstance};Initial Catalog={model.Databasename};User ID={model.Databaseowner};Password={model.Databaseownerpassword};Encrypt=true;TrustServerCertificate=true;";
             this.Updatedconnectionstring(connectionstring);
 
@@ -83,17 +86,19 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     throw new HubException("Failed to add user to role..");
                 }
             }
+
+            this.ihostapplicationlifetime.StopApplication();
         }
 
-        public void Updatedconnectionstring(string connectionstring)
+        private void Updatedconnectionstring(string connectionstring)
         {
             var jsonconfig = System.IO.File.ReadAllText(string.Concat(iwebhostenvironment.ContentRootPath, "\\", "appsettings.json"));
             var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
             if (deserializedconfig != null)
             {
                 deserializedconfig["ConnectionStrings"] = new { DefaultConnection = connectionstring };
-                var updatedConfigJson = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions{ WriteIndented = true });
-                System.IO.File.WriteAllText("appsettings.json", updatedConfigJson);
+                var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions{ WriteIndented = true });
+                System.IO.File.WriteAllText("appsettings.json", updatedconfigfile);
             }
         }
 
