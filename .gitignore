@@ -7,5 +7,4 @@ msbuild.binlog
 .vscode/
 *.binlog
 
-Mihcelle.Hwavmvid/Server/appsettings.json
 *.nupkg
