@@ -9,3 +9,4 @@ msbuild.binlog
 
 Mihcelle.Hwavmvid/Server/appsettings.json
 *.nupkg
+/Mihcelle.Hwavmvid/Server/appsettings.json
