@@ -8,6 +8,7 @@ using Mihcelle.Hwavmvid.Shared.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Net.Http;
+using System.Net.Mime;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -23,7 +24,7 @@ builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
 
 // mihcelle.hwavmvid
 builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated",
-    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api"));
+    client => { client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api"); });
 
 // mihcelle.hwavmvid
 var configclient = new HttpClient() { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };

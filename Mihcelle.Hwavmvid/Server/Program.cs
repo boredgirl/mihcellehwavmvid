@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,13 @@ using Mihcelle.Hwavmvid.Shared.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // mihcelle.hwavmvid
+var configbuilder = new ConfigurationBuilder()
+                .SetBasePath(builder.Environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{builder.Environment.ContentRootPath}.json", true, true);
+var config = configbuilder.Build();
+
+// mihcelle.hwavmvid
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");// ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<Applicationdbcontext>(options =>
     options.UseSqlServer(connectionString));
@@ -25,10 +34,7 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => options.S
     .AddEntityFrameworkStores<Applicationdbcontext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-})
+builder.Services.AddMvc()
             .AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.WriteIndented = false;

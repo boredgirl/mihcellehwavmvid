@@ -12,10 +12,10 @@ namespace Mihcelle.Hwavmvid.Shared.Models
         public string Sqlserverinstance { get; set; } = @".\sqlexpress";
         public string Databasename { get; set; } = "mihcelle.hwavmvid";
         public string Databaseowner { get; set; } = "sa";
-        public string Databaseownerpassword { get; set; } = "!default";
+        public string Databaseownerpassword { get; set; } = "default";
         public string Hostusername { get; } = "host";
-        public string Hostpassword { get; set; } = "!administrator";
-        public bool Usessl { get; } = true;
+        public string Hostpassword { get; set; } = "administrator";
+        public bool? Usessl { get; } = true;
 
     }
 }

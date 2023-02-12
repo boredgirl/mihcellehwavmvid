@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+	<Configurations>Debug;Release</Configurations>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -26,13 +27,13 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
-    <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
+		<ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Hubs\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Hubs\" />
+	</ItemGroup>
 
 </Project>

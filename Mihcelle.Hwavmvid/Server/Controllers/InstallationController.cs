@@ -7,34 +7,72 @@ using Microsoft.AspNetCore.SignalR;
 using Mihcelle.Hwavmvid.Shared.Models;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.IO;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
+using System.Text.Encodings.Web;
+using System.Text.Json.Serialization;
+using Mihcelle.Hwavmvid.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mihcelle.Hwavmvid.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class InstallationController : ControllerBase
     {
 
+        public IWebHostEnvironment iwebhostenvironment { get; set; }
         public IConfiguration configuration { get; set; }
         public UserManager<Applicationuser> usermanager { get; set; }
         public SignInManager<Applicationuser> signinmanager { get; set; }
+        public Applicationdbcontext context { get; set; }
 
-        public InstallationController(IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
+        public InstallationController(IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, Applicationdbcontext context)
         {
+            this.iwebhostenvironment = environment;
             this.configuration = configuration;
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;
+            this.context = context;
         }
 
+        [IgnoreAntiforgeryToken]
         [AllowAnonymous]
         [HttpGet]
         public async Task<bool> Get()
         {
             string defaultconnectionstring = null;
-            defaultconnectionstring = configuration.GetConnectionString("DefaultConnection");
+            defaultconnectionstring = this.configuration.GetConnectionString("DefaultConnection");
             bool framework_installed = !string.IsNullOrEmpty(defaultconnectionstring);
             return framework_installed;
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task Post([FromBody] Installationmodel model)
+        {
+            var connectionstring = $"Data Source={model.Sqlserverinstance};Initial Catalog={model.Databasename};User ID={model.Databaseowner};Password={model.Databaseownerpassword};Encrypt=true;TrustServerCertificate=true;";
+            this.Updatedconnectionstring(connectionstring);
+
+            this.context.Database.SetConnectionString(connectionstring);
+            await this.context.Database.EnsureCreatedAsync();
+            await this.context.Database.MigrateAsync();
+        }
+
+        public void Updatedconnectionstring(string connectionstring)
+        {
+            var jsonconfig = System.IO.File.ReadAllText(string.Concat(iwebhostenvironment.ContentRootPath, "\\", "appsettings.json"));
+            var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
+            if (deserializedconfig != null)
+            {
+                deserializedconfig["ConnectionStrings"] = new { DefaultConnection = connectionstring };
+                var updatedConfigJson = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                }); ;
+                System.IO.File.WriteAllText("appsettings.json", updatedConfigJson);
+            }
+        }
+
     }
 }

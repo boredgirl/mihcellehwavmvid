@@ -52,13 +52,15 @@
 }
 
 @code{
+
+
     protected override async Task OnInitializedAsync()
     {
 
         try
         {
             var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            var response = await client.GetAsync("installation/");
+            var response = await client.GetAsync("api/installation/");
             var stng = await response.Content.ReadAsStringAsync();
             this.framework_installed = Convert.ToBoolean(stng);
             await this.Updatemainlayout();

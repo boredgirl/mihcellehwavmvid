@@ -1,7 +1,12 @@
 ﻿@inherits MainLayoutBase
 @namespace Mihcelle.Hwavmvid.Client.Installation
 
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+
 @inject IHttpClientFactory httpclientfactory
+@inject HttpClient httpclient
 
 <div class="container p-2 p-sm-5">
     
@@ -16,30 +21,34 @@
         <div class="col-md-6 offset-md-3">
 
             <div class="p-2 p-sm-4 mb-2 bg-dark text-white">
-                installation not work yet:<br />
-                open nuget package manager console<br />
-                run: add-migration [name]<br />
-                run: update-database<br />
+
+                <strong>after installation application restart is required</strong><br />
+                <small style="font-size: 0.8rem;">
+                    or you install manually within vs:<br />
+                    open nuget package manager console<br />
+                    run: add-migration [name]<br />
+                    run: update-database<br />
+                </small>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="sqlserverinstance">Sql server instance name</span>
-                <input type="text" class="form-control" placeholder="@this.installationmodel.Sqlserverinstance" aria-label="SQL Server Instance" aria-describedby="sqlserverinstance">
+                <input type="text" class="form-control" @bind-value="this.installationmodel.Sqlserverinstance" placeholder="@this.installationmodel.Sqlserverinstance" aria-label="SQL Server Instance" aria-describedby="sqlserverinstance">
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text" id="database">Database name</span>
-              <input type="text" class="form-control" placeholder="@this.installationmodel.Databasename" aria-label="Database name" aria-describedby="database">
+              <input type="text" class="form-control" @bind-value="this.installationmodel.Databasename" placeholder="@this.installationmodel.Databasename" aria-label="Database name" aria-describedby="database">
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="databaseowner">Database owner</span>
-                <input type="text" class="form-control" placeholder="@this.installationmodel.Databaseowner" aria-label="Database owner" aria-describedby="databaseowner">
+                <input type="text" class="form-control" @bind-value="this.installationmodel.Databaseowner" placeholder="@this.installationmodel.Databaseowner" aria-label="Database owner" aria-describedby="databaseowner">
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text">Database owner password</span>
-                <input type="@this.databaseownerinputfieldtype" class="form-control" value="@this.installationmodel.Databaseownerpassword" aria-label="Database owner password">
+                <input type="@this.databaseownerinputfieldtype" class="form-control" @bind-value="this.installationmodel.Databaseownerpassword" aria-label="Database owner password">
                 <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggledatabaseownderpassword()">
                     👁
                 </button>
@@ -52,7 +61,7 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text">Administrator password</span>
-                <input type="@this.administratorpasswordinputfieldtype" class="form-control" value="@this.installationmodel.Hostpassword" aria-label="Administrator password">
+                <input type="@this.administratorpasswordinputfieldtype" class="form-control" @bind-value="this.installationmodel.Hostpassword" aria-label="Administrator password">
                 <button type="button" class="btn btn-sm btn-primary" style="min-width: 88px;" @onclick="() => Toggleadministratorpassword()">
                     👁
                 </button>
@@ -66,14 +75,18 @@
                 <input type="text" class="form-control bg-dark text-light" placeholder="Ssl connection enabled by default" aria-label="Ssl connection enabled by default" disabled>
             </div>
 
+            <button type="button" @onclick="async () => await this.Install()" class="btn btn-sm btn-primary">Send data</button>
+
         </div>
+
     </div>
+
 </div>
 
 @code {
 
 
-    protected Installationmodel installationmodel = new Installationmodel();
+    protected Installationmodel installationmodel { get; set; } = new Installationmodel();
 
     protected string databaseownerinputfieldtype { get; set; } = "password";
     protected void Toggledatabaseownderpassword()
@@ -87,6 +100,20 @@
     {
         this.administratorpasswordinputfieldtype = this.administratorpasswordinputfieldtype == "text" ? "password" : this.administratorpasswordinputfieldtype == "password" ? "text" : "password";
         this.StateHasChanged();
+    }
+
+    protected async Task Install()
+    {
+        try
+        {
+            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            await client.PostAsJsonAsync("api/installation", this.installationmodel);
+            this.navigationmanager.NavigateTo(this.navigationmanager.BaseUri, true);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
     }
 
 }
