@@ -1,5 +1,5 @@
 ﻿@namespace Mihcelle.Hwavmvid.Client
-@inherits ComponentBase
+@inherits MainLayoutBase
 
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -9,10 +9,6 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.AspNetCore.Http
 @using Mihcelle.Hwavmvid.Client.Authentication
-
-@inject NavigationManager navigationmanager
-@inject Applicationprovider applicationprovider
-@inject AuthenticationStateProvider authenticationstateprovider
 
 <AuthorizeView>
     <Authorized>

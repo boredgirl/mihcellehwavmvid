@@ -6,10 +6,10 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
 
-            <h1 class="display-4">asp .net core application framework</h1>
+            <h1 class="display-4 py-1" style="font-weight: 400 !important;">Complete asp .net core framework</h1>
             <p class="lead">
 
-                connectionid: @applicationprovider._connection?.ConnectionId
+                <span class="bg-warning">connectionid:</span> @this.applicationprovider._connection?.ConnectionId
                 <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
 
                 <AuthorizeView>
@@ -22,12 +22,23 @@
                 </AuthorizeView>
 
             </p>
+
         </div>
     </div>
 
 </div>
 
 @code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Task.Delay(1400).ContinueWith((task) =>
+            {
+                this.StateHasChanged();
+            });
+        }
 
-
+        await base.OnAfterRenderAsync(firstRender);
+    }
 }

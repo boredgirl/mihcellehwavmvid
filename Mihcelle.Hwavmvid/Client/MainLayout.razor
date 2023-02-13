@@ -28,12 +28,19 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Account
+                                    @if (this._context?.User?.Identity?.IsAuthenticated ?? false)
+                                    {
+                                        <span>☑@_context.User.Identity.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Account / Login</span>
+                                    }
                                 </a>
                                 <ul class="dropdown-menu" style="left: auto !important; right: 0;">
                                     <li>
                                         <div class="p-2 p-sm-4" style="min-width: 410px;">
-                                            <Navigationcomponent></Navigationcomponent>
+                                            <Accountdropdowncomponent></Accountdropdowncomponent>
                                         </div>
                                     </li>
                                 </ul>
@@ -73,10 +80,4 @@
         await base.OnInitializedAsync();
     }
 
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await this.applicationprovider.Establishapplicationconnection();
-        await base.OnAfterRenderAsync(firstRender);
-    }
 }

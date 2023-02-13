@@ -22,7 +22,7 @@ namespace Mihcelle.Hwavmvid.Client
         [Inject] public IConfiguration Configuration { get; set; }
         [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
 
-        public AuthenticationState? _context { get; set; }
+        public AuthenticationState? _context { get; set; } = null;
         public bool framework_installed { get; set; }
 
         protected override Task OnInitializedAsync()
@@ -35,6 +35,8 @@ namespace Mihcelle.Hwavmvid.Client
             if (firstRender)
             {
                 this._context = await this.authenticationstateprovider.GetAuthenticationStateAsync();
+                await this.applicationprovider.Establishapplicationconnection();
+
                 this.StateHasChanged();
             }
 
