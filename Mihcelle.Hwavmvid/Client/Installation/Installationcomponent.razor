@@ -1,13 +1,6 @@
 ﻿@inherits MainLayoutBase
 @namespace Mihcelle.Hwavmvid.Client.Installation
 
-@using System.Net.Http
-@using System.Net.Http.Json
-@using System.Threading.Tasks
-
-@inject IHttpClientFactory httpclientfactory
-@inject HttpClient httpclient
-
 <div class="container p-2 p-sm-5">
     
     <div class="row align-items-center">
@@ -106,7 +99,7 @@
     {
         try
         {
-            var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
             await client.PostAsJsonAsync("api/installation", this.installationmodel);
             this.navigationmanager.NavigateTo(this.navigationmanager.BaseUri, true);
         }

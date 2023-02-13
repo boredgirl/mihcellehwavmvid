@@ -10,13 +10,13 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LogoutController : ControllerBase
+    public class Logoutcontroller : ControllerBase
     {
 
         public UserManager<Applicationuser> usermanager { get; set; }
         public SignInManager<Applicationuser> signinmanager { get; set; }
 
-        public LogoutController(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
+        public Logoutcontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;

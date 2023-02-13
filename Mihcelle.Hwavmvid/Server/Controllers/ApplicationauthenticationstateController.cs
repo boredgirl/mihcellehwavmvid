@@ -14,14 +14,14 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ApplicationauthenticationstateController : ControllerBase
+    public class Applicationauthenticationstatecontroller : ControllerBase
     {
 
         public UserManager<Applicationuser> usermanager { get; set; }
         public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
 
-        public ApplicationauthenticationstateController(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
+        public Applicationauthenticationstatecontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;

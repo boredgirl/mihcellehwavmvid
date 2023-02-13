@@ -19,7 +19,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InstallationController : ControllerBase
+    public class Installationcontroller : ControllerBase
     {
 
         public IHostApplicationLifetime ihostapplicationlifetime { get; set; }
@@ -30,7 +30,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         public RoleManager<IdentityRole> rolemanager { get; set; }
         public Applicationdbcontext context { get; set; }
 
-        public InstallationController(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
+        public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
         {
             this.ihostapplicationlifetime = ihostapplicationlifetime;
             this.iwebhostenvironment = environment;

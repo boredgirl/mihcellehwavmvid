@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Mihcelle.Hwavmvid.Client.Authentication;
 using Microsoft.Extensions.Configuration;
 using Mihcelle.Hwavmvid.Client.Installation;
+using System.Text.Json;
 
 namespace Mihcelle.Hwavmvid.Client
 {
@@ -19,6 +20,7 @@ namespace Mihcelle.Hwavmvid.Client
         [Inject] public NavigationManager navigationmanager { get; set; }
         [Inject] public AuthenticationStateProvider authenticationstateprovider { get; set; }
         [Inject] public IConfiguration Configuration { get; set; }
+        [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
 
         public AuthenticationState? _context { get; set; }
         public bool framework_installed { get; set; }
@@ -39,7 +41,19 @@ namespace Mihcelle.Hwavmvid.Client
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        public async Task Updatemainlayout()
+        public JsonSerializerOptions jsonserializeroptions { get; set; } = new JsonSerializerOptions()
+        {
+            WriteIndented = false,
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never,
+            AllowTrailingCommas = true,
+            NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
+            DefaultBufferSize = 4096,
+            MaxDepth = 41,
+            ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles,
+            PropertyNamingPolicy = null,
+        };
+
+        protected async Task Updatemainlayout()
         {
             await InvokeAsync(() =>
             {

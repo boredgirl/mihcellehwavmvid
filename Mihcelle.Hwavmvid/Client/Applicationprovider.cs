@@ -18,7 +18,7 @@ namespace Mihcelle.Hwavmvid.Client
         private NavigationManager _navigationmanager { get; set; }
         public HubConnection? _connection { get; set; }
 
-        private const string _administrator = "host";
+        private const string unauthorizeduser = "unauthorizeduser";
 
         private string _applicationid = Guid.NewGuid().ToString();
 
@@ -26,7 +26,6 @@ namespace Mihcelle.Hwavmvid.Client
         {
             _navigationmanager = navigationmanager;
         }
-
         public async Task<bool> Establishapplicationconnection()
         {
             try
@@ -64,80 +63,6 @@ namespace Mihcelle.Hwavmvid.Client
 
             return false;
         }
-
-        public async Task Login(Applicationuser user)
-        {
-            try
-            {
-                if (_connection?.State == HubConnectionState.Disconnected
-                 || _connection?.State == HubConnectionState.Connecting
-                 || _connection?.State == HubConnectionState.Reconnecting)
-                {
-                    Console.WriteLine("User not connected..");
-                }
-
-                await _connection.SendAsync("Loginuser", user.UserName, user.PasswordHash).ContinueWith((task) =>
-                {
-                    if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
-                    {
-
-                    }
-                });
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-        }
-        public async Task Logout()
-        {
-            try
-            {
-                if (_connection?.State == HubConnectionState.Disconnected
-                 || _connection?.State == HubConnectionState.Connecting
-                 || _connection?.State == HubConnectionState.Reconnecting)
-                {
-                    Console.WriteLine("User not connected..");
-                }
-
-                await _connection.SendAsync("Logoutuser").ContinueWith((task) =>
-                {
-                    if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
-                    {
-
-                    }
-                });
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-        }
-        public async Task Register(Applicationuser user)
-        {
-            try
-            {
-                if (_connection?.State == HubConnectionState.Disconnected
-                 || _connection?.State == HubConnectionState.Connecting
-                 || _connection?.State == HubConnectionState.Reconnecting)
-                {
-                    Console.WriteLine("User not connected..");
-                }
-
-                await _connection.SendAsync("Createuser", user, user.PasswordHash).ContinueWith((task) =>
-                {
-                    if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
-                    {
-
-                    }
-                });
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-        }
-
         private HubConnection Buildapplicationhubconnection()
         {
 
@@ -145,7 +70,7 @@ namespace Mihcelle.Hwavmvid.Client
             var hubconnectionuri = _navigationmanager.BaseUri + "api/applicationhub";
 
             urlBuilder.Append(hubconnectionuri);
-            urlBuilder.Append("?username=" + _administrator);
+            urlBuilder.Append("?username=" + unauthorizeduser);
 
             var url = urlBuilder.ToString();
             return new HubConnectionBuilder().WithUrl(url, options =>
