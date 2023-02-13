@@ -9,6 +9,7 @@ using Mihcelle.Hwavmvid.Shared.Models;
 
 namespace Mihcelle.Hwavmvid.Server.Migrations
 {
+
     [DbContext(typeof(Applicationdbcontext))]
     [Migration("mihcelle.hwavmvid.01.00.00.00")]
     public class Applicationmigration : Migration
