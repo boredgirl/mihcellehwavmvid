@@ -13,7 +13,7 @@ using System.Text.Json;
 
 namespace Mihcelle.Hwavmvid.Client
 {
-    public class MainLayoutBase : LayoutComponentBase, IDisposable
+    public class Mainlayoutbase : LayoutComponentBase, IDisposable
     {
 
         [Inject] public Applicationprovider applicationprovider { get; set; }
