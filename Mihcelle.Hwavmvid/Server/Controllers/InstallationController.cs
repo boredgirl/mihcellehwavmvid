@@ -32,6 +32,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
         public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
         {
+
             this.ihostapplicationlifetime = ihostapplicationlifetime;
             this.iwebhostenvironment = environment;
             this.configuration = configuration;
@@ -46,6 +47,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpGet]
         public async Task<bool> Get()
         {
+
             string defaultconnectionstring = null;
             defaultconnectionstring = this.configuration.GetConnectionString("DefaultConnection");
             bool framework_installed = !string.IsNullOrEmpty(defaultconnectionstring);
@@ -56,6 +58,12 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpPost]
         public async Task Post([FromBody] Installationmodel model)
         {
+
+
+            if (this.User?.Identity?.IsAuthenticated ?? false)
+            {
+                await this.signinmanager.SignOutAsync();
+            }
 
             var connectionstring = $"Data Source={model.Sqlserverinstance};Initial Catalog={model.Databasename};User ID={model.Databaseowner};Password={model.Databaseownerpassword};Encrypt=true;TrustServerCertificate=true;";
             this.Updatedconnectionstring(connectionstring);
