@@ -9,6 +9,7 @@ namespace Mihcelle.Hwavmvid.Server.Data
 {
     public class Applicationdbcontext : IdentityDbContext<Applicationuser>
     {
+
         public DbSet<Applicationuser> Applicationusers { get; set; }
 
         public Applicationdbcontext(DbContextOptions options) : base(options)
@@ -20,5 +21,6 @@ namespace Mihcelle.Hwavmvid.Server.Data
         {
             base.OnModelCreating(builder);
         }
+
     }
 }

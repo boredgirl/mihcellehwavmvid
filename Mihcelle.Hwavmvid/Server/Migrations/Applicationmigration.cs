@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 using Microsoft.EntityFrameworkCore.Storage;
 using Mihcelle.Hwavmvid.Server.Data;
@@ -26,17 +27,58 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationuser",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<int>(type: "int", nullable: false),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                  },
-                 constraints: table =>
+                 constraints: dbtable =>
                  {
-                     table.PrimaryKey("pk_applicationuserid", x => x.Id);
+                     dbtable.PrimaryKey("pk_applicationuserid", x => x.Id);
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "Applicationsite",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_applicationsiteid", x => x.Id);
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "Applicationtenant",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Databaseconnectionstring = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_applicationtenantid", x => x.Id);
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "Applicationpage",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Url = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_applicationpageid", x => x.Id);
                  });
         }
 
         protected override void Down(MigrationBuilder migrationbuilder)
         {
             migrationbuilder.DropColumn("Applicationuser", "Applicationuser");
+            migrationbuilder.DropColumn("Applicationsite", "Applicationsite");
+            migrationbuilder.DropColumn("Applicationtenant", "Applicationtenant");
+            migrationbuilder.DropColumn("Applicationpage", "Applicationpage");
         }
     }
 }
