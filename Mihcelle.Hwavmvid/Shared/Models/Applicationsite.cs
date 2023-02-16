@@ -9,7 +9,9 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationsite : Applicationbase
     {
 
-
+        public string Name { get; set; }
+        public string Brandmark { get; set; }
+        public string Favicon { get; set; }
 
     }
 }

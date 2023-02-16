@@ -9,6 +9,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationtenant : Applicationbase
     {
 
+        public string Tanantid { get; set; }
         public string Name { get; set; }
         public string Databaseconnectionstring { get; set; }
 
