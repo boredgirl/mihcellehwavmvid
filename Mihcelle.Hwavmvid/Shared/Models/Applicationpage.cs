@@ -10,7 +10,6 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     {
 
         public string Siteid { get; set; }
-        public string Pagemoduleid { get; set; }
         public string Urlpath { get; set; }
         public string Name { get; set; }
         public bool Isnavigation { get; set; }

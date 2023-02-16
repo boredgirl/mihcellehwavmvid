@@ -67,6 +67,35 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
+                 name: "Applicationpage",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Urlpath = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Isnavigation = dbtable.Column<bool>(type: "bit", nullable: false, unicode: null),
+                     Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_application_pageid", item => item.Id);
+                     dbtable.ForeignKey("fk_application_siteid", item => item.Siteid, "Applicationsite");
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "Applicationmodule",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_application_moduleid", item => item.Id);
+                 });
+
+            migrationbuilder.CreateTable(
                  name: "Applicationpagemodule",
                  columns: dbtable => new
                  {
@@ -77,39 +106,8 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("pk_application_pagemoduleid", item => item.Id);
-                 });
-
-            migrationbuilder.CreateTable(
-                 name: "Applicationpage",
-                 columns: dbtable => new
-                 {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Pagemoduleid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Urlpath = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Isnavigation = dbtable.Column<bool>(type: "bit", nullable: false, unicode: null),
-                     Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
-                 },
-                 constraints: dbtable =>
-                 {
-                     dbtable.PrimaryKey("pk_application_pageid", item => item.Id);
-                     dbtable.ForeignKey("fk_application_siteid", item => item.Siteid, "Applicationsite");
-                     dbtable.ForeignKey("fk_application_pagedid_pagemoduleid", item => item.Pagemoduleid, "Applicationpagemodule");
-                 });
-
-            migrationbuilder.CreateTable(
-                 name: "Applicationmodule",
-                 columns: dbtable => new
-                 {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Pagemoduleid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
-                 },
-                 constraints: dbtable =>
-                 {
-                     dbtable.PrimaryKey("pk_application_moduleid", item => item.Id);
-                     dbtable.ForeignKey("fk_application_moduleid_pagemoduleid", item => item.Pagemoduleid, "Applicationpagemodule");
+                     dbtable.ForeignKey("fk_application_pagedid_pagemoduleid", item => item.Pageid, "Applicationpage");
+                     dbtable.ForeignKey("fk_application_moduleid_pagemoduleid", item => item.Moduleid, "Applicationmodule");
                  });
 
         }
@@ -117,9 +115,9 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
         protected override void Down(MigrationBuilder migrationbuilder)
         {
 
+            migrationbuilder.DropColumn("Applicationpagemodule", "Applicationpagemodule");
             migrationbuilder.DropColumn("Applicationmodule", "Applicationmodule");
             migrationbuilder.DropColumn("Applicationpage", "Applicationpage");
-            migrationbuilder.DropColumn("Applicationpagemodule", "Applicationpagemodule");
             migrationbuilder.DropColumn("Applicationtenant", "Applicationtenant");
             migrationbuilder.DropColumn("Applicationsite", "Applicationsite");
             migrationbuilder.DropColumn("Applicationuser", "Applicationuser");

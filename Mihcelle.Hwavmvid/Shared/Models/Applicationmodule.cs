@@ -9,7 +9,6 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationmodule : Applicationbase
     {
 
-        public string Pagemoduleid { get; set; }
 
     }
 }
