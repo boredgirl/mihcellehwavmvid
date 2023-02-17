@@ -15,6 +15,7 @@ using Mihcelle.Hwavmvid.Client;
 using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Models;
+using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,15 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
 })
     .AddEntityFrameworkStores<Applicationdbcontext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = builder.Configuration.GetSection("Installation").GetValue<string>("Createdon") ?? string.Empty;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/";
+    });
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>
