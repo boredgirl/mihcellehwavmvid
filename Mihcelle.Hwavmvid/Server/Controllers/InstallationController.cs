@@ -98,8 +98,6 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     throw new HubException("Failed to add user to role..");
                 }
             }
-
-            this.ihostapplicationlifetime.StopApplication();
         }
 
         private void Updatedconnectionstring(string connectionstring)

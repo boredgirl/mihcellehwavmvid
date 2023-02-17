@@ -45,7 +45,7 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.Cookie.Name = !string.IsNullOrEmpty(builder.Configuration.GetSection("Installation").GetValue<string>("Createdon")) ? "mihcelle.hwavmvid.id.cookie" : string.Empty;
+        options.Cookie.Name = !string.IsNullOrEmpty(builder.Configuration.GetSection("Installation").GetValue<string>("Createdon")) ? "mihcelle.hwavmvid.identity.cookie" : string.Empty;
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         options.SlidingExpiration = true;
         options.AccessDeniedPath = "/";
