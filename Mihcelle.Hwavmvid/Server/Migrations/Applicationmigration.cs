@@ -23,6 +23,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
 
         protected override void Up(MigrationBuilder migrationbuilder)
         {
+
             migrationbuilder.CreateTable(
                  name: "Applicationuser",
                  columns: dbtable => new

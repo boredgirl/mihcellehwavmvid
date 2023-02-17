@@ -27,7 +27,7 @@ var configbuilder = new ConfigurationBuilder()
 var config = configbuilder.Build();
 
 // mihcelle.hwavmvid
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");// ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<Applicationdbcontext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -42,14 +42,17 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
     .AddEntityFrameworkStores<Applicationdbcontext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+var authenticationbuilder = builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+if (!string.IsNullOrEmpty(connectionString))
+{
+    authenticationbuilder.AddCookie(options =>
     {
-        options.Cookie.Name = !string.IsNullOrEmpty(builder.Configuration.GetSection("Installation").GetValue<string>("Createdon")) ? "mihcelle.hwavmvid.identity.cookie" : string.Empty;
+        options.Cookie.Name = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         options.SlidingExpiration = true;
         options.AccessDeniedPath = "/";
     });
+}
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>
@@ -120,6 +123,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseCors("mihcellehwavmvidcorspolicy");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
