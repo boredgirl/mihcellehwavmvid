@@ -13,7 +13,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     {
 
         [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Applicationuserid { get; set; }
+        public override string Id { get; set; }
 
     }
 }

@@ -42,17 +42,20 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
     .AddEntityFrameworkStores<Applicationdbcontext>()
     .AddDefaultTokenProviders();
 
-var authenticationbuilder = builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
-if (!string.IsNullOrEmpty(connectionString))
+var installed = !string.IsNullOrEmpty(connectionString);
+var identitycookiename = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
+var authenticationbuilder = builder.Services.AddAuthentication(options =>
 {
-    authenticationbuilder.AddCookie(options =>
-    {
-        options.Cookie.Name = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.SlidingExpiration = true;
-        options.AccessDeniedPath = "/";
-    });
-}
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.RequireAuthenticatedSignIn = installed ? false : true;
+});
+authenticationbuilder.AddCookie(options =>
+{
+    options.Cookie.Name = installed ? identitycookiename : "unauthenticated";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+    options.AccessDeniedPath = "/";
+});
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>

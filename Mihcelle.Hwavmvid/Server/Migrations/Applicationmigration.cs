@@ -28,12 +28,12 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationuser",
                  columns: dbtable => new
                  {
-                     Applicationuserid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
                  {
-                     dbtable.PrimaryKey("pk_application_userid", item => item.Applicationuserid);
+                     dbtable.PrimaryKey("pk_application_userid", item => item.Id);
                  });
 
             migrationbuilder.CreateTable(
