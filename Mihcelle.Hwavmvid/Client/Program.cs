@@ -9,6 +9,9 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Net.Http;
 using System.Net.Mime;
+using Mihcelle.Hwavmvid.Cookies;
+using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -32,5 +35,8 @@ builder.Services.AddScoped(serviceprovider => configclient);
 using var response = await configclient.GetAsync("framework.json");
 using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
+
+// mihcelle.hwavmvid
+builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 
 await builder.Build().RunAsync();

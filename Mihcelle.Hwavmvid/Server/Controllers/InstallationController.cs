@@ -59,7 +59,6 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         public async Task Post([FromBody] Installationmodel model)
         {
 
-
             if (this.User?.Identity?.IsAuthenticated ?? false)
             {
                 await this.signinmanager.SignOutAsync();
@@ -114,13 +113,14 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
         private void Updateinstallationcreatedon(DateTime datetime)
         {
-            var jsonconfig = System.IO.File.ReadAllText(string.Concat(iwebhostenvironment.ContentRootPath, "\\", "appsettings.json"));
+            var configpath = string.Concat(iwebhostenvironment.ContentRootPath, "\\wwwroot\\", "framework.json");
+            var jsonconfig = System.IO.File.ReadAllText(configpath);
             var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
             if (deserializedconfig != null)
             {
                 deserializedconfig["Installation"] = new { Createdon = datetime.ToString() };
                 var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions { WriteIndented = true });
-                System.IO.File.WriteAllText("appsettings.json", updatedconfigfile);
+                System.IO.File.WriteAllText(configpath, updatedconfigfile);
             }
         }
 

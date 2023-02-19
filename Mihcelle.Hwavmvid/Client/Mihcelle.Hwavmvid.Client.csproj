@@ -23,6 +23,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
     <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>
 

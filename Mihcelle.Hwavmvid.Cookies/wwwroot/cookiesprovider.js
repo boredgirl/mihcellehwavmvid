@@ -5,6 +5,7 @@ export function cookiesprovider() {
         cookiemap: function () {
 
             this.getCookie = function (cname) {
+
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
                 for (var i = 0; i < ca.length; i++) {
@@ -18,7 +19,9 @@ export function cookiesprovider() {
                 }
                 return "";
             };
+
             this.setCookie = function (cname, cvalue, expirationdays) {
+
                 var d = new Date();
                 d.setTime(d.getTime() + (expirationdays * 24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toUTCString();

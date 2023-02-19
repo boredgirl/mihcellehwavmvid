@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Shared", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Cookies", "Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj", "{336AECF2-56A3-4C19-8121-D006D4ADCA3E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Fileupload", "Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj", "{98B5859B-BBC6-407F-A40F-17E710D98FBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Modal", "Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj", "{27C4BEB8-8BDB-4960-8E1C-921E222EE029}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mihcelle.Hwavmvid.Pager", "Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj", "{236238F2-B96F-4AA0-A295-CA7055699BDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,18 @@ Global
 		{336AECF2-56A3-4C19-8121-D006D4ADCA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{336AECF2-56A3-4C19-8121-D006D4ADCA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{336AECF2-56A3-4C19-8121-D006D4ADCA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B5859B-BBC6-407F-A40F-17E710D98FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B5859B-BBC6-407F-A40F-17E710D98FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B5859B-BBC6-407F-A40F-17E710D98FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B5859B-BBC6-407F-A40F-17E710D98FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C4BEB8-8BDB-4960-8E1C-921E222EE029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C4BEB8-8BDB-4960-8E1C-921E222EE029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C4BEB8-8BDB-4960-8E1C-921E222EE029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C4BEB8-8BDB-4960-8E1C-921E222EE029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{236238F2-B96F-4AA0-A295-CA7055699BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{236238F2-B96F-4AA0-A295-CA7055699BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{236238F2-B96F-4AA0-A295-CA7055699BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{236238F2-B96F-4AA0-A295-CA7055699BDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

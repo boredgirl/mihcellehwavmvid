@@ -1,12 +1,12 @@
 ﻿@inherits Mainlayoutbase
 @inject IHttpClientFactory httpclientfactory
 
-@if (!this.framework_installed)
+@if (this.framework_installed == false)
 {
     <Mihcelle.Hwavmvid.Client.Installation.Installationcomponent></Mihcelle.Hwavmvid.Client.Installation.Installationcomponent>
 }
 
-@if (this.framework_installed)
+@if (this.framework_installed == true)
 {
     <div class="mihcelle-hwavmvid-container">
 
@@ -72,20 +72,43 @@
     protected override async Task OnInitializedAsync()
     {
 
+        this.framework_installed = !string.IsNullOrEmpty(Configuration["framework:createdon"]);
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            if (framework_installed == false)
+            {
+                await this.Cookiesprovider.Initcookiesprovider();
+
+                var cookiename = ".AspNetCore.Identity.Application";
+                var cookievalue = await this.Cookiesprovider.Getcookie(cookiename);
+                await this.Cookiesprovider.Setcookie(cookiename, cookievalue, 0);
+            }
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    // deprecated
+    private async Task Getisinstalled()
+    {
+
         try
         {
             var client = this.httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
             var response = await client.GetAsync("api/installation/");
             var stng = await response.Content.ReadAsStringAsync();
             this.framework_installed = Convert.ToBoolean(stng);
-            await this.Updatemainlayout();
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception.Message);
         }
-
-        await base.OnInitializedAsync();
     }
 
 }

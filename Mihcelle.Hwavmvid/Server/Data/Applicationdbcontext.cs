@@ -19,7 +19,7 @@ namespace Mihcelle.Hwavmvid.Server.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            try { base.OnModelCreating(builder); } catch { }
         }
 
     }

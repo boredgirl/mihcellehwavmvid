@@ -10,6 +10,7 @@ using Mihcelle.Hwavmvid.Client.Authentication;
 using Microsoft.Extensions.Configuration;
 using Mihcelle.Hwavmvid.Client.Installation;
 using System.Text.Json;
+using Mihcelle.Hwavmvid.Cookies;
 
 namespace Mihcelle.Hwavmvid.Client
 {
@@ -21,9 +22,10 @@ namespace Mihcelle.Hwavmvid.Client
         [Inject] public AuthenticationStateProvider authenticationstateprovider { get; set; }
         [Inject] public IConfiguration Configuration { get; set; }
         [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
+        [Inject] public Cookiesprovider Cookiesprovider { get; set; }
 
         public AuthenticationState? _context { get; set; } = null;
-        public bool framework_installed { get; set; }
+        public bool? framework_installed { get; set; } = null;
 
         protected override Task OnInitializedAsync()
         {

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,9 @@ using Mihcelle.Hwavmvid.Client;
 using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Models;
+using System;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,10 +31,28 @@ var config = configbuilder.Build();
 
 // mihcelle.hwavmvid
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<Applicationdbcontext>(options =>
-    options.UseSqlServer(connectionString));
+var installed = !string.IsNullOrEmpty(connectionString);
+
+if (installed == false)
+{
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        var configpath = string.Concat(builder.Environment.ContentRootPath, "\\wwwroot\\", "framework.json");
+        var jsonconfig = System.IO.File.ReadAllText(configpath);
+        var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
+        if (deserializedconfig != null)
+        {
+            deserializedconfig["framework"] = new { Createdon = string.Empty };
+            var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions { WriteIndented = true });
+            System.IO.File.WriteAllText(configpath, updatedconfigfile);
+        }
+    }
+}
+
+builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
+builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
+{
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
@@ -42,20 +63,22 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options => {
     .AddEntityFrameworkStores<Applicationdbcontext>()
     .AddDefaultTokenProviders();
 
-var installed = !string.IsNullOrEmpty(connectionString);
-var identitycookiename = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
-var authenticationbuilder = builder.Services.AddAuthentication(options =>
+if (installed == true)
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.RequireAuthenticatedSignIn = installed ? false : true;
-});
-authenticationbuilder.AddCookie(options =>
-{
-    options.Cookie.Name = installed ? identitycookiename : "unauthenticated";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.SlidingExpiration = true;
-    options.AccessDeniedPath = "/";
-});
+    var identitycookiename = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
+    var authenticationbuilder = builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    });
+    authenticationbuilder.AddCookie(options =>
+    {
+        options.Cookie.SameSite = SameSiteMode.Unspecified;
+        options.Cookie.Name = installed ? identitycookiename : "unauthenticated";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/";
+    });
+}
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>
