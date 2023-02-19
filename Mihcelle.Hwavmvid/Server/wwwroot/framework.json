@@ -1,5 +1,10 @@
 {
   "framework": {
-    "Createdon": ""
+    "name": "Mihcellehwavmvid",
+    "description": "asp .net core application framework",
+    "version": "1.0.0"
+  },
+  "installation": {
+    "createdon":  ""
   }
 }

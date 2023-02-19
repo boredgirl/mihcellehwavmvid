@@ -118,7 +118,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
             if (deserializedconfig != null)
             {
-                deserializedconfig["Installation"] = new { Createdon = datetime.ToString() };
+                deserializedconfig["installation"] = new { createdon = datetime.ToString() };
                 var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions { WriteIndented = true });
                 System.IO.File.WriteAllText(configpath, updatedconfigfile);
             }
