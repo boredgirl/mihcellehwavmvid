@@ -71,8 +71,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-
-        this.framework_installed = !string.IsNullOrEmpty(Configuration["framework:createdon"]);
         await base.OnInitializedAsync();
     }
 
@@ -81,6 +79,8 @@
 
         if (firstRender)
         {
+            this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
+
             if (framework_installed == false)
             {
                 await this.Cookiesprovider.Initcookiesprovider();
