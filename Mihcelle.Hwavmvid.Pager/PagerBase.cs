@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace Mihcelle.Hwavmvid.Pager
 {
-    public partial class PagerBase<TPagerItem> : ComponentBase, IDisposable
+    public partial class Pagerbase<TPagerItem> : ComponentBase, IDisposable
     {
 
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected PagerService<TPagerItem> PagerService { get; set; }
+        [Inject] protected Pagerservice<TPagerItem> PagerService { get; set; }
 
         [Parameter] public RenderFragment<TPagerItem> PagerItem { get; set; }
         [Parameter] public List<TPagerItem> ContextPageItems { get; set; }
@@ -78,7 +78,7 @@ namespace Mihcelle.Hwavmvid.Pager
                 this.ContextPageItems.Clear();
 
                 var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
-                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<PagerApiItem<TPagerItem>>();
+                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<Pagerapiitem<TPagerItem>>();
 
                 this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
                 this.PagesTotal = apiItem.Pages;
@@ -114,7 +114,7 @@ namespace Mihcelle.Hwavmvid.Pager
                 this.ContextPage++;
 
                 var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
-                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<PagerApiItem<TPagerItem>>();
+                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<Pagerapiitem<TPagerItem>>();
 
                 this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
                 this.PagesTotal = apiItem.Pages;
@@ -152,7 +152,7 @@ namespace Mihcelle.Hwavmvid.Pager
             await this.UpdateContextAsync();
         }
 
-        private async void OnRemoveItem(PagerEvent<TPagerItem> obj)
+        private async void OnRemoveItem(Pagerevent<TPagerItem> obj)
         {
             await Task.Delay(200).ContinueWith(async (task) =>
             {

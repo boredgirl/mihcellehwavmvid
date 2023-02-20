@@ -36,17 +36,14 @@ var installed = !string.IsNullOrEmpty(connectionString);
 
 if (installed == false)
 {
-    if (string.IsNullOrEmpty(connectionString))
+    var configpath = string.Concat(builder.Environment.ContentRootPath, "\\wwwroot\\", "framework.json");
+    var jsonconfig = System.IO.File.ReadAllText(configpath);
+    var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
+    if (deserializedconfig != null)
     {
-        var configpath = string.Concat(builder.Environment.ContentRootPath, "\\wwwroot\\", "framework.json");
-        var jsonconfig = System.IO.File.ReadAllText(configpath);
-        var deserializedconfig = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonconfig);
-        if (deserializedconfig != null)
-        {
-            deserializedconfig["installation"] = new { createdon = string.Empty };
-            var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions { WriteIndented = true });
-            System.IO.File.WriteAllText(configpath, updatedconfigfile);
-        }
+        deserializedconfig["installation"] = new { createdon = string.Empty };
+        var updatedconfigfile = JsonSerializer.Serialize(deserializedconfig, new JsonSerializerOptions { WriteIndented = true });
+        System.IO.File.WriteAllText(configpath, updatedconfigfile);
     }
 }
 

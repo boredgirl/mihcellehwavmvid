@@ -1,6 +1,6 @@
 ﻿namespace Mihcelle.Hwavmvid.Pager
 {
-    public class PagerEvent<TPagerItem>
+    public class Pagerevent<TPagerItem>
     {
 
         public int ApiQueryId { get; set; }

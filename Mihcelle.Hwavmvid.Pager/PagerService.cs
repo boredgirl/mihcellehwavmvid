@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mihcelle.Hwavmvid.Pager
 {
-    public class PagerService<TPagerItem>
+    public class Pagerservice<TPagerItem>
     {
 
         private IJSRuntime JSRuntime { get; set; }
@@ -13,11 +13,11 @@ namespace Mihcelle.Hwavmvid.Pager
         private IJSObjectReference pagerMap { get; set; }
 
         public event Action<List<TPagerItem>, int> OnRetrievedItems;
-        public event Action<PagerEvent<TPagerItem>> OnRemoveItem;
+        public event Action<Pagerevent<TPagerItem>> OnRemoveItem;
         public event Action<int> OnUpdateContext;
         public event Action<Exception, int> OnError;
 
-        public PagerService(IJSRuntime jsRuntime)
+        public Pagerservice(IJSRuntime jsRuntime)
         {
             this.JSRuntime = jsRuntime;
         }
@@ -40,7 +40,7 @@ namespace Mihcelle.Hwavmvid.Pager
         }
         public void RemoveItem(TPagerItem item, int apiQueryId)
         {
-            this.OnRemoveItem?.Invoke(new PagerEvent<TPagerItem>() { Item = item, ApiQueryId = apiQueryId });
+            this.OnRemoveItem?.Invoke(new Pagerevent<TPagerItem>() { Item = item, ApiQueryId = apiQueryId });
         }
         public void UpdateContext(int apiQueryId)
         {
