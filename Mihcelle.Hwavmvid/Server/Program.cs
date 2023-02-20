@@ -50,7 +50,6 @@ if (installed == false)
 }
 
 builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -60,8 +59,7 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 2;
 })
-    .AddEntityFrameworkStores<Applicationdbcontext>()
-    .AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<Applicationdbcontext>();
 
 if (installed == true)
 {

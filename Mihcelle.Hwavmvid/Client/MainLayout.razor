@@ -87,7 +87,7 @@
 
                 var cookiename = ".AspNetCore.Identity.Application";
                 var cookievalue = await this.Cookiesprovider.Getcookie(cookiename);
-                await this.Cookiesprovider.Setcookie(cookiename, cookievalue, 0);
+                await this.Cookiesprovider.Setcookie(cookiename, cookievalue, -1);
             }
         }
 

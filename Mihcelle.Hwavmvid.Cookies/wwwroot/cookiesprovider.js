@@ -4,12 +4,13 @@ export function cookiesprovider() {
 
         cookiemap: function () {
 
-            this.getCookie = function (cname) {
+            this.getCookie = function (cookiename) {
 
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
+                let name = cookiename + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
                     while (c.charAt(0) == ' ') {
                         c = c.substring(1);
                     }
@@ -17,15 +18,16 @@ export function cookiesprovider() {
                         return c.substring(name.length, c.length);
                     }
                 }
-                return "";
+
+                return null;
             };
 
-            this.setCookie = function (cname, cvalue, expirationdays) {
+            this.setCookie = function (cookiename, cookievalue, expirationdays) {
 
                 var d = new Date();
                 d.setTime(d.getTime() + (expirationdays * 24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toUTCString();
-                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                document.cookie = cookiename + "=" + cookievalue + ";" + expires + ";path=/";
             };
         }
     };
