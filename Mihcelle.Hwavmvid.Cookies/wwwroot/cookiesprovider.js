@@ -1,4 +1,4 @@
-export function cookiesprovider() {
+export function initcookiesprovider() {
 
     var __obj = {
 

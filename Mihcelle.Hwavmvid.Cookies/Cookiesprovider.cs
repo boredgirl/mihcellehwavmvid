@@ -28,8 +28,8 @@ namespace Mihcelle.Hwavmvid.Cookies
         {
             if (this.Module == null || this.Cookiemap == null)
             {
-                this.Module = await this.Jsruntime.InvokeAsync<IJSObjectReference>("import", this.NavigationManager.BaseUri + "_content/Mihcelle.Hwavmvid.Cookies/cookiesprovider.js");
-                this.Cookiemap = await this.Module.InvokeAsync<IJSObjectReference>("cookiesprovider");
+                this.Module = await this.Jsruntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Cookies/cookiesprovider.js");
+                this.Cookiemap = await this.Module.InvokeAsync<IJSObjectReference>("initcookiesprovider");
             }
         }
 

@@ -61,22 +61,13 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
 })
     .AddEntityFrameworkStores<Applicationdbcontext>();
 
-if (installed == true)
+builder.Services.ConfigureApplicationCookie(options =>
 {
-    var identitycookiename = string.Concat("mihcelle_hwavmvid_identity_cookie_", builder.Configuration.GetSection("Installation").GetValue<string>("Createdon"));
-    var authenticationbuilder = builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    });
-    authenticationbuilder.AddCookie(options =>
-    {
-        options.Cookie.SameSite = SameSiteMode.Unspecified;
-        options.Cookie.Name = installed ? identitycookiename : "unauthenticated";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.SlidingExpiration = true;
-        options.AccessDeniedPath = "/";
-    });
-}
+    options.Cookie.Name = "mihcelle.hwavmvid.cookieitem";
+    options.Cookie.HttpOnly = false;
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+});
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>

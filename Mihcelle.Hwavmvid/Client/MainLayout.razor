@@ -83,11 +83,14 @@
 
             if (framework_installed == false)
             {
-                await this.Cookiesprovider.Initcookiesprovider();
+               
+                // default auth cookie name
+                // .AspNetCore.Identity.Application
 
-                var cookiename = ".AspNetCore.Identity.Application";
-                var cookievalue = await this.Cookiesprovider.Getcookie(cookiename);
-                await this.Cookiesprovider.Setcookie(cookiename, cookievalue, -1);
+                await this.Cookiesprovider.Initcookiesprovider();
+                var auth_cookie_name = "mihcelle.hwavmvid.cookieitem";
+                var cookievalue = await this.Cookiesprovider.Getcookie(auth_cookie_name);
+                await this.Cookiesprovider.Setcookie(auth_cookie_name, cookievalue, -1);
             }
         }
 
