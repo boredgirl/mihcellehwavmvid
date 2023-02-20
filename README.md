@@ -4,7 +4,11 @@
 
 # mihcellehwavmvid application framework
 
--open vs and clone the repository
+-open visual studio and clone the repository onto your desktop
+-build and run the server console project
+-then install the framework with sqlserver connection properties
+
+-if you want install manual:
 -in nuget package manager console run: add-migration [migrationname] and then run: update-database
 -build and start the application
 

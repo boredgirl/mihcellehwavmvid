@@ -15,6 +15,7 @@ using Microsoft.VisualBasic;
 using Mihcelle.Hwavmvid.Client;
 using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
+using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
 using System;
 using System.Runtime.CompilerServices;
@@ -63,7 +64,7 @@ builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.Name = "mihcelle.hwavmvid.cookieitem";
+    options.Cookie.Name = Authentication.Authcookiename;
     options.Cookie.HttpOnly = false;
     options.SlidingExpiration = true;
     options.ExpireTimeSpan = TimeSpan.FromDays(1);
