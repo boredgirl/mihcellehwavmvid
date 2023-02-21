@@ -71,6 +71,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+
+        this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
         await base.OnInitializedAsync();
     }
 
@@ -81,7 +83,6 @@
         {
 
             @* // implemented in program.cs
-            this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
             if (framework_installed == false)
             {
 
