@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Mihcelle.Hwavmvid.Fileupload
 {
-    public class FileUploadBase : ComponentBase, IDisposable
+    public class Fileuploadbase : ComponentBase, IDisposable
     {
 
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected FileUploadService FileUploadService { get; set; }
+        [Inject] protected Fileuploadservice FileUploadService { get; set; }
 
         [Parameter] public Dictionary<string, string> FileUploadHeaders { get; set; }
         [Parameter] public string ApiUrl { get; set; }
@@ -21,8 +21,8 @@ namespace Mihcelle.Hwavmvid.Fileupload
 
         public int maxFiles { get; set; } = 10;
 
-        public event EventHandler<Dictionary<Guid, FileUploadModel>> OnUploadImagesEvent;
-        public Dictionary<Guid, FileUploadModel> FileUploadModels = new Dictionary<Guid, FileUploadModel>();
+        public event EventHandler<Dictionary<Guid, Fileuploadmodel>> OnUploadImagesEvent;
+        public Dictionary<Guid, Fileuploadmodel> FileUploadModels = new Dictionary<Guid, Fileuploadmodel>();
 
         public string Output { get; set; }
         public float progresswidth { get; set; }
@@ -57,7 +57,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
                 await previewImage.OpenReadStream().ReadAsync(bytes);
                 var imageDataUrl = $"data:{imageFormat};base64,{Convert.ToBase64String(bytes)}";
 
-                var model = new FileUploadModel()
+                var model = new Fileuploadmodel()
                 {
                     Base64ImageUrl = imageDataUrl,
                     BrowserFile = iBrowserFile,
@@ -67,7 +67,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
             }
         }
 
-        private void OnUploadImagesExecute(object sender, Dictionary<Guid, FileUploadModel> e)
+        private void OnUploadImagesExecute(object sender, Dictionary<Guid, Fileuploadmodel> e)
         {
             Console.WriteLine("on upload images execute..");
         }
@@ -86,7 +86,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
             this.StateHasChanged();
         }
 
-        private async Task UploadFiles(Dictionary<Guid, FileUploadModel> models)
+        private async Task UploadFiles(Dictionary<Guid, Fileuploadmodel> models)
         {
             try
             {                
@@ -147,7 +147,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
             }
         }
 
-        private void OnFileUploadDropEventExecute(object sender, FileUploadEvent e)
+        private void OnFileUploadDropEventExecute(object sender, Fileuploadevent e)
         {
             if (this.DropzoneElementId == e.FileUploadDropzoneId)
             {

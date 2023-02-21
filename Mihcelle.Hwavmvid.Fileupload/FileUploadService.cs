@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Mihcelle.Hwavmvid.Fileupload
 {
-    public class FileUploadService
+    public class Fileuploadservice
     {
 
         public IJSRuntime JSRuntime;
@@ -15,7 +15,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
 
         public DotNetObjectReference<FileUploadServiceExtension> dotNetObjectReference;
 
-        public FileUploadService(IJSRuntime jsRuntime)
+        public Fileuploadservice(IJSRuntime jsRuntime)
         {
             this.JSRuntime = jsRuntime;
             this.FileUploadServiceExtension = new FileUploadServiceExtension();
@@ -24,7 +24,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
 
         public async Task InitFileUploadDropzone(string inputFileId, string elementId)
         {
-            this.Module = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazorfileuploadjsinterop.js");
+            this.Module = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/mihcelle.hwavmvid.fileupload/blazorfileuploadjsinterop.js");
             this.FileUploadMap = await this.Module.InvokeAsync<IJSObjectReference>("initfileupload", this.dotNetObjectReference, inputFileId, elementId);
         }
 
@@ -33,12 +33,12 @@ namespace Mihcelle.Hwavmvid.Fileupload
     public class FileUploadServiceExtension
     {
 
-        public event EventHandler<FileUploadEvent> OnDropEvent;
+        public event EventHandler<Fileuploadevent> OnDropEvent;
 
         [JSInvokable("OnDrop")]
         public void OnDrop(string elementId)
         {
-            FileUploadEvent eventParameters = new FileUploadEvent() { FileUploadDropzoneId = elementId };
+            Fileuploadevent eventParameters = new Fileuploadevent() { FileUploadDropzoneId = elementId };
             OnDropEvent?.Invoke(this, eventParameters);
         }
 

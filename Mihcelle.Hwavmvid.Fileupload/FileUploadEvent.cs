@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Mihcelle.Hwavmvid.Fileupload
 {
-    public class FileUploadEvent
+    public class Fileuploadevent
     {
 
         public string FileUploadDropzoneId { get; set; }
 
-        public FileUploadEvent() { }
+        public Fileuploadevent() { }
 
     }
 }

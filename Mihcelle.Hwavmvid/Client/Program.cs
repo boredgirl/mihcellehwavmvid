@@ -13,6 +13,7 @@ using Mihcelle.Hwavmvid.Cookies;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Mihcelle.Hwavmvid.Modal;
+using Mihcelle.Hwavmvid.Fileupload;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -39,6 +40,7 @@ builder.Configuration.AddJsonStream(stream);
 
 // mihcelle.hwavmvid
 builder.Services.AddScoped<Modalservice, Modalservice>();
+builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 
 WebAssemblyHost host = builder.Build();

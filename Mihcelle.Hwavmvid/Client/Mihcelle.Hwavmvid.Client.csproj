@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
+    <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj" />
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj" />
     <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>

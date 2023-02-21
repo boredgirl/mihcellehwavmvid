@@ -2,7 +2,7 @@
 
 namespace Mihcelle.Hwavmvid.Fileupload
 {
-    public class FileUploadModel
+    public class Fileuploadmodel
     {
 
         public string Base64ImageUrl { get; set; }

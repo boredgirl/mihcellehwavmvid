@@ -1,13 +1,21 @@
 ﻿@inherits Mainlayoutbase
 
+@using Mihcelle.Hwavmvid.Fileupload
+
 <AuthorizeView>
     <Authorized>
 
         <div>
 
-            <div class="d-flex flex-wrap bg-white mt-4">
+            <div class="bg-white mt-4">
 
-                <h4>Site settings module</h4>
+                <h5>Brandmark</h5>
+
+                <div class="p-1 bg-light">
+
+                    <Fileuploadcomponent ApiUrl="Site/Brandmark" InputFileId="@this.Brandmarkinputfieldid" DropzoneElementId="@this.Brandmarkdropzoneelementid"></Fileuploadcomponent>
+
+                </div>
 
             </div>
 
@@ -23,4 +31,6 @@
 @code {
 
 
+    public string Brandmarkdropzoneelementid { get; set; } = "brandmark_dropzone_element_id";
+    public string Brandmarkinputfieldid { get; set; } = "brandmark_input_field_id";
 }
