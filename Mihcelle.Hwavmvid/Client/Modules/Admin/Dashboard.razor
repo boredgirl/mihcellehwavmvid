@@ -89,6 +89,11 @@
     public string adminmodalelementid { get; set; } = "admin_modal_element_id";
     public Type? contextcomponenttype { get; set; } = typeof(Sitesettings);
 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 

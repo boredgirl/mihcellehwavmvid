@@ -22,12 +22,16 @@
                     <Modalbody>
 
                         <div class="bg-light text-dark px-2 py-4">
+
                             <DynamicComponent Type="@_componenttype"></DynamicComponent>
+
                         </div>
 
                     </Modalbody>
 
                     <Modalfooter>
+
+                        <button @onclick="(() => this.modalservice.HideModal(this._adminmodalelementid))" type="button" class="btn btn-sm btn-link float-end">Close settings</button>
 
                     </Modalfooter>
 
