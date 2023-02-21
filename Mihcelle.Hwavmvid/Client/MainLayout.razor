@@ -79,8 +79,9 @@
 
         if (firstRender)
         {
-            this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
 
+            @* // implemented in program.cs
+            this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
             if (framework_installed == false)
             {
 
@@ -92,6 +93,7 @@
                 var cookievalue = await this.Cookiesprovider.Getcookie(auth_cookie_name);
                 await this.Cookiesprovider.Setcookie(auth_cookie_name, cookievalue, -1);
             }
+            *@
         }
 
         await base.OnAfterRenderAsync(firstRender);

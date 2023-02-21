@@ -39,4 +39,13 @@ builder.Configuration.AddJsonStream(stream);
 // mihcelle.hwavmvid
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 
-await builder.Build().RunAsync();
+WebAssemblyHost host = builder.Build();
+IConfiguration? configuration = host.Services.GetService<IConfiguration>();
+Cookiesprovider? cookiesprovider = host.Services.GetService<Cookiesprovider>();
+if (cookiesprovider != null && string.IsNullOrEmpty(configuration?["installation:createdon"]))
+{
+    await cookiesprovider.Initcookiesprovider();
+    await cookiesprovider.Setcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, string.Empty, (-1));
+}
+
+await host.RunAsync();

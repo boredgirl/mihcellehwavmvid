@@ -12,7 +12,7 @@ namespace Mihcelle.Hwavmvid.Server.Data
 
         public DbSet<Applicationuser> Applicationusers { get; set; }
 
-        public Applicationdbcontext(DbContextOptions options) : base(options)
+        public Applicationdbcontext(DbContextOptions options) : base (options)
         {
 
         }

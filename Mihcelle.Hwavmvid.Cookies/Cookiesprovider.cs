@@ -16,13 +16,11 @@ namespace Mihcelle.Hwavmvid.Cookies
         public IJSObjectReference Cookiemap { get; set; }
 
         public DotNetObjectReference<Cookiesprovider> DotNetObjectRef;
-        public NavigationManager NavigationManager { get; set; }
 
-        public Cookiesprovider(IJSRuntime jsRuntime, NavigationManager navigationManager)
+        public Cookiesprovider(IJSRuntime jsRuntime)
         {
             this.Jsruntime = jsRuntime;
             this.DotNetObjectRef = DotNetObjectReference.Create(this);
-            NavigationManager = navigationManager;
         }
         public async Task Initcookiesprovider()
         {

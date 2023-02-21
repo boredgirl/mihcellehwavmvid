@@ -42,7 +42,6 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.context = context;
         }
 
-        [IgnoreAntiforgeryToken]
         [AllowAnonymous]
         [HttpGet]
         public async Task<bool> Get()

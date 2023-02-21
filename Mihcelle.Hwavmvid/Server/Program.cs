@@ -47,25 +47,28 @@ if (installed == false)
     }
 }
 
-builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
+try
 {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequiredLength = 2;
-})
-    .AddEntityFrameworkStores<Applicationdbcontext>();
+    builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
+    builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 2;
+    })
+        .AddEntityFrameworkStores<Applicationdbcontext>();
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Cookie.Name = Authentication.Authcookiename;
-    options.Cookie.HttpOnly = false;
-    options.SlidingExpiration = true;
-    options.ExpireTimeSpan = TimeSpan.FromDays(1);
-});
+    builder.Services.ConfigureApplicationCookie(options =>
+    {
+        options.Cookie.Name = Authentication.Authcookiename;
+        options.Cookie.HttpOnly = false;
+        options.SlidingExpiration = true;
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    });
+} catch (Exception exception) { Console.WriteLine(exception.Message); }
 
 builder.Services.AddMvc()
             .AddJsonOptions(options =>
