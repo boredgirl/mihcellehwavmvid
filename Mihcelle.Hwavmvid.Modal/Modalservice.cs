@@ -27,7 +27,7 @@ namespace Mihcelle.Hwavmvid.Modal
         {
             if(this.Module == null || this.Jsobjref == null)
             {
-                this.Module = await this.Jsruntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/modaljsinterop.js");
+                this.Module = await this.Jsruntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Modal/modaljsinterop.js");
                 this.Jsobjref = await this.Module.InvokeAsync<IJSObjectReference>("initmodal", this.DotNetObjectRef);
             }
         }

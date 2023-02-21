@@ -1,0 +1,65 @@
+﻿@inherits Mainlayoutbase
+
+@using Mihcelle.Hwavmvid.Modal
+
+@inject Modalservice modalservice
+
+<AuthorizeView>
+    <Authorized>
+
+        <div>
+
+            <div class="d-flex flex-wrap bg-white mt-4">
+
+                <Modalcomponent ElementId="@this.adminmodal_elementid">
+
+                    <Modalheader>
+
+                        <div class="bg-dark text-light px-2 py-4">Admin module</div>
+
+                    </Modalheader>
+
+                    <Modalbody>
+
+                        <div class="bg-light text-dark px-2 py-4">
+                            <DynamicComponent Type="@_componenttype"></DynamicComponent>
+                        </div>
+
+                    </Modalbody>
+
+                    <Modalfooter>
+
+                    </Modalfooter>
+
+                </Modalcomponent>
+
+            </div>
+
+        </div>
+
+    </Authorized>
+    <NotAuthorized>
+
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+
+
+    [Parameter] public Type _componenttype { get; set; }
+
+    public string adminmodal_elementid { get; set; } = "adminmodal_elementid";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            await this.modalservice.Initmodal();
+            await this.modalservice.ShowModal(this.adminmodal_elementid);
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

@@ -12,6 +12,7 @@ using System.Net.Mime;
 using Mihcelle.Hwavmvid.Cookies;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
+using Mihcelle.Hwavmvid.Modal;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -37,6 +38,7 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 
 // mihcelle.hwavmvid
+builder.Services.AddScoped<Modalservice, Modalservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 
 WebAssemblyHost host = builder.Build();
