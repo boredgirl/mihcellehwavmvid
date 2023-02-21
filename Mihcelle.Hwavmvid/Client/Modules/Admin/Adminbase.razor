@@ -11,7 +11,7 @@
 
             <div class="d-flex flex-wrap bg-white mt-4">
 
-                <Modalcomponent ElementId="@this.adminmodal_elementid">
+                <Modalcomponent ElementId="@this._adminmodalelementid">
 
                     <Modalheader>
 
@@ -47,19 +47,8 @@
 @code {
 
 
-    [Parameter] public Type _componenttype { get; set; }
+    [Parameter] public Type? _componenttype { get; set; }
 
-    public string adminmodal_elementid { get; set; } = "adminmodal_elementid";
+    [Parameter] public string? _adminmodalelementid { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-
-        if (firstRender)
-        {
-            await this.modalservice.Initmodal();
-            await this.modalservice.ShowModal(this.adminmodal_elementid);
-        }
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
 }
