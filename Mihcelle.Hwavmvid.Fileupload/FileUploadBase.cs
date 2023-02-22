@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace Mihcelle.Hwavmvid.Fileupload
     public class Fileuploadbase : ComponentBase, IDisposable
     {
 
-        [Inject] protected HttpClient HttpClient { get; set; }
+        [Inject] protected IHttpClientFactory ihttpclientfactory { get; set; }
         [Inject] protected Fileuploadservice FileUploadService { get; set; }
 
         [Parameter] public Dictionary<string, string> FileUploadHeaders { get; set; }
@@ -130,20 +131,24 @@ namespace Mihcelle.Hwavmvid.Fileupload
                     }
 
                     var filename = string.Concat(model.Value.BrowserFile.Name.Split(Path.GetInvalidFileNameChars()));
-                    content.Add(new StreamContent(stream), "file", filename);
+                    content.Add(new StreamContent(stream), "files", filename);
                 }
 
-                foreach(var item in this.FileUploadHeaders)
+                if (this.FileUploadHeaders != null && this.FileUploadHeaders.Any())
                 {
-                    content.Headers.Add(item.Key, item.Value);
+                    foreach (var item in this.FileUploadHeaders)
+                    {
+                        content.Headers.Add(item.Key, item.Value);
+                    }
                 }
-                    
-                var result = this.HttpClient.PostAsync(this.ApiUrl, content).Result;
-                var remotePath = await result.Content.ReadAsStringAsync();                
+
+                var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                var result = await client.PostAsync(this.ApiUrl, content);
+                var remotePath = await result.Content.ReadAsStringAsync();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(exception.Message);
             }
         }
 
