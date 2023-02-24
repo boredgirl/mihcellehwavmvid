@@ -1,5 +1,6 @@
 ﻿@inherits Mainlayoutbase
 @inject IHttpClientFactory httpclientfactory
+@using Mihcelle.Hwavmvid.Shared.Models
 
 @if (this.framework_installed == false)
 {
@@ -14,7 +15,9 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
 
-                    <a class="navbar-brand" href="#">@Configuration["framework:name"]@Configuration["framework:version"]</a>
+                    <a class="navbar-brand" href="#">
+                        <img src="@(string.Concat(this.navigationmanager.BaseUri, "images/", this.site?.Brandmark))" height="72" style="background-color: slateblue;" />
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -22,7 +25,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="#">@Configuration["framework:description"]</a>
+                                <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">@Configuration["framework:description"]</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
@@ -66,8 +69,10 @@
     </div>
 }
 
-@code{
+@code {
 
+
+    public Applicationsite? site { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -81,6 +86,9 @@
 
         if (firstRender)
         {
+
+            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
 
             @* // implemented in program.cs
             if (framework_installed == false)

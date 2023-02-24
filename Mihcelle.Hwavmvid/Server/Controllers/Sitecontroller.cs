@@ -126,7 +126,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                         return new BadRequestObjectResult(new { Message = "File size Should Be UpTo " + maximumfilesize + "MB" });
                     }
 
-                    var supportedFileExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var supportedFileExtensions = new[] { ".ico" };
                     string fileExtension = Path.GetExtension(file.FileName);
                     if (!supportedFileExtensions.Contains(fileExtension))
                     {

@@ -77,13 +77,13 @@
     public string Favicondropzoneelementid { get; set; } = "favicon_dropzone_element_id";
     public string Faviconinputfieldid { get; set; } = "favicon_input_field_id";
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 
         var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
         this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
 
-        await base.OnParametersSetAsync();
+        await base.OnAfterRenderAsync(firstRender);
     }
 
 }

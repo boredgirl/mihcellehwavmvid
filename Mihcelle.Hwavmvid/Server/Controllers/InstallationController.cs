@@ -101,8 +101,8 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             {
                 Name = "Mihcellehwavmvid",
                 Description = "asp .net core application framework",
-                Brandmark = string.Empty,
-                Favicon = string.Empty,
+                Brandmark = "appbrandmark.png",
+                Favicon = "appfavicon.ico",
                 Createdon = DateTime.Now,
             }; 
             
