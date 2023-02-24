@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.EntityFrameworkCore;
 using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Models;
 
@@ -20,6 +22,14 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.iwebhostenvironment = iwebhostenvironment;
             this.applicationdbcontext = applicationdbcontext;
         }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<Applicationsite> Get()
+        {
+            var site = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
+            return site;
+        }
 
         [AllowAnonymous]
         [HttpPost("brandmark")]
@@ -33,6 +43,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                 int maximumfilesallowed = 1;
                 string relativefolderpath = @"\images";
                 string absolutefolderpath = string.Concat(this.iwebhostenvironment.WebRootPath, relativefolderpath);
+
                 if (!Directory.Exists(absolutefolderpath))
                 {
                     Directory.CreateDirectory(absolutefolderpath);
@@ -64,6 +75,14 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     {
                         file.CopyTo(stream);
                     }
+
+                    var site = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
+                    if (site != null)
+                    {
+                        site.Brandmark = fileName;
+                        this.applicationdbcontext.Applicationsites.Update(site);
+                        await this.applicationdbcontext.SaveChangesAsync();
+                    }
                 }
 
                 return new OkObjectResult(new { Message = "Successfully uploaded brandmark." });
@@ -81,7 +100,61 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         {
 
 
-            return new OkObjectResult(new { Message = "File upload succeeded." });
+            try
+            {
+
+                int maximumfilesize = 10;
+                int maximumfilesallowed = 1;
+                string relativefolderpath = @"\images";
+                string absolutefolderpath = string.Concat(this.iwebhostenvironment.WebRootPath, relativefolderpath);
+
+                if (!Directory.Exists(absolutefolderpath))
+                {
+                    Directory.CreateDirectory(absolutefolderpath);
+                }
+
+                if (files.Count > maximumfilesallowed)
+                {
+                    return new BadRequestObjectResult(new { Message = "Maximum number of files exceeded." });
+                }
+
+                foreach (IFormFile file in files)
+                {
+
+                    if (file.Length > (maximumfilesize * 1024 * 1024))
+                    {
+                        return new BadRequestObjectResult(new { Message = "File size Should Be UpTo " + maximumfilesize + "MB" });
+                    }
+
+                    var supportedFileExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    string fileExtension = Path.GetExtension(file.FileName);
+                    if (!supportedFileExtensions.Contains(fileExtension))
+                    {
+                        return new BadRequestObjectResult(new { Message = "Unknown file type(s)." });
+                    }
+
+                    string fileName = string.Concat(Guid.NewGuid().ToString(), fileExtension);
+                    string fullPath = Path.Combine(absolutefolderpath, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, 4096, true))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var site = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
+                    if (site != null)
+                    {
+                        site.Favicon = fileName;
+                        this.applicationdbcontext.Applicationsites.Update(site);
+                        await this.applicationdbcontext.SaveChangesAsync();
+                    }
+                }
+
+                return new OkObjectResult(new { Message = "Successfully uploaded brandmark." });
+            }
+            catch
+            {
+                return new BadRequestObjectResult(new { Message = "Error uploading brandmark." });
+            }
         }
 
     }

@@ -42,6 +42,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Brandmark = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Favicon = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),

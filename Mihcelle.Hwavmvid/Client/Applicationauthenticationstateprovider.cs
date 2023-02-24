@@ -17,9 +17,11 @@ namespace Mihcelle.Hwavmvid.Client
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
-        {            
+        {
+
             try
             {
+
                 var client = this._httpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                 var claimsdictitems = await client.GetFromJsonAsync<List<KeyValuePair<string, string>>>("Applicationauthenticationstate");
                 var authclaims = new List<Claim>();

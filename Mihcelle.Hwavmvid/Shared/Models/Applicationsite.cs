@@ -10,6 +10,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     {
 
         public string Name { get; set; }
+        public string Description { get; set; }
         public string Brandmark { get; set; }
         public string Favicon { get; set; }
 

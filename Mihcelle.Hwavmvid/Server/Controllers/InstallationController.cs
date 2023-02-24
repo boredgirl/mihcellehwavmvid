@@ -96,6 +96,18 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     throw new HubException("Failed to add user to role..");
                 }
             }
+
+            var site = new Applicationsite()
+            {
+                Name = "Mihcellehwavmvid",
+                Description = "asp .net core application framework",
+                Brandmark = string.Empty,
+                Favicon = string.Empty,
+                Createdon = DateTime.Now,
+            }; 
+            
+            this.context.Applicationsites.Add(site);
+            await this.context.SaveChangesAsync();
         }
 
         private void Updatedconnectionstring(string connectionstring)
