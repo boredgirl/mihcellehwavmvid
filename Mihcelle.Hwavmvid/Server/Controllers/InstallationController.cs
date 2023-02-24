@@ -111,6 +111,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
             var page = new Applicationpage()
             {
+                Siteid = site.Id,
                 Name = "Mihcellehwavmvid Techonologies",
                 Isnavigation = true,
                 Urlpath = "index",
