@@ -7,7 +7,7 @@
     <Mihcelle.Hwavmvid.Client.Installation.Installationcomponent></Mihcelle.Hwavmvid.Client.Installation.Installationcomponent>
 }
 
-@if (this.framework_installed == true)
+@if (this.framework_installed == true && this.site != null)
 {
     <div class="mihcelle-hwavmvid-container">
 
@@ -78,6 +78,12 @@
     {
 
         this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
+        if (this.framework_installed == true)
+        {
+            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
+        }
+
         await base.OnInitializedAsync();
     }
 
@@ -86,9 +92,6 @@
 
         if (firstRender)
         {
-
-            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
 
             @* // implemented in program.cs
             if (framework_installed == false)
