@@ -1,34 +1,74 @@
-﻿@page "/"
+﻿@page "/{page?}"
 @inherits Mainlayoutbase
 
-<div class="py-3">
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+@if (this._contextpage != null)
+{
+    <div class="py-3">
 
-            <h1 class="display-4 py-1" style="font-weight: 400 !important;">Complete asp .net core framework</h1>
-            <p class="lead">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
 
-                <span class="bg-warning">connectionid:</span> @this.applicationprovider._connection?.ConnectionId
-                <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
+                <h1 class="display-4 py-1" style="font-weight: 400 !important;">Webpage @this._contextpage.Name</h1>
+                <p class="lead">
 
-                <AuthorizeView>
-                    <Authorized>
-                        <div><small>signedin user: @_context?.User?.Identity?.Name</small></div>
-                    </Authorized>
-                    <NotAuthorized>
-                        not authorized..
-                    </NotAuthorized>
-                </AuthorizeView>
+                    <span class="bg-warning">connectionid:</span> @this.applicationprovider._connection?.ConnectionId
+                    <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
 
-            </p>
+                    <AuthorizeView>
+                        <Authorized>
+                            <div><small>signedin user: @_contextauth?.User?.Identity?.Name</small></div>
+                        </Authorized>
+                        <NotAuthorized>
+                            not authorized..
+                        </NotAuthorized>
+                    </AuthorizeView>
 
+                </p>
+
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+}
+
+@if (this._contextpage == null)
+{
+    <div class="py-3">
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+
+                <h1 class="display-4 py-1" style="font-weight: 400 !important;">Webpage not found 404</h1>
+
+            </div>
+        </div>
+
+    </div>
+}
 
 @code {
+
+
+    [Parameter] public string? page { get; set; }
+
+    public Applicationpage? _contextpage { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        this.page = page ?? "index";
+
+        try
+        {
+            var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            this._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", this.page));
+        }
+        catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+        await base.OnParametersSetAsync();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

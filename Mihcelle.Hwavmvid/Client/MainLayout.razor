@@ -7,9 +7,9 @@
     <Mihcelle.Hwavmvid.Client.Installation.Installationcomponent></Mihcelle.Hwavmvid.Client.Installation.Installationcomponent>
 }
 
-@if (this.framework_installed == true && this.site != null)
+@if (this.framework_installed == true && this._contextsite != null)
 {
-    <link rel="icon" type="image/x-icon" href="@(string.Concat(this.navigationmanager.BaseUri, "images/", this.site.Favicon))">
+    <link rel="icon" type="image/x-icon" href="@(string.Concat(this.navigationmanager.BaseUri, "images/", this._contextsite.Favicon))">
 
     <div class="mihcelle-hwavmvid-container">
 
@@ -18,7 +18,7 @@
                 <div class="container-fluid">
 
                     <a class="navbar-brand" href="#">
-                        <img src="@(string.Concat(this.navigationmanager.BaseUri, "images/", this.site?.Brandmark))" height="72" style="background-color: slateblue;" />
+                        <img src="@(string.Concat(this.navigationmanager.BaseUri, "images/", this._contextsite?.Brandmark))" height="72" style="background-color: slateblue;" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
                         </ul>
                         <ul class="navbar-nav ms-auto">
 
-                            @if (this._context?.User?.Identity?.IsAuthenticated ?? false)
+                            @if (this._contextauth?.User?.Identity?.IsAuthenticated ?? false)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin">Admin</a>
@@ -41,9 +41,9 @@
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @if (this._context?.User?.Identity?.IsAuthenticated ?? false)
+                                    @if (this._contextauth?.User?.Identity?.IsAuthenticated ?? false)
                                     {
-                                        <span>☑@_context.User.Identity.Name</span>
+                                        <span>☑@_contextauth.User.Identity.Name</span>
                                     }
                                     else
                                     {
@@ -73,21 +73,6 @@
 
 @code {
 
-
-    public Applicationsite? site { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-
-        this.framework_installed = !string.IsNullOrEmpty(Configuration["installation:createdon"]);
-        if (this.framework_installed == true)
-        {
-            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
-        }
-
-        await base.OnInitializedAsync();
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
