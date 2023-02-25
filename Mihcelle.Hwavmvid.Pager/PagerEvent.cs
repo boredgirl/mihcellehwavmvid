@@ -3,7 +3,7 @@
     public class Pagerevent<TPagerItem>
     {
 
-        public int ApiQueryId { get; set; }
+        public string ApiQueryId { get; set; }
         public TPagerItem Item { get; set; }
 
     }

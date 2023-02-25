@@ -12,10 +12,10 @@ namespace Mihcelle.Hwavmvid.Pager
         private IJSObjectReference pagerJsObjectReference { get; set; }
         private IJSObjectReference pagerMap { get; set; }
 
-        public event Action<List<TPagerItem>, int> OnRetrievedItems;
+        public event Action<List<TPagerItem>, string> OnRetrievedItems;
         public event Action<Pagerevent<TPagerItem>> OnRemoveItem;
-        public event Action<int> OnUpdateContext;
-        public event Action<Exception, int> OnError;
+        public event Action<string> OnUpdateContext;
+        public event Action<Exception, string> OnError;
 
         public Pagerservice(IJSRuntime jsRuntime)
         {
@@ -24,10 +24,10 @@ namespace Mihcelle.Hwavmvid.Pager
 
         public async Task InitPagerService()
         {
-            this.pagerJsObjectReference = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazorpagerjsinterop.js");
+            this.pagerJsObjectReference = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Pager/blazorpagerjsinterop.js");
             this.pagerMap = await this.pagerJsObjectReference.InvokeAsync<IJSObjectReference>("initpager");
         }
-        public void ExposeItems(List<TPagerItem> items, int apiqueryid)
+        public void ExposeItems(List<TPagerItem> items, string apiqueryid)
         {
             this.OnRetrievedItems?.Invoke(items, apiqueryid);
         }
@@ -38,15 +38,15 @@ namespace Mihcelle.Hwavmvid.Pager
                 await this.pagerMap.InvokeVoidAsync("scrollToElement", elementId);
             }
         }
-        public void RemoveItem(TPagerItem item, int apiQueryId)
+        public void RemoveItem(TPagerItem item, string apiQueryId)
         {
             this.OnRemoveItem?.Invoke(new Pagerevent<TPagerItem>() { Item = item, ApiQueryId = apiQueryId });
         }
-        public void UpdateContext(int apiQueryId)
+        public void UpdateContext(string apiQueryId)
         {
             this.OnUpdateContext?.Invoke(apiQueryId);
         }
-        public void ThrowError(Exception exception, int apiQueryId)
+        public void ThrowError(Exception exception, string apiQueryId)
         {
             this.OnError?.Invoke(exception, apiQueryId);
         }

@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Mihcelle.Hwavmvid.Modal;
 using Mihcelle.Hwavmvid.Fileupload;
+using Mihcelle.Hwavmvid.Pager;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -42,6 +43,7 @@ builder.Configuration.AddJsonStream(stream);
 builder.Services.AddScoped<Modalservice, Modalservice>();
 builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
+builder.Services.AddScoped<Pagerservice<Applicationpage>, Pagerservice<Applicationpage>>();
 
 WebAssemblyHost host = builder.Build();
 IConfiguration? configuration = host.Services.GetService<IConfiguration>();

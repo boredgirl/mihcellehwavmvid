@@ -10,7 +10,7 @@ namespace Mihcelle.Hwavmvid.Pager
     public partial class Pagerbase<TPagerItem> : ComponentBase, IDisposable
     {
 
-        [Inject] protected HttpClient HttpClient { get; set; }
+        [Inject] protected IHttpClientFactory ihttpclientfactory { get; set; }
         [Inject] protected Pagerservice<TPagerItem> PagerService { get; set; }
 
         [Parameter] public RenderFragment<TPagerItem> PagerItem { get; set; }
@@ -19,7 +19,7 @@ namespace Mihcelle.Hwavmvid.Pager
         [Parameter] public string ElementId { get; set; }
         [Parameter] public string GetItemsApiUrl { get; set; }
         [Parameter] public string HubConnectionId { get; set; }
-        [Parameter] public int ApiQueryId { get; set; }
+        [Parameter] public string ApiQueryId { get; set; }
         [Parameter] public int ItemsPerPage { get; set; }
         [Parameter] public bool Scrolling { get; set; }
 
@@ -43,13 +43,13 @@ namespace Mihcelle.Hwavmvid.Pager
         protected override async Task OnInitializedAsync()
         {
             this.PagerService.OnRemoveItem += OnRemoveItem;
-            this.PagerService.OnUpdateContext += (int apiQueryId) => UpdateContextComponent(apiQueryId);
+            this.PagerService.OnUpdateContext += (string apiQueryId) => UpdateContextComponent(apiQueryId);
 
             await this.UpdateContextAsync();
             await base.OnInitializedAsync();
         }
 
-        private async void UpdateContextComponent(int obj)
+        private async void UpdateContextComponent(string obj)
         {
             if (this.ApiQueryId == obj)
             {
@@ -77,7 +77,8 @@ namespace Mihcelle.Hwavmvid.Pager
                 this.Loading = true;
                 this.ContextPageItems.Clear();
 
-                var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
+                var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                var getItemsResponse = await client.GetAsync(this.requestUri);
                 var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<Pagerapiitem<TPagerItem>>();
 
                 this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
@@ -113,7 +114,8 @@ namespace Mihcelle.Hwavmvid.Pager
                 this.Loading = true;
                 this.ContextPage++;
 
-                var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
+                var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                var getItemsResponse = await client.GetAsync(this.requestUri);
                 var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<Pagerapiitem<TPagerItem>>();
 
                 this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
@@ -163,7 +165,7 @@ namespace Mihcelle.Hwavmvid.Pager
         public void Dispose()
         {
             this.PagerService.OnRemoveItem -= OnRemoveItem;
-            this.PagerService.OnUpdateContext -= (int apiQueryId) => UpdateContextComponent(apiQueryId);
+            this.PagerService.OnUpdateContext -= (string apiQueryId) => UpdateContextComponent(apiQueryId);
         }
 
     }
