@@ -41,11 +41,11 @@
                         <Pagercomponent ApiQueryId="@this._contextsite?.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidpages" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.apppages" Context="contextitem" ItemsPerPage="2" TItemGeneric="@Applicationpage" Class="py-sm-3" Scrolling="@false">
                             <PagerItem>
 
-                                <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
-                                    <div class="flex-fill">
+                                <div class="row" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
+                                    <div class="col-sm-8">
                                         <button type="button" class="btn btn-sm btn-link">@contextitem.Name</button>
                                     </div>
-                                    <div class="flex-fill text-start">
+                                    <div class="col-sm-4">
                                         <button type="button" @onclick="@(() => this.pagerservice.RemoveItem(contextitem, this._contextsite?.Id))" class="btn btn-sm btn-danger">
                                             <span aria-hidden="true" style="font-size: 1.4rem; line-height: 0;">&times;</span> Remove Ignore
                                         </button>

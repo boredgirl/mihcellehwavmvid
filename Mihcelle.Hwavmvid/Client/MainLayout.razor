@@ -32,6 +32,22 @@
                         </ul>
                         <ul class="navbar-nav ms-auto">
 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Links
+                                </a>
+                                <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                                    
+                                    @foreach (var item in this._contextpages)
+                                    {
+                                        <li class="dropdown-item">
+                                            <a href="@(string.Concat(this.navigationmanager.BaseUri, item.Urlpath))">@item.Name</a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </li>
+
                             @if (this._contextauth?.User?.Identity?.IsAuthenticated ?? false)
                             {
                                 <li class="nav-item dropdown">

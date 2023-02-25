@@ -31,6 +31,7 @@ namespace Mihcelle.Hwavmvid.Client
         public bool? framework_installed { get; set; } = null;
         public AuthenticationState? _contextauth { get; set; }
         public Applicationsite? _contextsite { get; set; }
+        public List<Applicationpage>? _contextpages { get; set; } = new List<Applicationpage>();
 
 
         protected override async Task OnInitializedAsync()
@@ -41,6 +42,7 @@ namespace Mihcelle.Hwavmvid.Client
             {
                 var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                 this._contextsite = await client.GetFromJsonAsync<Applicationsite>("api/site");
+                this._contextpages = await client.GetFromJsonAsync<List<Applicationpage>>("api/page");
             }
 
             await base.OnInitializedAsync();

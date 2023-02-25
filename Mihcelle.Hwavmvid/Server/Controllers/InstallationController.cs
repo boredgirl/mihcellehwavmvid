@@ -117,7 +117,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     Siteid = site.Id,
                     Name = pagename,
                     Isnavigation = true,
-                    Urlpath = "index",
+                    Urlpath = pagename.ToLower().Replace(' ', '_'),
                     Createdon = DateTime.Now,
                 };
 
