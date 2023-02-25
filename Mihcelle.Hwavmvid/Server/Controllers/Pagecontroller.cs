@@ -46,10 +46,12 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         {
             var totalitems = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == siteid);
             var items = await totalitems.Skip((contextpage - 1) * itemsperpage).Take(itemsperpage).ToListAsync();
+            int pagesTotal = Convert.ToInt32(Math.Ceiling(totalitems.Count() / Convert.ToDouble(itemsperpage)));
+
             var apiitem = new Pagerapiitem<Applicationpage>()
             {
                 Items = items,
-                Pages = totalitems.Count()
+                Pages = pagesTotal
             };
 
             return apiitem;
