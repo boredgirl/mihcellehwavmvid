@@ -42,7 +42,7 @@ namespace Mihcelle.Hwavmvid.Client
             {
                 var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                 this._contextsite = await client.GetFromJsonAsync<Applicationsite>("api/site");
-                this._contextpages = await client.GetFromJsonAsync<List<Applicationpage>>("api/page");
+                this._contextpages = await client.GetFromJsonAsync<List<Applicationpage>>("api/page/bysideid/" + this._contextsite?.Id);
             }
 
             await base.OnInitializedAsync();

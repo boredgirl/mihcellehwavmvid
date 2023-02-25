@@ -33,6 +33,14 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("bysideid/{siteid}")]
+        public async Task<List<Applicationpage>> Bysideid(string siteid)
+        {
+            var items = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == siteid).ToListAsync();
+            return items;
+        }
+
+        [AllowAnonymous]
         [HttpGet("{contextpage}/{itemsperpage}/{siteid}")]
         public async Task<Pagerapiitem<Applicationpage>> Get(int contextpage, int itemsperpage, string siteid)
         {
