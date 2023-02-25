@@ -17,28 +17,28 @@
         <div class="container">
             <div class="row align-items-center my-2">
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 py-2">
                     <div class="text-center">
                         <strong>Context page</strong>
                     </div>
                 </div>
 
-                <div class="col-lg-8">
+                <div class="col-lg-8 py-2">
                     <div class="p-1 bg-light">
                         @_contextpage?.Name
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="col-lg-12 py-2">
                     
                     @{
-                        var getItemsApiUrl = string.Concat(this.navigationmanager.BaseUri, "api/page");
+                        var getItemsApiUrl = string.Concat(this.navigationmanager?.BaseUri, "api/page");
                     }
 
                     @if (this._contextsite != null)
                     {
 
-                        <Pagercomponent ApiQueryId="@this._contextsite?.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidpages" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@apppages" Context="contextitem" ItemsPerPage="14" TItemGeneric="@Applicationpage" Class="py-sm-3" Scrolling="@false">
+                        <Pagercomponent ApiQueryId="@this._contextsite?.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidpages" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.apppages" Context="contextitem" ItemsPerPage="14" TItemGeneric="@Applicationpage" Class="py-sm-3" Scrolling="@false">
                             <PagerItem>
 
                                 <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
@@ -63,9 +63,6 @@
         </div>
 
     </Authorized>
-    <NotAuthorized>
-
-    </NotAuthorized>
 </AuthorizeView>
 
 
@@ -79,33 +76,33 @@
         this.pagerservice.OnRetrievedItems += RetrievedItems;
         this.pagerservice.OnRemoveItem += RemoveItem;
         this.pagerservice.OnError += Error;
+
         await base.OnInitializedAsync();
     }
 
     public void RetrievedItems(List<Applicationpage> obj, string apiQueryId)
     {
-        if (apiQueryId.ToString() == _contextsite?.Id)
+        if (apiQueryId.ToString() == this._contextsite?.Id)
         {
-            //this.ChatHubService.IgnoredUsers.AddRange(obj);
-            //this.ChatHubService.RunUpdateUI();
+            this.apppages.AddRange(obj);
+            this.StateHasChanged();
         }
     }
 
     public async void RemoveItem(Pagerevent<Applicationpage> obj)
     {
-        if (obj.ApiQueryId.ToString() == _contextsite?.Id)
+        if (obj.ApiQueryId.ToString() == this._contextsite?.Id)
         {
-            //await this.ChatHubService.UnignoreUser(obj.Item.ChatHubIgnoredUserId);
-            //this.ChatHubService.IgnoredUsers.Remove(obj.Item);
-            //this.ChatHubService.RunUpdateUI();
+            this.apppages.Remove(obj.Item);
+            this.StateHasChanged();
         }
     }
 
     public void Error(Exception exception, string apiQueryId)
     {
-        if (_contextsite?.Id == apiQueryId.ToString())
+        if (this._contextsite?.Id == apiQueryId.ToString())
         {
-            //this.ChatHubService.HandleException(exception);
+            Console.Write(exception.Message);
         }
     }
 
@@ -115,4 +112,5 @@
         this.pagerservice.OnRemoveItem -= RemoveItem;
         this.pagerservice.OnError -= Error;
     }
+
 }

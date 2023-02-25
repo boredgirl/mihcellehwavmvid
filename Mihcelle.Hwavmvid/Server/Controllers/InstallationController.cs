@@ -109,17 +109,22 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.context.Applicationsites.Add(site);
             await this.context.SaveChangesAsync();
 
-            var page = new Applicationpage()
+            string[] pagenames = new[] { "Mihcellehwavmvid Techonologies", "Developers", "Taxi driver", "Caipirinha", "Ashtrays", "Pizza Tonno", "Odutanèe frontpage" };
+            foreach(var pagename in pagenames)
             {
-                Siteid = site.Id,
-                Name = "Mihcellehwavmvid Techonologies",
-                Isnavigation = true,
-                Urlpath = "index",
-                Createdon = DateTime.Now,
-            };
+                var page = new Applicationpage()
+                {
+                    Siteid = site.Id,
+                    Name = pagename,
+                    Isnavigation = true,
+                    Urlpath = "index",
+                    Createdon = DateTime.Now,
+                };
 
-            this.context.Applicationpages.Add(page);
-            await this.context.SaveChangesAsync();
+                this.context.Applicationpages.Add(page);
+                await this.context.SaveChangesAsync();
+            }
+            
         }
 
         private void Updatedconnectionstring(string connectionstring)
