@@ -1,4 +1,5 @@
-﻿@inherits Mainlayoutbase
+﻿@inherits Indexbase
+@using Mihcelle.Hwavmvid.Client.Pages
 
 <AuthorizeView>
     <Authorized>
@@ -8,14 +9,13 @@
 
                 <div class="col-lg-4">
                     <div class="text-center">
-                        <strong>Page settings</strong>
+                        <strong>Context page</strong>
                     </div>
                 </div>
 
                 <div class="col-lg-8">
                     <div class="p-1 bg-light">
-
-
+                        @_contextpage?.Name
                     </div>
                 </div>
 
