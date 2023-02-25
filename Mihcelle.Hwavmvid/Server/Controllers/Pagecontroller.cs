@@ -36,11 +36,12 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpGet("{contextpage}/{itemsperpage}/{siteid}")]
         public async Task<Pagerapiitem<Applicationpage>> Get(int contextpage, int itemsperpage, string siteid)
         {
-            var items = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == siteid).ToListAsync();
+            var totalitems = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == siteid);
+            var items = await totalitems.Skip((contextpage - 1) * itemsperpage).Take(itemsperpage).ToListAsync();
             var apiitem = new Pagerapiitem<Applicationpage>()
             {
                 Items = items,
-                Pages = items.Count()
+                Pages = totalitems.Count()
             };
 
             return apiitem;
