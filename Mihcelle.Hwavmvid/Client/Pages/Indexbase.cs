@@ -14,7 +14,7 @@ namespace Mihcelle.Hwavmvid.Client.Pages
         protected override async Task OnParametersSetAsync()
         {
 
-            this.page = page ?? "index";
+            this.page = page ?? "mihcellehwavmvidtechnologies";
 
             try
             {
