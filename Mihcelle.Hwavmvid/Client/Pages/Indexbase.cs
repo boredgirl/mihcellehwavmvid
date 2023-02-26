@@ -14,7 +14,7 @@ namespace Mihcelle.Hwavmvid.Client.Pages
         protected override async Task OnParametersSetAsync()
         {
 
-            this._contextpageurlpath = _contextpageurlpath ?? "mihcellehwavmvid_technologies";
+            this._contextpageurlpath = _contextpageurlpath ?? "mihcellehwavmvid_techonologies";
 
             try
             {
