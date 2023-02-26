@@ -72,7 +72,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
             this.context.Database.SetConnectionString(connectionstring);
             await this.context.Database.EnsureCreatedAsync();
-            await this.context.Database.MigrateAsync();
+            //await this.context.Database.MigrateAsync();
 
             var applicationuser = new Applicationuser();
             applicationuser.UserName = model.Hostusername;

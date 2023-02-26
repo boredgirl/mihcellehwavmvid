@@ -25,7 +25,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
         {
 
             migrationbuilder.CreateTable(
-                 name: "Applicationuser",
+                 name: "Applicationusers",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
@@ -37,7 +37,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
-                 name: "Applicationsite",
+                 name: "Applicationsites",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
@@ -53,7 +53,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
-                 name: "Applicationtenant",
+                 name: "Applicationtenants",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
@@ -69,7 +69,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
-                 name: "Applicationpage",
+                 name: "Applicationpages",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
@@ -86,7 +86,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
-                 name: "Applicationmodule",
+                 name: "Applicationmodules",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
@@ -98,7 +98,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  });
 
             migrationbuilder.CreateTable(
-                 name: "Applicationpagemodule",
+                 name: "Applicationpagemodules",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
