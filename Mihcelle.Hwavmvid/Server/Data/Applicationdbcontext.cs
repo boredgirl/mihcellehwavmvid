@@ -14,8 +14,10 @@ namespace Mihcelle.Hwavmvid.Server.Data
         public DbSet<Applicationsite> Applicationsites { get; set; }
         public DbSet<Applicationtenant> Applicationtenants { get; set; }
         public DbSet<Applicationpage> Applicationpages { get; set; }
+        public DbSet<Applicationcontainer> Applicationcontainers { get; set; }
+        public DbSet<Applicationcontainercolumn> Applicationcontainercolumns { get; set; }
+        public DbSet<Applicationmodulepackage> Applicationmodulepackages { get; set; }
         public DbSet<Applicationmodule> Applicationmodules { get; set; }
-        public DbSet<Applicationpagemodule> Applicationpagemodules { get; set; }
 
         public Applicationdbcontext(DbContextOptions options) : base (options)
         {
