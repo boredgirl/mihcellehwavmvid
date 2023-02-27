@@ -91,7 +91,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                     await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Userrole));
                 }
 
-                var addtoroleresult = await usermanager.AddToRoleAsync(applicationuser, Authentication.Userrole);
+                var addtoroleresult = await usermanager.AddToRoleAsync(applicationuser, Authentication.Hostrole);
                 if (!addtoroleresult.Succeeded)
                 {
                     throw new HubException("Failed to add user to role..");

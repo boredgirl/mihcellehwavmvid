@@ -1,0 +1,23 @@
+﻿@namespace Mihcelle.Hwavmvid.Modules
+
+<AuthorizeView Roles="Host,Administrator">
+    <Authorized>
+
+        <textarea @bind="htmltext" rows="10" cols="41">
+
+        </textarea>
+
+    </Authorized>
+    <NotAuthorized>        
+
+    </NotAuthorized>
+</AuthorizeView>
+
+<div>@((MarkupString)htmltext)</div>
+
+@code {
+
+
+    protected string htmltext { get; set; } = "<h1 class=\"display-4 lead\">Hello html editor</h1>";
+
+}

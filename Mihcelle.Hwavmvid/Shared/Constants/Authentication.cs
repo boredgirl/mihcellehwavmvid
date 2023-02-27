@@ -11,7 +11,7 @@ namespace Mihcelle.Hwavmvid.Shared.Constants
 
         public const string Authcookiename = ".mihcelle.hwavmvid.identity.application";
         public const string Anonymousrole = "Anonymous";
-        public const string Userrole = "Userrole";
+        public const string Userrole = "User";
         public const string Administratorrole = "Administrator";
         public const string Hostrole = "Host";
 

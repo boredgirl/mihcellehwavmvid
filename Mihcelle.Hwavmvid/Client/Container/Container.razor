@@ -1,4 +1,5 @@
 ﻿@inherits Containerbase
+@using Mihcelle.Hwavmvid.Modules
 
 @if (this._contextcontainer != null && this._contextcontainer.Columns != null)
 {
@@ -13,6 +14,8 @@
                 <div class="@column.Columnwidth" style="min-height: 100px; border: 2px dotted black">
 
                     <small class="bg-dark text-light">@column.Id</small>
+
+                    <DynamicComponent Type="@typeof(Htmleditor)"></DynamicComponent>
 
                 </div>
 
