@@ -14,6 +14,7 @@ using System.Text.Json.Serialization;
 using Mihcelle.Hwavmvid.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Mihcelle.Hwavmvid.Shared.Constants;
+using Microsoft.VisualBasic;
 
 namespace Mihcelle.Hwavmvid.Server.Controllers
 {
@@ -109,7 +110,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.context.Applicationsites.Add(site);
             await this.context.SaveChangesAsync();
 
-            string[] pagenames = new[] { "Mihcellehwavmvid Techonologies", "Developers", "Taxi driver", "Caipirinha", "Ashtrays", "Pizza Tonno", "Odutanèe frontpage" };
+            string[] pagenames = new[] { "Mihcellehwavmvid Techonologies", "Developers", "Taxi driver", "Tawa gal", "Ashtrays", "Pizza Tonno", "Spaghetti napoli" };
             foreach(var pagename in pagenames)
             {
                 var page = new Applicationpage()
@@ -124,7 +125,32 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                 this.context.Applicationpages.Add(page);
                 await this.context.SaveChangesAsync();
             }
-            
+
+            var frontpage = await this.context.Applicationpages.FirstOrDefaultAsync(item => item.Name == "Mihcellehwavmvid Techonologies");
+            if (frontpage != null)
+            {
+                var container = new Applicationcontainer()
+                {
+                    Containertype = Shared.Constants.Applicationcontainertype.Boxed,
+                    Pageid = frontpage.Id,
+                    Createdon = DateTime.Now,
+                };
+
+                this.context.Applicationcontainers.Add(container);
+                await this.context.SaveChangesAsync();
+
+                var column = new Applicationcontainercolumn()
+                {
+                    Containerid = container.Id,
+                    Columnwidth = Shared.Constants.Applicationcolumnwidth.Hundred,
+                    Gridposition = 1,
+                    Createdon = DateTime.Now,
+                };
+
+                this.context.Applicationcontainercolumns.Add(column);
+                await this.context.SaveChangesAsync();
+            }                
+
         }
 
         private void Updatedconnectionstring(string connectionstring)
