@@ -32,10 +32,11 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                 {
                     var orderedcolumns = columns.OrderBy(item => item.Gridposition).ToList();
                     container.Columns = orderedcolumns;
+                    return container;
                 }
             }
 
-            return container;
+            return new Applicationcontainer();
         }
 
     }

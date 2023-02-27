@@ -2,22 +2,22 @@
 @inherits Indexbase
 
 
-@if (this._contextpage != null)
+@if (this.applicationprovider?._contextpage != null)
 {
     <div class="py-3">
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
 
-                <h1 class="display-4 py-1" style="font-weight: 400 !important;">Webpage @this._contextpage.Name</h1>
+                <h1 class="display-4 py-1" style="font-weight: 400 !important;">Webpage @this.applicationprovider?._contextpage.Name</h1>
                 <p class="lead">
 
-                    <span class="bg-warning">connectionid:</span> @this.applicationprovider._connection?.ConnectionId
+                    <span class="bg-warning">connectionid:</span> @this.applicationprovider?._connection?.ConnectionId
                     <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
 
                     <AuthorizeView>
                         <Authorized>
-                            <div><small>signedin user: @_contextauth?.User?.Identity?.Name</small></div>
+                            <div><small>signedin user: @this.applicationprovider?._contextauth?.User?.Identity?.Name</small></div>
                         </Authorized>
                         <NotAuthorized>
                             not authorized..
@@ -34,7 +34,7 @@
     </div>
 }
 
-@if (this._contextpage == null)
+@if (this.applicationprovider?._contextpage == null)
 {
     <div class="py-3">
 

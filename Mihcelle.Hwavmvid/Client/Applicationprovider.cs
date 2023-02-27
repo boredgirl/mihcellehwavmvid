@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,29 @@ namespace Mihcelle.Hwavmvid.Client
     public class Applicationprovider
     {
 
-        private NavigationManager _navigationmanager { get; set; }
+        public NavigationManager _navigationmanager { get; set; }
+
+        public event Action _oncontextpagechanged;
+
+        public AuthenticationState? _contextauth { get; set; }
+        public Applicationsite _contextsite { get; set; }
+
+        private Applicationpage contextpage { get; set; }
+        public Applicationpage _contextpage 
+        {
+            get
+            {
+                return this.contextpage;
+            }
+            set
+            {
+                this.contextpage = value;
+                this._oncontextpagechanged?.Invoke();
+            }
+        }
+        public Applicationcontainer _contextcontainer { get; set; }
+
+
         public HubConnection? _connection { get; set; }
 
         private const string unauthorizeduser = "unauthorizeduser";

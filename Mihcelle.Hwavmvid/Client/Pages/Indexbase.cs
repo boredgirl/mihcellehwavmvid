@@ -8,9 +8,8 @@ namespace Mihcelle.Hwavmvid.Client.Pages
     public class Indexbase : Mainlayoutbase
     {
 
-        [Parameter] public string? _contextpageurlpath { get; set; }
-
-        public Applicationpage? _contextpage { get; set; }
+        [Parameter]
+        public string? _contextpageurlpath { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -20,7 +19,7 @@ namespace Mihcelle.Hwavmvid.Client.Pages
             try
             {
                 var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                this._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", this._contextpageurlpath));
+                this.applicationprovider._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", this._contextpageurlpath));
             }
             catch (Exception exception) { Console.WriteLine(exception.Message); }
 

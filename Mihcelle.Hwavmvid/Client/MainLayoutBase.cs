@@ -29,8 +29,6 @@ namespace Mihcelle.Hwavmvid.Client
 
 
         public bool? framework_installed { get; set; } = null;
-        public AuthenticationState? _contextauth { get; set; }
-        public Applicationsite? _contextsite { get; set; }
         public List<Applicationpage>? _contextpages { get; set; } = new List<Applicationpage>();
 
 
@@ -41,8 +39,8 @@ namespace Mihcelle.Hwavmvid.Client
             if (this.framework_installed == true)
             {
                 var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                this._contextsite = await client.GetFromJsonAsync<Applicationsite>("api/site");
-                this._contextpages = await client.GetFromJsonAsync<List<Applicationpage>>("api/page/bysideid/" + this._contextsite?.Id);
+                this.applicationprovider._contextsite = await client.GetFromJsonAsync<Applicationsite>("api/site");
+                this._contextpages = await client.GetFromJsonAsync<List<Applicationpage>>("api/page/bysideid/" + this.applicationprovider?._contextsite?.Id);
             }
 
             await base.OnInitializedAsync();
@@ -52,7 +50,7 @@ namespace Mihcelle.Hwavmvid.Client
         {
             if (firstRender)
             {
-                this._contextauth = await this.authenticationstateprovider.GetAuthenticationStateAsync();
+                this.applicationprovider._contextauth = await this.authenticationstateprovider.GetAuthenticationStateAsync();
                 await this.applicationprovider.Establishapplicationconnection();
 
                 this.StateHasChanged();
