@@ -6,7 +6,7 @@
         public override void Configure(IServiceCollection services)
         {
 
-            //services.AddDbContext<Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext>();
+            services.AddScoped<Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext>();
             base.Configure(services);
         }
 

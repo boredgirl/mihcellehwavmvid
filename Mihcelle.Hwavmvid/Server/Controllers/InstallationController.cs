@@ -30,8 +30,9 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
         public Applicationdbcontext context { get; set; }
+        public Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext htmleditorapplicationdbcontext { get; set; }
 
-        public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
+        public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context, Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext htmleditorapplicationdbcontext)
         {
 
             this.ihostapplicationlifetime = ihostapplicationlifetime;
@@ -41,6 +42,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.signinmanager = signinmanager;
             this.rolemanager = rolemanager;
             this.context = context;
+            this.htmleditorapplicationdbcontext = htmleditorapplicationdbcontext;
         }
 
         [AllowAnonymous]
@@ -73,7 +75,9 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
             this.context.Database.SetConnectionString(connectionstring);
             await this.context.Database.EnsureCreatedAsync();
-            //await this.context.Database.MigrateAsync();
+
+            this.htmleditorapplicationdbcontext.Database.SetConnectionString(connectionstring);
+            await this.htmleditorapplicationdbcontext.Database.MigrateAsync();
 
             var applicationuser = new Applicationuser();
             applicationuser.UserName = model.Hostusername;
