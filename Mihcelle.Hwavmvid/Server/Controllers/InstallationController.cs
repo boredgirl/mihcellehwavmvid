@@ -88,7 +88,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             {
                 if (!await this.rolemanager.RoleExistsAsync(Authentication.Administratorrole))
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Userrole));
+                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Hostrole));
                 }
 
                 var addtoroleresult = await usermanager.AddToRoleAsync(applicationuser, Authentication.Hostrole);
