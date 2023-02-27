@@ -3,9 +3,11 @@
 <AuthorizeView Roles="Host">
     <Authorized>
 
-        <textarea @bind="htmltext" rows="10" cols="41">
+        <div>
+            <textarea @bind="htmltext" rows="5" cols="41">
 
-        </textarea>
+            </textarea>
+        </div>        
 
     </Authorized>
     <NotAuthorized>        
@@ -18,6 +20,6 @@
 @code {
 
 
-    protected string htmltext { get; set; } = "<h1 class=\"display-4 lead\">Hello html editor</h1>";
+    protected string htmltext { get; set; } = "<h1 class=\"display-4 lead bg-dark text-light\">Almost complete html editor</h1>";
 
 }
