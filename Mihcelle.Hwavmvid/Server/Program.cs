@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
+using Mihcelle.Hwavmvid;
 using Mihcelle.Hwavmvid.Client;
 using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
@@ -119,6 +121,9 @@ builder.Services.AddSignalR()
         options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
         options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     });
+
+Programextended partial = new Programpartial();
+partial.Configure(builder.Services);
 
 var app = builder.Build();
 
