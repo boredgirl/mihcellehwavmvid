@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mihcelle.Hwavmvid.Modules.Htmleditor;
+using System.Runtime.CompilerServices;
 
-namespace Mihcelle.Hwavmvid.Server.Modules.Htmleditor
+namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 {
     public class Moduleinstaller : Mihcelle.Hwavmvid.Server.Moduleinstallerinterface
     {
@@ -24,5 +25,14 @@ namespace Mihcelle.Hwavmvid.Server.Modules.Htmleditor
             await this._dbcontext.Database.RollbackTransactionAsync();
         }
 
+        public void Dispose()
+        {
+
+        }
+
+        public object? GetService(Type serviceType)
+        {
+            return this;
+        }
     }
 }

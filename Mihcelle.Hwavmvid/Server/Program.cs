@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using Mihcelle.Hwavmvid;
 using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Modules.Htmleditor;
 using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Constants;
@@ -52,7 +53,7 @@ if (installed == false)
 
 try
 {
-    builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
+    builder.Services.AddDbContext<Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext>(options => options.UseSqlServer(connectionString));
     builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -62,7 +63,7 @@ try
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 2;
     })
-        .AddEntityFrameworkStores<Applicationdbcontext>();
+        .AddEntityFrameworkStores<Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext>();
 
     builder.Services.ConfigureApplicationCookie(options =>
     {
@@ -126,37 +127,16 @@ builder.Services.AddSignalR()
 
 if (installed == true)
 {
-
-    try // run modules installer
+    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+    foreach (var item in programitems)
     {
-        var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
-        foreach (var item in installeritems)
+        if (item.IsClass)
         {
-            if (item.IsClass)
-            {
-                Moduleinstallerinterface? installerinterfaceinstance = (Moduleinstallerinterface?)Activator.CreateInstance(item);
-                if (installerinterfaceinstance != null)
-                    installerinterfaceinstance.Install();
-            }
+            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+            if (programinterfaceinstance != null)
+                programinterfaceinstance.Configure(builder.Services);
         }
     }
-    catch (Exception exception) { Console.WriteLine(exception.Message); }
-
-
-    try // run modules startup configures
-    {
-        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
-        foreach (var item in programitems)
-        {
-            if (item.IsClass)
-            {
-                Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
-                if (programinterfaceinstance != null)
-                    programinterfaceinstance.Configure(builder.Services);
-            }
-        }
-    }
-    catch (Exception exception) { Console.WriteLine(exception.Message); }
 }
 
 var app = builder.Build();
@@ -196,4 +176,24 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
+if (installed == true)
+{
+    try // run modules installer
+    {
+        var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
+        foreach (var item in installeritems)
+        {
+            if (item.IsClass)
+            {
+                var moduleinstaller = (Moduleinstallerinterface?) app.Services.GetService(item);
+                if (moduleinstaller != null)
+                    await moduleinstaller.Install();
+            }
+        }
+    }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
+}
+
 app.Run();
+
+
