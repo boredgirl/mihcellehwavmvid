@@ -76,8 +76,8 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.context.Database.SetConnectionString(connectionstring);
             await this.context.Database.EnsureCreatedAsync();
 
-            this.htmleditorapplicationdbcontext.Database.SetConnectionString(connectionstring);
-            await this.htmleditorapplicationdbcontext.Database.MigrateAsync();
+            //this.htmleditorapplicationdbcontext.Database.SetConnectionString(connectionstring);
+            //await this.htmleditorapplicationdbcontext.Database.MigrateAsync();
 
             var applicationuser = new Applicationuser();
             applicationuser.UserName = model.Hostusername;

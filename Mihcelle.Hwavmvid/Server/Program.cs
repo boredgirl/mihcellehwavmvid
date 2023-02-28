@@ -124,19 +124,40 @@ builder.Services.AddSignalR()
     });
 
 
-try
+if (installed == true)
 {
-    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
-    foreach (var item in programitems)
+
+    try // run modules installer
     {
-        if (item.IsClass)
+        var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
+        foreach (var item in installeritems)
         {
-            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
-            programinterfaceinstance.Configure(builder.Services);
+            if (item.IsClass)
+            {
+                Moduleinstallerinterface? installerinterfaceinstance = (Moduleinstallerinterface?)Activator.CreateInstance(item);
+                if (installerinterfaceinstance != null)
+                    installerinterfaceinstance.Install();
+            }
         }
     }
-} catch (Exception exception) { Console.WriteLine(exception.Message); }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
 
+
+    try // run modules startup configures
+    {
+        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+        foreach (var item in programitems)
+        {
+            if (item.IsClass)
+            {
+                Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+                if (programinterfaceinstance != null)
+                    programinterfaceinstance.Configure(builder.Services);
+            }
+        }
+    }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
+}
 
 var app = builder.Build();
 
