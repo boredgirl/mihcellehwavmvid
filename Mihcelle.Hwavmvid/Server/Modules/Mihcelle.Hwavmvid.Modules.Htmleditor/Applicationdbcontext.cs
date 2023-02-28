@@ -11,7 +11,7 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
     public class Applicationdbcontext : Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext
     {
 
-        public DbSet<Applicationhtmleditor> Applicationhtmleditor { get; set; }
+        public DbSet<Applicationhtmleditor> Applicationhtmleditors { get; set; }
 
         public Applicationdbcontext(DbContextOptions options) : base(options)
         {
