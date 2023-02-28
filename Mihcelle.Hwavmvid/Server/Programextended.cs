@@ -1,6 +1,6 @@
 ﻿namespace Mihcelle.Hwavmvid
 {
-    public class Programextended
+    public abstract class Programextended
     {
 
         public virtual void Configure(IServiceCollection services)

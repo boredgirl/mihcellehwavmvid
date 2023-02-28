@@ -122,8 +122,8 @@ builder.Services.AddSignalR()
         options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     });
 
-Programextended partial = new Programpartial();
-partial.Configure(builder.Services);
+Programextended iprogram = new Programstartup();
+iprogram.Configure(builder.Services);
 
 var app = builder.Build();
 
