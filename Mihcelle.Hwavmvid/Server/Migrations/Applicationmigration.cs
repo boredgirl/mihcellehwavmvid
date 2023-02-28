@@ -28,7 +28,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationusers",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -40,11 +40,11 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationsites",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Brandmark = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Favicon = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Brandmark = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Favicon = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -56,10 +56,10 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationtenants",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Databaseconnectionstring = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Databaseconnectionstring = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -72,10 +72,10 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationpages",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Urlpath = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Urlpath = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Isnavigation = dbtable.Column<bool>(type: "bit", nullable: false, unicode: null),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
@@ -89,9 +89,9 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationcontainers",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Pageid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Containertype = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Pageid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Containertype = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -104,10 +104,10 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationcontainercolumns",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Containerid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Containerid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Gridposition = dbtable.Column<int>(type: "int", nullable: false, unicode: null),
-                     Columnwidth = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Columnwidth = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -120,11 +120,11 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationmodulepackages",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Version = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Siteid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Version = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
@@ -137,9 +137,9 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  name: "Applicationmodules",
                  columns: dbtable => new
                  {
-                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Packageid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     Containercolumnid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Packageid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
+                     Containercolumnid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 255),
                      Containercolumnposition = dbtable.Column<int>(type: "int", nullable: false, unicode: null),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
@@ -147,7 +147,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  {
                      dbtable.PrimaryKey("pk_application_moduleid", item => item.Id);
                      dbtable.ForeignKey("fk_application_module_packageid", item => item.Packageid, "Applicationpackages");
-                     dbtable.ForeignKey("fk_application_module_columnid", item => item.Containercolumnid, "Applicationcontainercolumns");
+                     dbtable.ForeignKey("fk_application_module_containercolumnid", item => item.Containercolumnid, "Applicationcontainercolumns");
                  });
 
         }
