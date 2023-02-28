@@ -1,6 +1,6 @@
 ﻿namespace Mihcelle.Hwavmvid.Server
 {
-    public interface Moduleinstallerinterface : IServiceProvider
+    public interface Moduleinstallerinterface
     {
 
         Task Install();

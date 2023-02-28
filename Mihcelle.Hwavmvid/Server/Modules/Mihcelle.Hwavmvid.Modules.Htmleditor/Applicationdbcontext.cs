@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Shared.Models;
 
 namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 {
 
-    public class Applicationdbcontext : Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext
+    public class Applicationdbcontext : Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext, Moduleinstallerinterface
     {
 
         public DbSet<Applicationhtmleditor> Applicationhtmleditors { get; set; }
@@ -21,6 +22,16 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
         protected override void OnModelCreating(ModelBuilder builder)
         {
             try { base.OnModelCreating(builder); } catch { }
+        }
+
+        public async Task Install()
+        {
+            await this.Database.MigrateAsync();
+        }
+
+        public async Task Deinstall()
+        {
+            await this.Database.RollbackTransactionAsync();
         }
 
     }

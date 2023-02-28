@@ -8,7 +8,7 @@
         {
 
             services.AddScoped<Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.Htmleditor.Applicationdbcontext>();
-            services.AddScoped<Mihcelle.Hwavmvid.Server.Moduleinstallerinterface, Mihcelle.Hwavmvid.Modules.Htmleditor.Moduleinstaller>();
+            //services.AddScoped<Mihcelle.Hwavmvid.Server.Moduleinstallerinterface, Mihcelle.Hwavmvid.Modules.Htmleditor.Moduleinstaller>();
 
         }
 

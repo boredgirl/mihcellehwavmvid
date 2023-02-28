@@ -127,16 +127,20 @@ builder.Services.AddSignalR()
 
 if (installed == true)
 {
-    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
-    foreach (var item in programitems)
+    try
     {
-        if (item.IsClass)
+        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+        foreach (var item in programitems)
         {
-            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
-            if (programinterfaceinstance != null)
-                programinterfaceinstance.Configure(builder.Services);
+            if (item.IsClass)
+            {
+                Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+                if (programinterfaceinstance != null)
+                    programinterfaceinstance.Configure(builder.Services);
+            }
         }
-    }
+    } 
+    catch (Exception exception) { Console.WriteLine(exception.Message); }    
 }
 
 var app = builder.Build();
@@ -178,6 +182,7 @@ app.MapFallbackToFile("index.html");
 
 if (installed == true)
 {
+
     try // run modules installer
     {
         var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
@@ -185,13 +190,18 @@ if (installed == true)
         {
             if (item.IsClass)
             {
-                var moduleinstaller = (Moduleinstallerinterface?) app.Services.GetService(item);
-                if (moduleinstaller != null)
-                    await moduleinstaller.Install();
+
+                using (var scope = app.Services.CreateScope())
+                {
+                    var moduleinstaller = (Moduleinstallerinterface?) scope.ServiceProvider.GetService(item);
+                    if (moduleinstaller != null)
+                        await moduleinstaller.Install();
+                }
             }
         }
     }
     catch (Exception exception) { Console.WriteLine(exception.Message); }
+    
 }
 
 app.Run();
