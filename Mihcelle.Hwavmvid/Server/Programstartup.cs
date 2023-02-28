@@ -1,11 +1,11 @@
 ﻿namespace Mihcelle.Hwavmvid
 {
-    public class Programstartup : Mihcelle.Hwavmvid.Programextended
+    public class Programstartup : Mihcelle.Hwavmvid.Programinterface
     {
 
-        public override void Configure(IServiceCollection services)
+        public void Configure(IServiceCollection services)
         {
-            base.Configure(services);
+
         }
 
     }

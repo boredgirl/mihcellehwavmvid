@@ -20,6 +20,7 @@ using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
 using System;
+using System.CodeDom;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -122,8 +123,20 @@ builder.Services.AddSignalR()
         options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     });
 
-Programextended iprogram = new Programstartup();
-iprogram.Configure(builder.Services);
+
+try
+{
+    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+    foreach (var item in programitems)
+    {
+        if (item.IsClass)
+        {
+            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+            programinterfaceinstance.Configure(builder.Services);
+        }
+    }
+} catch (Exception exception) { Console.WriteLine(exception.Message); }
+
 
 var app = builder.Build();
 

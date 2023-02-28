@@ -29,14 +29,14 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
-                     ModuleId = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
+                     Moduleid = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Htmlstring = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 410),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("pk_application_htmleditorid", item => item.Id);
-                     dbtable.ForeignKey("fk_application_htmleditor_moduleid", item => item.ModuleId, "Applicationmodules");
+                     dbtable.ForeignKey("fk_application_htmleditor_moduleid", item => item.Moduleid, "Applicationmodules");
                  });
         }
 
