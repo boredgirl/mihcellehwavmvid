@@ -10,10 +10,10 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationmodulepackage : Applicationbase
     {
 
-
-        public string Version { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Version { get; set; }
+        public string Assemblytype { get; set; }
+        public string Description { get; set; }        
 
     }
 }

@@ -47,8 +47,9 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
             {
                 var package = new Applicationmodulepackage()
                 {
+                    Name = "Htmleditor",
                     Version = "1.0.0",
-                    Name = "Mihcelle.Hwavmvid.Modules.HtmlEditor, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.HtmlEditor, Mihcelle.Hwavmvid.Client",
                     Description = string.Empty,
                     Createdon = DateTime.Now,
                 };

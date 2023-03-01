@@ -121,9 +121,11 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
-                     Version = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     
                      Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
-                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     Version = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     Assemblytype = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),                     
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },
                  constraints: dbtable =>
