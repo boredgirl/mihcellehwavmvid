@@ -27,7 +27,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">@Configuration["framework:description"]</a>
+                                <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">@this.Configuration?["framework:description"]</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
@@ -41,7 +41,7 @@
                                     @foreach (var item in this._contextpages)
                                     {
                                         <li class="dropdown-item">
-                                            <a href="@(string.Concat(this.navigationmanager.BaseUri, item.Urlpath))">@item.Name</a>
+                                            <a href="@(string.Concat(this.navigationmanager?.BaseUri, item.Urlpath))">@item.Name</a>
                                         </li>
                                     }
 
@@ -52,13 +52,13 @@
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                        Modules
+                                        Packages
                                     </a>
                                     <ul class="dropdown-menu" style="left: auto !important; right: 0;">
                                         <li>
                                             <div class="p-2 p-sm-4" style="min-width: 410px;">
                                                 
-                                                <Modulepackagesdropdowncomponent></Modulepackagesdropdowncomponent>
+                                                <Mihcelle.Hwavmvid.Client.Modulepackagesdropdowncomponent></Mihcelle.Hwavmvid.Client.Modulepackagesdropdowncomponent>
 
                                             </div>
                                         </li>
