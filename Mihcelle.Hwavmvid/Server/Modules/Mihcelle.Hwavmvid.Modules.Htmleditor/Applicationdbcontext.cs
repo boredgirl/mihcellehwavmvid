@@ -40,6 +40,22 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
         {
             await this.Database.RollbackTransactionAsync();
         }
+        
+        public Applicationmodulepackage applicationmodulepackage 
+        {
+            get
+            {
+                var package = new Applicationmodulepackage()
+                {
+                    Version = "1.0.0",
+                    Name = "Mihcelle.Hwavmvid.Modules.HtmlEditor, Mihcelle.Hwavmvid.Client",
+                    Description = string.Empty,
+                    Createdon = DateTime.Now,
+                };
+
+                return package;
+            }
+        }
 
     }
 }

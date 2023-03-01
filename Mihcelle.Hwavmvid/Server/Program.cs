@@ -183,19 +183,33 @@ app.MapFallbackToFile("index.html");
 if (installed == true)
 {
 
-    try // run modules installer
+    try // run modules installer migrate database and add package references to database
     {
         var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
         foreach (var item in installeritems)
         {
             if (item.IsClass)
             {
-
                 using (var scope = app.Services.CreateScope())
                 {
                     var moduleinstaller = (Moduleinstallerinterface?) scope.ServiceProvider.GetService(item);
                     if (moduleinstaller != null)
-                        await moduleinstaller.Install();
+                    {                        
+                        var package = moduleinstaller.applicationmodulepackage;
+                        var dbcontext = scope.ServiceProvider.GetService<Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext>();
+
+                        if (dbcontext != null)
+                        {
+                            var installedpackage = dbcontext.Applicationmodulepackages.Where(item => item.Name == package.Name).FirstOrDefault();
+                            if (installedpackage == null)
+                            {
+
+                                await moduleinstaller.Install();
+                                dbcontext.Applicationmodulepackages.Add(package);
+                                await dbcontext.SaveChangesAsync();
+                            }
+                        }                        
+                    }
                 }
             }
         }

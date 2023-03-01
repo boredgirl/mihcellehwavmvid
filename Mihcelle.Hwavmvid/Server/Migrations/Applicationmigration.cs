@@ -121,7 +121,6 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
-                     Siteid = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      Version = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
                      Name = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
                      Description = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
@@ -130,7 +129,6 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("pk_application_modulepackageid", item => item.Id);
-                     dbtable.ForeignKey("fk_application_modulepackage_siteid", item => item.Siteid, "Applicationsites", "Id");
                  });
 
             migrationbuilder.CreateTable(
