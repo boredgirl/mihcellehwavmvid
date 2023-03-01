@@ -26,7 +26,14 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 
         public async Task Install()
         {
-            await this.Database.MigrateAsync();
+            try
+            {
+                await this.Database.MigrateAsync();
+            }
+            catch (Exception message)
+            {
+                Console.WriteLine(message);
+            }
         }
 
         public async Task Deinstall()

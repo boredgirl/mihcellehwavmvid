@@ -12,7 +12,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationuser : IdentityUser
     {
 
-        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [StringLength(410)]
         public override string Id { get; set; }
 
     }

@@ -8,9 +8,12 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 
 
         [Key]
+        [StringLength(410)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        //public string Moduleid { get; set; }
+
+        [StringLength(410)]
+        public string Moduleid { get; set; }
         public string Htmlstring { get; set; }
         public DateTime Createdon { get; set; }
 

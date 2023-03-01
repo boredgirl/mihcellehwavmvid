@@ -11,7 +11,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     public class Applicationbase
     {
 
-        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [StringLength(410)]
         public string Id { get; set; }
         public DateTime Createdon { get; set; }
 
