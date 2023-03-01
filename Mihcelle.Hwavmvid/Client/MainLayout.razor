@@ -52,6 +52,24 @@
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                        Modules
+                                    </a>
+                                    <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                                        <li>
+                                            <div class="p-2 p-sm-4" style="min-width: 410px;">
+                                                
+                                                <Modulepackagesdropdowncomponent></Modulepackagesdropdowncomponent>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+
+                            @if (this.applicationprovider?._contextauth?.User?.Identity?.IsAuthenticated ?? false)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                         Admin
                                     </a>
                                     <ul class="dropdown-menu" style="left: auto !important; right: 0;">
