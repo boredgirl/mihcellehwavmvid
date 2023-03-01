@@ -1,54 +1,82 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Mihcelle.Hwavmvid.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
+using Mihcelle.Hwavmvid.Cookies;
 
 namespace Mihcelle.Hwavmvid.Client
 {
     public class Applicationprovider
     {
 
-        public NavigationManager _navigationmanager { get; set; }
 
+        // app providers //
+        public NavigationManager navigationmanager { get; set; }
+        public IJSRuntime ijsruntime { get; set; }
+        
+
+        // javascript references //
+        public DotNetObjectReference<Applicationprovider> dotnetobjref;
+        public IJSObjectReference appjavascriptfile { get; set; }
+        public IJSObjectReference appjavascriptmap { get; set; }
+
+
+        // application events //
         public event Action _oncontextpagechanged;
 
+
+        // application _context properties //
         public AuthenticationState? _contextauth { get; set; }
         public Applicationsite _contextsite { get; set; }
-
-        private Applicationpage contextpage { get; set; }
+        private Applicationpage applicationpage { get; set; }
         public Applicationpage _contextpage 
         {
-            get
-            {
-                return this.contextpage;
-            }
+            get { return this.applicationpage; }
             set
             {
-                this.contextpage = value;
+                this.applicationpage = value;
                 this._oncontextpagechanged?.Invoke();
             }
         }
         public Applicationcontainer _contextcontainer { get; set; }
 
 
+        // signalr things //
         public HubConnection? _connection { get; set; }
 
         private const string unauthorizeduser = "unauthorizeduser";
 
         private string _applicationid = Guid.NewGuid().ToString();
 
-        public Applicationprovider(NavigationManager navigationmanager)
+
+        // constructor //
+        public Applicationprovider(IJSRuntime ijsruntime, NavigationManager navigationmanager)
         {
-            _navigationmanager = navigationmanager;
+            this.ijsruntime = ijsruntime;
+            this.navigationmanager = navigationmanager;
+
+            this.dotnetobjref = DotNetObjectReference.Create(this);
         }
+
+        // initialize javascript interop //
+        public async Task Initapplicationprovider()
+        {
+            if (this.appjavascriptfile == null || this.appjavascriptmap == null)
+            {
+                this.appjavascriptfile = await this.ijsruntime.InvokeAsync<IJSObjectReference>("import", "/jsinterops/applicationprovider.js");
+                this.appjavascriptmap = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initapplicationprovider");
+            }
+        }
+
+        // signalr methods //
         public async Task<bool> Establishapplicationconnection()
         {
             try
@@ -90,7 +118,7 @@ namespace Mihcelle.Hwavmvid.Client
         {
 
             StringBuilder urlBuilder = new StringBuilder();
-            var hubconnectionuri = _navigationmanager.BaseUri + "api/applicationhub";
+            var hubconnectionuri = navigationmanager.BaseUri + "api/applicationhub";
 
             urlBuilder.Append(hubconnectionuri);
             urlBuilder.Append("?username=" + unauthorizeduser);
