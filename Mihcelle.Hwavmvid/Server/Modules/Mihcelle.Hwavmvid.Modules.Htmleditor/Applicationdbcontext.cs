@@ -49,7 +49,7 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
                 {
                     Name = "Htmleditor",
                     Version = "1.0.0",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.HtmlEditor, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Htmleditor.Index, Mihcelle.Hwavmvid.Client",
                     Description = string.Empty,
                     Createdon = DateTime.Now,
                 };
