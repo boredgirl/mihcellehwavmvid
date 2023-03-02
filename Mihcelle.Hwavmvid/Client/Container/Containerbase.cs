@@ -23,13 +23,18 @@ namespace Mihcelle.Hwavmvid.Client.Container
                 this.applicationprovider._contextcontainer = null;
                 this.StateHasChanged();
 
-                var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                this.applicationprovider._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer?>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
+                await InvokeAsync(async () =>
+                {
+                    var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                    this.applicationprovider._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer?>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
+                    this.StateHasChanged();
+                });
 
                 if (this.applicationprovider._contextcontainer != null)
                 {
                     await InvokeAsync(async () =>
                     {
+                        var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                         this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
                         this.StateHasChanged();
                     });

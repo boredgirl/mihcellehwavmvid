@@ -33,21 +33,13 @@ namespace Mihcelle.Hwavmvid.Client
 
         // application events //
         public event Action _oncontextpagechanged;
+        public void _contextpagechanged() => this._oncontextpagechanged?.Invoke();
 
 
         // application _context properties //
         public AuthenticationState? _contextauth { get; set; }
         public Applicationsite _contextsite { get; set; }
-        private Applicationpage applicationpage { get; set; }
-        public Applicationpage _contextpage 
-        {
-            get { return this.applicationpage; }
-            set
-            {
-                this.applicationpage = value;
-                this._oncontextpagechanged?.Invoke();
-            }
-        }
+        public Applicationpage? _contextpage { get; set; }
         public Applicationcontainer? _contextcontainer { get; set; }
 
 

@@ -8,34 +8,46 @@ namespace Mihcelle.Hwavmvid.Client.Pages
     public class Indexbase : Mainlayoutbase
     {
 
-        [Parameter] public string? _contextpageurlpath { get; set; }
+        [Parameter] 
+        public string? _contextpageurlpath { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        private const string frontpage = "mihcellehwavmvid_techonologies";
+
+        protected override async Task OnParametersSetAsync()
         {
+            this._contextpageurlpath = _contextpageurlpath ?? frontpage;
+            await this.Getcontextpage(this._contextpageurlpath);
 
-            this._contextpageurlpath = _contextpageurlpath ?? "mihcellehwavmvid_techonologies";
-
-            try
-            {
-                var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                this.applicationprovider._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", this._contextpageurlpath));
-            }
-            catch (Exception exception) { Console.WriteLine(exception.Message); }
-
-            await base.OnInitializedAsync();
+            await base.OnParametersSetAsync();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                await Task.Delay(1400).ContinueWith(async (task) =>
+
+                await Task.Delay(1400).ContinueWith((task) =>
                 {
                     this.StateHasChanged();
                 });
-            }
+            }           
 
             await base.OnAfterRenderAsync(firstRender);
+        }
+
+        private async Task Getcontextpage(string _contextpageurlpath)
+        {
+            try
+            {
+                await InvokeAsync(async () =>
+                {
+                    var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                    this.applicationprovider._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", _contextpageurlpath));
+                    this.applicationprovider._contextpagechanged();
+                    this.StateHasChanged();
+                });  
+            }
+            catch (Exception exception) { Console.WriteLine(exception.Message); }
         }
 
     }
