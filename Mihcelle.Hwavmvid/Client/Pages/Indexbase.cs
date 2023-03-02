@@ -8,10 +8,9 @@ namespace Mihcelle.Hwavmvid.Client.Pages
     public class Indexbase : Mainlayoutbase
     {
 
-        [Parameter]
-        public string? _contextpageurlpath { get; set; }
+        [Parameter] public string? _contextpageurlpath { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
 
             this._contextpageurlpath = _contextpageurlpath ?? "mihcellehwavmvid_techonologies";
@@ -22,6 +21,14 @@ namespace Mihcelle.Hwavmvid.Client.Pages
                 this.applicationprovider._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", this._contextpageurlpath));
             }
             catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+            await base.OnInitializedAsync();
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+
+            
 
             await base.OnParametersSetAsync();
         }
