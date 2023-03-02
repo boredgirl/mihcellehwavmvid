@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
@@ -207,6 +208,7 @@ if (installed == true)
                                 await moduleinstaller.Install();
                                 dbcontext.Applicationmodulepackages.Add(package);
                                 await dbcontext.SaveChangesAsync();
+
                             }
                         }                        
                     }

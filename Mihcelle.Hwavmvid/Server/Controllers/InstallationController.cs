@@ -151,6 +151,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
                 this.context.Applicationcontainercolumns.Add(column);
                 await this.context.SaveChangesAsync();
+
             }                
 
         }

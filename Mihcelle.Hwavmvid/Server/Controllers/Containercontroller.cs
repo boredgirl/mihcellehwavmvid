@@ -27,13 +27,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             var container = await this.applicationdbcontext.Applicationcontainers.FirstOrDefaultAsync(item => item.Pageid == pageid);
             if (container != null)
             {
-                var columns = await this.applicationdbcontext.Applicationcontainercolumns.Where(item => item.Containerid == container.Id).ToListAsync();
-                if (columns != null && columns.Any())
-                {
-                    var orderedcolumns = columns.OrderBy(item => item.Gridposition).ToList();
-                    container.Columns = orderedcolumns;
-                    return container;
-                }
+                return container;
             }
 
             return new Applicationcontainer();

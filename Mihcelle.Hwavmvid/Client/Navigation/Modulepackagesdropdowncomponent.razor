@@ -13,15 +13,15 @@
 <AuthorizeView>
     <Authorized>
 
-        @if (this.packages != null)
+        @if (this.applicationprovider._contextpackages != null)
         {
 
             <div class="d-flex flex-wrap bg-white mt-4 py-3" style="max-width: 410px;">            
 
-                @foreach (var package in this.packages)
+                @foreach (var package in this.applicationprovider._contextpackages)
                 {
 
-                    <div class="position-relative p-1" style="width: 150px; height: 150px;">
+                    <div class="position-relative p-1" style="width: 150px; height: 150px;" id="@package.Id" draggable="true">
                         <button type="button" class="btn btn-light w-100 h-100 px-2 py-4 bg-light text-dark text text-centerborder border-dark rounded-0">
                             <span class="display-4">Y</span><br />
                             <small class="py-2 w-100" style="font-size: 0.8rem; position:absolute; left:0px; bottom:10px;">@package.Name</small>
@@ -40,13 +40,11 @@
 @code {
 
 
-    public List<Applicationmodulepackage> packages { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
 
         var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-        this.packages = await client.GetFromJsonAsync<List<Applicationmodulepackage>>("api/modulepackage");
+        this.applicationprovider._contextpackages = await client.GetFromJsonAsync<List<Applicationmodulepackage>>("api/modulepackage");
 
         await base.OnInitializedAsync();
     }

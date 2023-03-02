@@ -1,21 +1,32 @@
 ﻿@inherits Containerbase
 @using Mihcelle.Hwavmvid.Modules.HtmlEditor
 
-@if (this._contextcontainer != null && this._contextcontainer.Columns != null)
+@if (this.applicationprovider?._contextcontainer != null && this.applicationprovider?._contextcontainercolumns != null)
 {
 
-    <div class="@this._contextcontainer.Containertype">
+    <div class="@this.applicationprovider._contextcontainer.Containertype">
 
         <div class="row align-items-center">
 
-            @foreach (var column in this._contextcontainer.Columns)
+            @foreach (var column in this.applicationprovider._contextcontainercolumns)
             {
-                
-                <div class="@column.Columnwidth" style="min-height: 100px; border: 2px dotted black">
 
-                    <small class="bg-dark text-light">columnid: @column.Id</small>
+                <div class="position-relative @column.Columnwidth" style="width: 100%; min-height: 100px; border: 2px dotted black">
 
-                    <DynamicComponent Type="@typeof(Htmleditor)"></DynamicComponent>
+                    @foreach (var module in column.Modules)
+                    {
+
+                        Type componenttype = Type.GetType(module.Assemblytype);
+                        <div>
+
+                            <small class="bg-dark text-light">columnid: @column.Id</small>
+                            <DynamicComponent Type="@componenttype"></DynamicComponent>
+
+                        </div>
+
+                    }
+
+                    <div id="@column.Id" class="packagedropzone packagedropzone-@(column.Id.ToString())" />
 
                 </div>
 

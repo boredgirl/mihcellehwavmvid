@@ -11,6 +11,7 @@ using Mihcelle.Hwavmvid.Shared.Models;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Mihcelle.Hwavmvid.Cookies;
+using System.Net.Http.Json;
 
 namespace Mihcelle.Hwavmvid.Client
 {
@@ -19,6 +20,7 @@ namespace Mihcelle.Hwavmvid.Client
 
 
         // app providers //
+        public IHttpClientFactory ihttpclientfactory { get; set; }
         public NavigationManager navigationmanager { get; set; }
         public IJSRuntime ijsruntime { get; set; }
         
@@ -57,22 +59,101 @@ namespace Mihcelle.Hwavmvid.Client
         private string _applicationid = Guid.NewGuid().ToString();
 
 
+        // _contextitems and draggable droppable package items //
+        public List<Applicationmodulepackage>? _contextpackages { get; set; }
+        public List<Applicationcontainercolumn>? _contextcontainercolumns { get; set; }
+
+
         // constructor //
-        public Applicationprovider(IJSRuntime ijsruntime, NavigationManager navigationmanager)
+        public Applicationprovider(IHttpClientFactory ihttpclientfactory, IJSRuntime ijsruntime, NavigationManager navigationmanager)
         {
+            this.ihttpclientfactory = ihttpclientfactory;
             this.ijsruntime = ijsruntime;
             this.navigationmanager = navigationmanager;
 
             this.dotnetobjref = DotNetObjectReference.Create(this);
         }
 
+
         // initialize javascript interop //
-        public async Task Initapplicationprovider()
+        public async Task Initpackagemoduledraganddrop()
         {
-            if (this.appjavascriptfile == null || this.appjavascriptmap == null)
+
+            if (this.appjavascriptfile == null)
             {
+
                 this.appjavascriptfile = await this.ijsruntime.InvokeAsync<IJSObjectReference>("import", "/jsinterops/applicationprovider.js");
-                this.appjavascriptmap = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initapplicationprovider");
+                if (this.appjavascriptfile != null)
+                {
+                    if (this.appjavascriptfile != null && this._contextpackages != null && this._contextcontainercolumns != null)
+                    {
+
+                        try
+                        {
+                            foreach (var packageitem in this._contextpackages)
+                            {
+                                var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, packageitem.Id, "draggable");
+                                if (obj != null)
+                                {
+                                    await obj.InvokeVoidAsync("removeevents");
+                                    await obj.InvokeVoidAsync("addevents");
+                                }
+
+                                packageitem.JSObjectReference = obj;
+                            }
+                        }
+                        catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+                        try
+                        {
+                            foreach (var columnitem in this._contextcontainercolumns)
+                            {
+                                var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, columnitem.Id, "droppable");
+                                if (obj != null)
+                                {
+                                    await obj.InvokeVoidAsync("removeevents");
+                                    await obj.InvokeVoidAsync("addevents");
+
+                                    columnitem.JSObjectReference = obj;
+                                }
+                            }
+                        }
+                        catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+                    }
+                }
+            }
+        }
+        [JSInvokable("ItemDropped")]
+        public async void ItemDropped(string draggedfieldid, string droppedfieldid)
+        {
+
+            if (_contextauth?.User?.Identity?.IsAuthenticated ?? false)
+            {
+                try
+                {
+                    var package = this._contextpackages.FirstOrDefault(item => item.Id == draggedfieldid);
+                    if (package != null)
+                    {
+                        var module = new Applicationmodule()
+                        {
+                            Id = string.Empty,
+                            Packageid = package.Id,
+                            Containercolumnid = droppedfieldid,
+                            Containercolumnposition = 0,
+                            Assemblytype = package.Assemblytype,
+                            Createdon = DateTime.Now,
+                        };
+
+                        var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                        await client.PostAsJsonAsync("api/module", module);
+                        this.navigationmanager.NavigateTo(navigationmanager.Uri, true);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             }
         }
 

@@ -15,7 +15,5 @@ namespace Mihcelle.Hwavmvid.Shared.Models
         public string Pageid { get; set; }
         public string Containertype { get; set; }
 
-        [NotMapped] public List<Applicationcontainercolumn>? Columns { get; set; }
-
     }
 }

@@ -7,8 +7,6 @@ namespace Mihcelle.Hwavmvid.Client.Container
     public class Containerbase : Indexbase, IDisposable
     {
 
-        public Applicationcontainer? _contextcontainer { get; set; }
-
         protected override async Task OnInitializedAsync()
         {
 
@@ -19,14 +17,21 @@ namespace Mihcelle.Hwavmvid.Client.Container
         protected async Task Contextpagechanged()
         {
 
-            if (this.applicationprovider?._contextpage != null && this._contextcontainer == null ||
-                this.applicationprovider?._contextpage != null && this._contextcontainer != null && this.applicationprovider?._contextpage.Id != this._contextcontainer.Pageid)
+            if (this.applicationprovider?._contextpage != null && this.applicationprovider._contextcontainer == null ||
+                this.applicationprovider?._contextpage != null && this.applicationprovider._contextcontainer != null && this.applicationprovider?._contextpage.Id != this.applicationprovider?._contextcontainer.Pageid)
             {
 
                 try
                 {
+
                     var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                    this._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
+                    this.applicationprovider._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
+
+                    if (this.applicationprovider._contextcontainer != null)
+                    {
+                        this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
+                    }
+
                     this.StateHasChanged();
                 }
                 catch (Exception exception)

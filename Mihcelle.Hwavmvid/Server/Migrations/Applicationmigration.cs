@@ -140,6 +140,7 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      Packageid = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      Containercolumnid = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     Assemblytype = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
                      Containercolumnposition = dbtable.Column<int>(type: "int", nullable: false, unicode: null),
                      Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                  },

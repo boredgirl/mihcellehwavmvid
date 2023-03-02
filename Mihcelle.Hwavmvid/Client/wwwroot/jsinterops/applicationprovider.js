@@ -1,36 +1,126 @@
-export function initapplicationprovider() {
+export function initpackagemoduledraganddrop(dotnetobjref, elementId, type) {
 
     var __obj = {
 
-        cookiemap: function () {
+        draggablelistmap: function (dotnetobjref, elementId) {
 
-            this.getCookie = function (cookiename) {
+            this.addevents = async function () {
 
-                let name = cookiename + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
+
+                    jsitem.addEventListener('dragstart', function (e) {
+
+                        if (e.target != null) {
+
+                            e.dataTransfer.effectAllowed = "move";
+
+                            //var id = e.target.id;
+                            //var arr = id.split('-');
+                            //var packageid = arr[arr.length - 1];
+
+                            var packageid = e.target.id;
+                            if (packageid != null) {
+
+                                var exceptDropzone = '.packagedropzone-' + packageid;
+                                var dropzones = document.querySelectorAll('.packagedropzone:not(' + exceptDropzone + ')');
+
+                                if (dropzones != null) {
+
+                                    Array.prototype.forEach.call(dropzones, function (item) {
+
+                                        item.style.display = "block";
+                                    });
+                                }
+
+                                e.dataTransfer.setData("packageid", packageid);
+                            }
+                        }
+                    });
+                    jsitem.addEventListener('dragend', function (e) {
+
+                        var dropzones = document.getElementsByClassName('packagedropzone');
+                        if (dropzones != null) {
+
+                            Array.prototype.forEach.call(dropzones, function (item) {
+
+                                item.style.display = "none";
+                                item.classList.remove('active-packagedropzone');
+                            });
+                        }
+                    });
                 }
-
-                return null;
             };
+            this.removeevents = async function () {
 
-            this.setCookie = function (cookiename, cookievalue, expirationdays) {
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
 
-                var d = new Date();
-                d.setTime(d.getTime() + (expirationdays * 24 * 60 * 60 * 1000));
-                var expires = "expires=" + d.toUTCString();
-                document.cookie = cookiename + "=" + cookievalue + ";" + expires + ";path=/";
+                    try {
+                        jsitem.removeEventListener("dragstart", (item, e) => { });
+                        jsitem.removeEventListener("dragend", (item, e) => { });
+                    } catch (err) { }
+                }
             };
-        }
+        },
+        droppablelistmap: function (dotnetobjref, elementId) {
+
+            this.addevents = async function () {
+
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
+
+                    jsitem.addEventListener('dragenter', function (e) {
+
+                        if (e.target != null)
+                            e.target.classList.add('active-packagedropzone');
+                    });
+                    jsitem.addEventListener('dragleave', function (e) {
+
+                        if (e.target !== null)
+                            e.target.classList.remove('active-packagedropzone');
+                    });
+                    jsitem.addEventListener('dragover', function (e) {
+
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    });
+                    jsitem.addEventListener('drop', function (e) {
+
+                        e.preventDefault();
+                        if (e.target != null) {
+
+                            //var id = e.target.id;
+                            //var arr = id.split('-');
+                            //var droppedfieldid = arr[arr.length - 1];
+
+                            var droppedfieldid = e.target.id;
+                            var draggedfieldid = e.dataTransfer.getData('packageid');
+                            dotnetobjref.invokeMethodAsync('ItemDropped', draggedfieldid, droppedfieldid);
+                        }
+                    });
+                }
+            };
+            this.removeevents = async function () {
+
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
+
+                    try {
+                        jsitem.removeEventListener("dragenter", (item, e) => { });
+                        jsitem.removeEventListener("dragleave", (item, e) => { });
+                        jsitem.removeEventListener("dragover", (item, e) => { });
+                        jsitem.removeEventListener("drop", (item, e) => { });
+                    } catch (err) { }
+                }
+            };
+        },
     };
 
-    return new __obj.cookiemap();
+    if (type === "draggable")
+        return new __obj.draggablelistmap(dotnetobjref, elementId);
+
+    if (type === "droppable")
+        return new __obj.droppablelistmap(dotnetobjref, elementId);
+
 }
