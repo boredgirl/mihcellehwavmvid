@@ -32,7 +32,6 @@ namespace Mihcelle.Hwavmvid.Client.Pages
             {
                 await Task.Delay(1400).ContinueWith(async (task) =>
                 {
-                    await this.applicationprovider.Initpackagemoduledraganddrop();
                     this.StateHasChanged();
                 });
             }

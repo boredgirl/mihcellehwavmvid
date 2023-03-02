@@ -124,8 +124,9 @@ namespace Mihcelle.Hwavmvid.Client
                 }
             }
         }
+
         [JSInvokable("ItemDropped")]
-        public async void ItemDropped(string draggedfieldid, string droppedfieldid)
+        public async Task ItemDropped(string draggedfieldid, string droppedfieldid)
         {
 
             if (_contextauth?.User?.Identity?.IsAuthenticated ?? false)

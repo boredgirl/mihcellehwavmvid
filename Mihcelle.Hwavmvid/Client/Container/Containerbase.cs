@@ -29,7 +29,16 @@ namespace Mihcelle.Hwavmvid.Client.Container
 
                     if (this.applicationprovider._contextcontainer != null)
                     {
-                        this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
+                        await InvokeAsync(async () =>
+                        {
+                            this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
+                            this.StateHasChanged();
+                        });
+
+                        if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
+                        {
+                            await this.applicationprovider.Initpackagemoduledraganddrop();
+                        }
                     }
 
                     this.StateHasChanged();
