@@ -40,8 +40,6 @@ namespace Mihcelle.Hwavmvid.Client.Container
                             await this.applicationprovider.Initpackagemoduledraganddrop();
                         }
                     }
-
-                    this.StateHasChanged();
                 }
                 catch (Exception exception)
                 {
