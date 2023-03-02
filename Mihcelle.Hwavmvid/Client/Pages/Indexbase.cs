@@ -25,14 +25,6 @@ namespace Mihcelle.Hwavmvid.Client.Pages
             await base.OnInitializedAsync();
         }
 
-        protected override async Task OnParametersSetAsync()
-        {
-
-            
-
-            await base.OnParametersSetAsync();
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
