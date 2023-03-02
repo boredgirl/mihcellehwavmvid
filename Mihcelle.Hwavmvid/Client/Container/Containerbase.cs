@@ -21,6 +21,7 @@ namespace Mihcelle.Hwavmvid.Client.Container
             {
 
                 this.applicationprovider._contextcontainer = null;
+                this.applicationprovider._contextcontainercolumns = null;
                 this.StateHasChanged();
 
                 await InvokeAsync(async () =>
