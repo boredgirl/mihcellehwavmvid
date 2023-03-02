@@ -21,7 +21,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
         [AllowAnonymous]
         [HttpGet("{pageid}")]
-        public async Task<Applicationcontainer> Get(string pageid)
+        public async Task<Applicationcontainer?> Get(string pageid)
         {
 
             var container = await this.applicationdbcontext.Applicationcontainers.FirstOrDefaultAsync(item => item.Pageid == pageid);
@@ -30,7 +30,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
                 return container;
             }
 
-            return new Applicationcontainer();
+            return null;
         }
 
     }

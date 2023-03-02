@@ -48,7 +48,7 @@ namespace Mihcelle.Hwavmvid.Client
                 this._oncontextpagechanged?.Invoke();
             }
         }
-        public Applicationcontainer _contextcontainer { get; set; }
+        public Applicationcontainer? _contextcontainer { get; set; }
 
 
         // signalr things //

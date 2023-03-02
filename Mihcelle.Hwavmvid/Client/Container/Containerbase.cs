@@ -16,35 +16,32 @@ namespace Mihcelle.Hwavmvid.Client.Container
 
         protected async Task Contextpagechanged()
         {
-
-            if (this.applicationprovider?._contextpage != null && this.applicationprovider._contextcontainer == null ||
-                this.applicationprovider?._contextpage != null && this.applicationprovider._contextcontainer != null && this.applicationprovider?._contextpage.Id != this.applicationprovider?._contextcontainer.Pageid)
+            try
             {
 
-                try
+                this.applicationprovider._contextcontainer = null;
+                this.StateHasChanged();
+
+                var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                this.applicationprovider._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer?>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
+
+                if (this.applicationprovider._contextcontainer != null)
                 {
-
-                    var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-                    this.applicationprovider._contextcontainer = await client.GetFromJsonAsync<Applicationcontainer>(string.Concat("api/container/", this.applicationprovider?._contextpage.Id));
-
-                    if (this.applicationprovider._contextcontainer != null)
+                    await InvokeAsync(async () =>
                     {
-                        await InvokeAsync(async () =>
-                        {
-                            this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
-                            this.StateHasChanged();
-                        });
+                        this.applicationprovider._contextcontainercolumns = await client.GetFromJsonAsync<List<Applicationcontainercolumn>>(string.Concat("api/containercolumns/", this.applicationprovider?._contextcontainer.Id));
+                        this.StateHasChanged();
+                    });
 
-                        if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
-                        {
-                            await this.applicationprovider.Initpackagemoduledraganddrop();
-                        }
+                    if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
+                    {
+                        await this.applicationprovider.Initpackagemoduledraganddrop();
                     }
                 }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception.Message);
-                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
             }
         }
 
