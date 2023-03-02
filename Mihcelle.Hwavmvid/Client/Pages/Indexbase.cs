@@ -16,7 +16,9 @@ namespace Mihcelle.Hwavmvid.Client.Pages
         protected override async Task OnParametersSetAsync()
         {
             this._contextpageurlpath = _contextpageurlpath ?? frontpage;
-            await this.Getcontextpage(this._contextpageurlpath);
+
+            if (this.applicationprovider._contextpage != null && this.applicationprovider._contextpage.Urlpath != this._contextpageurlpath)
+                await this.Getcontextpage(this._contextpageurlpath);
 
             await base.OnParametersSetAsync();
         }
