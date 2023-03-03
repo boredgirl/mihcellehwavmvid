@@ -12,6 +12,7 @@ namespace Mihcelle.Hwavmvid.Client.Pages
         [Inject] public NavigationManager navigationmanager { get; set; }
         [Inject] public Applicationprovider applicationprovider { get; set; }
 
+
         [Parameter] 
         public string _contextpageurlpath { get; set; }
         private string _contextpagealreadyrequested { get; set; }
@@ -31,7 +32,6 @@ namespace Mihcelle.Hwavmvid.Client.Pages
                 this._contextpageurlpath = frontpage;
 
             await this.Getcontextpage(this._contextpageurlpath);
-
             await base.OnParametersSetAsync();
         }
 

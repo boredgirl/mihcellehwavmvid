@@ -126,15 +126,11 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
                 this.context.Applicationpages.Add(page);
                 await this.context.SaveChangesAsync();
-            }
 
-            var frontpage = await this.context.Applicationpages.FirstOrDefaultAsync(item => item.Name == "Mihcellehwavmvid Techonologies");
-            if (frontpage != null)
-            {
                 var container = new Applicationcontainer()
                 {
                     Containertype = Shared.Constants.Applicationcontainertype.Boxed,
-                    Pageid = frontpage.Id,
+                    Pageid = page.Id,
                     Createdon = DateTime.Now,
                 };
 
@@ -151,8 +147,7 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
 
                 this.context.Applicationcontainercolumns.Add(column);
                 await this.context.SaveChangesAsync();
-
-            }                
+            }            
 
         }
 
