@@ -73,46 +73,46 @@ namespace Mihcelle.Hwavmvid.Client
 
             if (this.appjavascriptfile == null)
             {
-
                 this.appjavascriptfile = await this.ijsruntime.InvokeAsync<IJSObjectReference>("import", "/jsinterops/applicationprovider.js");
-                if (this.appjavascriptfile != null)
+            }
+
+            if (this.appjavascriptfile != null)
+            {
+                if (this.appjavascriptfile != null && this._contextpackages != null && this._contextcontainercolumns != null)
                 {
-                    if (this.appjavascriptfile != null && this._contextpackages != null && this._contextcontainercolumns != null)
+
+                    try
                     {
-
-                        try
+                        foreach (var packageitem in this._contextpackages)
                         {
-                            foreach (var packageitem in this._contextpackages)
+                            var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, packageitem.Id, "draggable");
+                            if (obj != null)
                             {
-                                var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, packageitem.Id, "draggable");
-                                if (obj != null)
-                                {
-                                    await obj.InvokeVoidAsync("removeevents");
-                                    await obj.InvokeVoidAsync("addevents");
-                                }
-
-                                packageitem.JSObjectReference = obj;
+                                await obj.InvokeVoidAsync("removeevents");
+                                await obj.InvokeVoidAsync("addevents");
                             }
+
+                            packageitem.JSObjectReference = obj;
                         }
-                        catch (Exception exception) { Console.WriteLine(exception.Message); }
-
-                        try
-                        {
-                            foreach (var columnitem in this._contextcontainercolumns)
-                            {
-                                var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, columnitem.Id, "droppable");
-                                if (obj != null)
-                                {
-                                    await obj.InvokeVoidAsync("removeevents");
-                                    await obj.InvokeVoidAsync("addevents");
-
-                                    columnitem.JSObjectReference = obj;
-                                }
-                            }
-                        }
-                        catch (Exception exception) { Console.WriteLine(exception.Message); }
-
                     }
+                    catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+                    try
+                    {
+                        foreach (var columnitem in this._contextcontainercolumns)
+                        {
+                            var obj = await this.appjavascriptfile.InvokeAsync<IJSObjectReference>("initpackagemoduledraganddrop", this.dotnetobjref, columnitem.Id, "droppable");
+                            if (obj != null)
+                            {
+                                await obj.InvokeVoidAsync("removeevents");
+                                await obj.InvokeVoidAsync("addevents");
+
+                                columnitem.JSObjectReference = obj;
+                            }
+                        }
+                    }
+                    catch (Exception exception) { Console.WriteLine(exception.Message); }
+
                 }
             }
         }
