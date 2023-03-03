@@ -12,7 +12,7 @@ namespace Mihcelle.Hwavmvid.Shared.Models
     {
 
         [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [StringLength(410)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public DateTime Createdon { get; set; }
 
     }

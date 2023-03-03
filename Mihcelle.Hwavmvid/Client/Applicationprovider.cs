@@ -130,7 +130,7 @@ namespace Mihcelle.Hwavmvid.Client
                     {
                         var module = new Applicationmodule()
                         {
-                            Id = string.Empty,
+                            Id = null,
                             Packageid = package.Id,
                             Containercolumnid = droppedfieldid,
                             Containercolumnposition = 0,

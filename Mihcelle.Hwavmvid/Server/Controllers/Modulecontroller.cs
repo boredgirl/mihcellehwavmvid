@@ -21,7 +21,6 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpPost]
         public async Task Post([FromBody] Applicationmodule module)
         {
-            module.Id = null;
             await this.applicationdbcontext.Applicationmodules.AddAsync(module);
             await this.applicationdbcontext.SaveChangesAsync();
         }
