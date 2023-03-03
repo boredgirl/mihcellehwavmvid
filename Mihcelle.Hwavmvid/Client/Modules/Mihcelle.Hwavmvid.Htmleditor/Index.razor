@@ -2,10 +2,11 @@
 @inherits ComponentBase
 
 @using System.ComponentModel.DataAnnotations
+@using Mihcelle.Hwavmvid.Modal
 
 @inject IHttpClientFactory ihttpclientfactory
 @inject NavigationManager navigationmanager
-
+@inject Modalservice modalservice
 
 
 <AuthorizeView Roles="Host">
@@ -15,34 +16,77 @@
         {
             <div>
 
-                <textarea @bind="this.editor.Htmlstring" rows="5" cols="41">
+                <Modalcomponent ElementId="@this._htmleditormodalelementid">
 
-                </textarea>
+                    <Modalheader>
 
-                <br />
+                        <div class="bg-dark text-light text-center px-2 py-2">
 
-                <button type="button" @onclick="async () => await this.Savechanges()" class="btn btn-sm btn-primary">
-                    Save changes
-                </button>
+                            <div class="lead py-2">
+                                Htmleditor
+                            </div>
+
+                        </div>
+
+                    </Modalheader>
+
+                    <Modalbody>
+
+                        <div class="p-2 lead">
+
+                            <div>
+                                <strong><small>Edit html output</small></strong>
+                            </div>
+
+                            <textarea @bind="this.editor.Htmlstring" rows="14" cols="410" class="w-100" onclick="border border-dark"></textarea>
+
+                        </div>
+
+                    </Modalbody>
+
+                    <Modalfooter>
+
+                        <div class="float-end">
+
+                            <button type="button" @onclick="async () => await this.Savechanges()" class="btn btn-sm btn-link">
+                                Save changes
+                            </button>
+
+                            <button @onclick="(() => this.modalservice.HideModal(this._htmleditormodalelementid))" type="button" class="btn btn-sm btn-link">
+                                Close editor
+                            </button>
+
+                        </div>
+
+                    </Modalfooter>
+
+                </Modalcomponent>
 
             </div>
         }
 
     </Authorized>
-    <NotAuthorized>        
-
-    </NotAuthorized>
 </AuthorizeView>
 
 @if (this.editor != null)
 {
-    <div>@((MarkupString)this.editor.Htmlstring)</div>
+
+    <div class="position-relative py-2" style="min-height: 140px;">
+
+        <button @onclick="async() => await Opencontextmodule()" @onclick:stopPropagation=true type="button" class="btn btn-sm btn-link px-2 py-4 rounded-0" style="position: absolute; top: 4px; right: 4px;">
+            <small class="py-2">Edit html</small>
+        </button>
+
+        <div>@((MarkupString) this.editor.Htmlstring)</div>
+
+    </div>
 }
 
 @code {
 
-    [Parameter]
-    public string Moduleid { get; set; }
+
+    [Parameter] public string Moduleid { get; set; }
+    [Parameter] public string _htmleditormodalelementid { get; set; } = Guid.NewGuid().ToString();
 
     public Applicationhtmleditor? editor { get; set; }
 
@@ -84,6 +128,17 @@
         {
             Console.WriteLine(exception.Message);
         }
+    }
+
+    public async Task Opencontextmodule()
+    {
+
+        await this.modalservice.ShowModal(this._htmleditormodalelementid);
+
+        await InvokeAsync(() =>
+        {
+            this.StateHasChanged();
+        });
     }
 
     public class Applicationhtmleditor
