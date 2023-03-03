@@ -1,14 +1,32 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 @inherits ComponentBase
 
+@using System.ComponentModel.DataAnnotations
+
+@inject IHttpClientFactory ihttpclientfactory
+@inject NavigationManager navigationmanager
+
+
+
 <AuthorizeView Roles="Host">
     <Authorized>
 
-        <div>
-            <textarea @bind="htmltext" rows="5" cols="41">
+        @if (this.editor != null)
+        {
+            <div>
 
-            </textarea>
-        </div>        
+                <textarea @bind="this.editor.Htmlstring" rows="5" cols="41">
+
+                </textarea>
+
+                <br />
+
+                <button type="button" @onclick="async () => await this.Savechanges()" class="btn btn-sm btn-primary">
+                    Save changes
+                </button>
+
+            </div>
+        }
 
     </Authorized>
     <NotAuthorized>        
@@ -16,11 +34,63 @@
     </NotAuthorized>
 </AuthorizeView>
 
-<div>@((MarkupString)htmltext)</div>
+@if (this.editor != null)
+{
+    <div>@((MarkupString)this.editor.Htmlstring)</div>
+}
 
 @code {
 
+    [Parameter]
+    public string Moduleid { get; set; }
 
-    protected string htmltext { get; set; } = "<h1 class=\"display-4 lead bg-dark text-light\">Almost complete html editor</h1>";
+    public Applicationhtmleditor? editor { get; set; }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (this.editor == null && !string.IsNullOrEmpty(this.Moduleid))
+        {
+            try
+            {
+                this.editor = new Applicationhtmleditor()
+                    {
+                        Id = string.Empty,
+                        Moduleid = this.Moduleid,
+                        Htmlstring = string.Empty,
+                        Createdon = DateTime.Now,
+                    };
+
+                var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                this.editor = await client.GetFromJsonAsync<Applicationhtmleditor?>(string.Concat("api/htmleditor/", this.Moduleid));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
+
+        await base.OnParametersSetAsync();
+    }
+
+    public async Task Savechanges()
+    {
+        try
+        {
+            var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            await client.PostAsJsonAsync<Applicationhtmleditor?>("api/htmleditor", this.editor);
+            this.navigationmanager.NavigateTo(navigationmanager.Uri, true);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
+    }
+
+    public class Applicationhtmleditor
+    {
+        public string Id { get; set; }
+        public string Moduleid { get; set; }
+        public string Htmlstring { get; set; }
+        public DateTime Createdon { get; set; }
+    }
 }

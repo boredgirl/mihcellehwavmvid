@@ -1,5 +1,4 @@
 ﻿@inherits Containerbase
-@using Mihcelle.Hwavmvid.Modules.Htmleditor
 
 @if (this.applicationprovider?._contextcontainer != null && this.applicationprovider?._contextcontainercolumns != null)
 {
@@ -15,12 +14,15 @@
 
                     @foreach (var module in column.Modules)
                     {
+                        var dictitem = new Dictionary<string, object>();
+                        dictitem.Add("Moduleid", module.Id);
 
                         Type componenttype = Type.GetType(module.Assemblytype);
+
                         <div>
 
                             <small class="bg-dark text-light">columnid: @column.Id</small>
-                            <DynamicComponent Type="@componenttype"></DynamicComponent>
+                            <DynamicComponent Type="@componenttype" Parameters="@dictitem"></DynamicComponent>
 
                         </div>
 
