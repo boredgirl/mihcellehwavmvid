@@ -57,5 +57,25 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             return apiitem;
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task Post([FromBody] Applicationpage page)
+        {
+            var existingpage = await this.applicationdbcontext.Applicationpages.FirstOrDefaultAsync(item => item.Id == page.Id);
+            if (existingpage == null)
+            {
+                await this.applicationdbcontext.Applicationpages.AddAsync(page);
+                await this.applicationdbcontext.SaveChangesAsync();
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("{pageid}")]
+        public async Task Delete(string pageid)
+        {
+            await this.applicationdbcontext.Applicationpages.Where(item => item.Id == pageid).ExecuteDeleteAsync<Applicationpage>();
+            await this.applicationdbcontext.SaveChangesAsync();
+        }
+
     }
 }
