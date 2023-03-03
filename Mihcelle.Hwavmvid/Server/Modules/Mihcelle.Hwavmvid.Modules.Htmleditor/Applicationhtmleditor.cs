@@ -14,7 +14,10 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
 
         [StringLength(410)]
         public string Moduleid { get; set; }
+
+        [StringLength(841)]
         public string Htmlstring { get; set; }
+
         public DateTime Createdon { get; set; }
 
     }
