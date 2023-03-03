@@ -5,8 +5,11 @@ using System.Net.Http.Json;
 
 namespace Mihcelle.Hwavmvid.Client.Container
 {
-    public class Containerbase : Indexbase, IDisposable
+    public class Containerbase : ComponentBase, IDisposable
     {
+
+        [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
+        [Inject] public Applicationprovider applicationprovider { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,6 +36,7 @@ namespace Mihcelle.Hwavmvid.Client.Container
 
                 if (this.applicationprovider._contextcontainer != null)
                 {
+
                     await InvokeAsync(async () =>
                     {
                         var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
@@ -40,10 +44,14 @@ namespace Mihcelle.Hwavmvid.Client.Container
                         this.StateHasChanged();
                     });
 
-                    if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
+                    await Task.Delay(410).ContinueWith(async (task) =>
                     {
-                        await this.applicationprovider.Initpackagemoduledraganddrop();
-                    }
+                        if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
+                        {
+                            await this.applicationprovider.Initpackagemoduledraganddrop();
+                        }
+                    });
+                    
                 }
             }
             catch (Exception exception)

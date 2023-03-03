@@ -20,6 +20,17 @@ namespace Mihcelle.Hwavmvid.Client.Pages
             await base.OnInitializedAsync();
         }
 
+        protected override async Task OnParametersSetAsync()
+        {
+            if (string.IsNullOrEmpty(this._contextpageurlpath))
+            {
+                this._contextpageurlpath = frontpage;
+                await this.Getcontextpage();
+            }                
+
+            await base.OnParametersSetAsync();
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)

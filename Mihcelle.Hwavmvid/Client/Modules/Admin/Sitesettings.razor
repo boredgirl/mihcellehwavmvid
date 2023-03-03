@@ -1,8 +1,12 @@
-﻿@inherits Indexbase
+﻿@inherits ComponentBase
 
 @using Mihcelle.Hwavmvid.Fileupload
 @using Mihcelle.Hwavmvid.Shared.Models
 @using Mihcelle.Hwavmvid.Client.Pages
+
+@inject IHttpClientFactory ihttpclientfactory
+@inject NavigationManager navigationmanager
+@inject Applicationprovider applicationprovider
 
 <AuthorizeView>
     <Authorized>
@@ -29,7 +33,7 @@
                 <div class="col-md-4">
 
                     <div class="w-100 text-center">
-                        <img src="@string.Concat(this.navigationmanager.BaseUri, "images/", site?.Brandmark)" height="88" />
+                        <img src="@string.Concat(this.navigationmanager.BaseUri, "images/", this.applicationprovider._contextsite?.Brandmark)" height="88" />
                     </div>
 
                 </div>
@@ -51,7 +55,7 @@
                 <div class="col-md-4">
 
                     <div class="w-100 text-center">
-                        <img src="@string.Concat(this.navigationmanager.BaseUri, "images/", site?.Favicon)" height="42" />
+                        <img src="@string.Concat(this.navigationmanager.BaseUri, "images/", this.applicationprovider._contextsite?.Favicon)" height="42" />
                     </div>
 
                 </div>
@@ -67,6 +71,7 @@
 
 
 @code {
+
 
 
     // Site model

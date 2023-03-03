@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Mihcelle.Hwavmvid.Client.Authentication
 {
-    public class Authenticationbase : Mainlayoutbase
+    public class Authenticationbase : ComponentBase
     {
 
     }
