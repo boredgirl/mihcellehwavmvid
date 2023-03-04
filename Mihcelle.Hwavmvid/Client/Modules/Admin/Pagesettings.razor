@@ -40,7 +40,7 @@
                     @if (this.applicationprovider?._contextsite != null)
                     {
 
-                        <Pagercomponent ApiQueryId="@this.applicationprovider?._contextsite?.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidpages" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.apppages" Context="contextitem" ItemsPerPage="2" TItemGeneric="@Applicationpage" Class="py-sm-3" Scrolling="@false">
+                        <PagerComponent ApiQueryId="@this.applicationprovider?._contextsite?.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidpages" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.apppages" Context="contextitem" ItemsPerPage="2" TItemGeneric="@Applicationpage" Class="py-sm-3" Scrolling="@false">
                             <PagerItem>
 
                                 <div class="row" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
@@ -55,7 +55,7 @@
                                 </div>
 
                             </PagerItem>
-                        </Pagercomponent>
+                        </PagerComponent>
 
                     }
 
