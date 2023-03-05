@@ -179,7 +179,7 @@ app.MapHub<Applicationhub>("/api/applicationhub", options =>
 
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.cshtml");
+app.MapFallbackToFile("index.html");
 
 if (installed == true)
 {
