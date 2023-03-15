@@ -70,6 +70,21 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         }
 
         [Authorize]
+        [HttpPut]
+        public async Task Put([FromBody] Applicationpage page)
+        {
+            var existingpage = await this.applicationdbcontext.Applicationpages.FirstOrDefaultAsync(item => item.Id == page.Id);
+            if (existingpage != null)
+            {
+                existingpage.Name = page.Name;
+                existingpage.Urlpath = page.Name.ToLower().Replace(" ", "");
+
+                this.applicationdbcontext.Applicationpages.Update(existingpage);
+                await this.applicationdbcontext.SaveChangesAsync();
+            }
+        }
+
+        [Authorize]
         [HttpDelete("{pageid}")]
         public async Task Delete(string pageid)
         {
