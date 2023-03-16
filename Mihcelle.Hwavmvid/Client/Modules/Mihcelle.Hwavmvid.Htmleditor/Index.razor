@@ -85,9 +85,10 @@
 @code {
 
 
-    [Parameter] public string Moduleid { get; set; }
-    [Parameter] public string _htmleditormodalelementid { get; set; } = Guid.NewGuid().ToString();
-
+    [Parameter]
+    public string Moduleid { get; set; }
+    
+    public string _htmleditormodalelementid { get; set; } = Guid.NewGuid().ToString();
     public Applicationhtmleditor? editor { get; set; }
 
     protected override async Task OnParametersSetAsync()

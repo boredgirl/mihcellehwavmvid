@@ -11,9 +11,11 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
     public class Modulecontroller : ControllerBase
     {
 
+        public IServiceProvider serviceprovider { get; set; }
         public Applicationdbcontext applicationdbcontext { get; set; }
-        public Modulecontroller(Applicationdbcontext applicationdbcontext)
+        public Modulecontroller(IServiceProvider serviceprovider, Applicationdbcontext applicationdbcontext)
         {
+            this.serviceprovider = serviceprovider;
             this.applicationdbcontext = applicationdbcontext;
         }
 
@@ -29,11 +31,27 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(string id)
         {
+
             var module = await this.applicationdbcontext.Applicationmodules.FirstOrDefaultAsync(item => item.Id == id);
             if (module != null)
             {
-                module.Containercolumnid = string.Empty;
-                this.applicationdbcontext.Applicationmodules.Update(module);
+                var installeritems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Moduleinstallerinterface)).IsAssignableFrom(assemblytypes));
+                foreach (var item in installeritems)
+                {
+                    if (item.IsClass)
+                    {
+                        var moduleinstaller = (Moduleinstallerinterface?)this.serviceprovider.GetService(item);
+                        if (moduleinstaller != null)
+                        {
+                            try {
+                                await moduleinstaller.Removemodule(id);
+                            }
+                            catch (Exception exception) { Console.WriteLine(exception.Message); }
+                        }
+                    }
+                }
+
+                await this.applicationdbcontext.Applicationmodules.Where(item => item.Id == id).ExecuteDeleteAsync();
                 await this.applicationdbcontext.SaveChangesAsync();
             }
         }

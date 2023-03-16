@@ -24,6 +24,12 @@ namespace Mihcelle.Hwavmvid.Modules.Htmleditor
             try { base.OnModelCreating(builder); } catch { }
         }
 
+        public async Task Removemodule(string moduleid)
+        {
+            await this.Applicationhtmleditors.Where(item => item.Moduleid == moduleid).ExecuteDeleteAsync();
+            await this.SaveChangesAsync();            
+        }
+
         public async Task Install()
         {
             try
