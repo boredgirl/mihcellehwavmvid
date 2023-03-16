@@ -41,6 +41,7 @@ namespace Mihcelle.Hwavmvid.Client.Pages
             {
                 await Task.Delay(1400).ContinueWith((task) =>
                 {
+                    this.applicationprovider._contextpagechanged();
                     this.StateHasChanged();
                 });
             }           
@@ -57,7 +58,6 @@ namespace Mihcelle.Hwavmvid.Client.Pages
                     this._contextpagealreadyrequested = path;
                     var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
                     this.applicationprovider._contextpage = await client.GetFromJsonAsync<Applicationpage>(string.Concat("api/page/", path));
-                    this.StateHasChanged();
                     this.applicationprovider._contextpagechanged();
                 }
             }

@@ -52,8 +52,6 @@ namespace Mihcelle.Hwavmvid.Client
             {
                 this.applicationprovider._contextauth = await this.authenticationstateprovider.GetAuthenticationStateAsync();
                 await this.applicationprovider.Establishapplicationconnection();
-
-                this.StateHasChanged();
             }
 
             await base.OnAfterRenderAsync(firstRender);

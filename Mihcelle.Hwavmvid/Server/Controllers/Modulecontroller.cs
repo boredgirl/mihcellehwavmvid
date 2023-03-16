@@ -17,12 +17,25 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.applicationdbcontext = applicationdbcontext;
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public async Task Post([FromBody] Applicationmodule module)
         {
             await this.applicationdbcontext.Applicationmodules.AddAsync(module);
             await this.applicationdbcontext.SaveChangesAsync();
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task Delete(string id)
+        {
+            var module = await this.applicationdbcontext.Applicationmodules.FirstOrDefaultAsync(item => item.Id == id);
+            if (module != null)
+            {
+                module.Containercolumnid = string.Empty;
+                this.applicationdbcontext.Applicationmodules.Update(module);
+                await this.applicationdbcontext.SaveChangesAsync();
+            }
         }
 
     }

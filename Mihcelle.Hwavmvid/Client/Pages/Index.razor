@@ -9,23 +9,7 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
 
-                <h1 class="display-4 py-1" style="font-weight: 400 !important;">Webpage @this.applicationprovider?._contextpage.Name</h1>
-                <p class="lead">
-
-                    <span class="bg-warning">connectionid:</span> @this.applicationprovider?._connection?.ConnectionId
-                    <button type="button" @onclick="() => StateHasChanged()">statehaschanged()</button>
-
-                    <AuthorizeView>
-                        <Authorized>
-                            <div><small>signedin user: @this.applicationprovider?._contextauth?.User?.Identity?.Name</small></div>
-                        </Authorized>
-                        <NotAuthorized>
-                            not authorized..
-                        </NotAuthorized>
-                    </AuthorizeView>
-
-                </p>
-
+                <h1 class="display-4 lead py-1" style="font-weight: 400 !important;">Webpage @this.applicationprovider?._contextpage.Name</h1>
                 <Mihcelle.Hwavmvid.Client.Container.Container></Mihcelle.Hwavmvid.Client.Container.Container>
 
             </div>

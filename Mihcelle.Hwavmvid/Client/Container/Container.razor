@@ -10,18 +10,23 @@
             @foreach (var column in this.applicationprovider._contextcontainercolumns)
             {
 
-                <div class="position-relative @column.Columnwidth" style="width: 100%; min-height: 100px; border: 2px dotted black">
+                <div class="position-relative @column.Columnwidth" style="width: 100%; min-height: 140px; border: 2px dotted black">
 
                     @foreach (var module in column.Modules)
                     {
+
                         var dictitem = new Dictionary<string, object>();
                         dictitem.Add("Moduleid", module.Id);
 
                         Type componenttype = Type.GetType(module.Assemblytype);
 
-                        <div>
+                        <div class="position-relative">
 
                             <DynamicComponent Type="@componenttype" Parameters="@dictitem"></DynamicComponent>
+
+                            <button @onclick="async() => await Deletemodule(module.Id)" @onclick:stopPropagation=true type="button" class="btn btn-sm btn-primary px-2 py-2 rounded-0" style="position: absolute; top: 4px; right: 4px;">
+                                <small class="py-2">Delete module item</small>
+                            </button>
 
                         </div>
 
@@ -41,6 +46,8 @@
 
 
 @code {
+
+
 
 
 }

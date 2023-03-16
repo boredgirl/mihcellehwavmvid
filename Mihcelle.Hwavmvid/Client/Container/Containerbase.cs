@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Mihcelle.Hwavmvid.Client.Pages;
 using Mihcelle.Hwavmvid.Shared.Models;
 using System.Net.Http.Json;
@@ -10,6 +11,7 @@ namespace Mihcelle.Hwavmvid.Client.Container
 
         [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
         [Inject] public Applicationprovider applicationprovider { get; set; }
+        [Inject] public NavigationManager navigationmanager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -20,6 +22,7 @@ namespace Mihcelle.Hwavmvid.Client.Container
 
         protected async Task Contextpagechanged()
         {
+
             try
             {
 
@@ -58,6 +61,13 @@ namespace Mihcelle.Hwavmvid.Client.Container
             {
                 Console.WriteLine(exception.Message);
             }
+        }
+
+        public async Task Deletemodule(string moduleid)
+        {
+            var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+            await client.DeleteAsync(string.Concat("api/module/", moduleid));
+            this.navigationmanager.NavigateTo(this.navigationmanager.Uri, true);
         }
 
         public void Dispose()
