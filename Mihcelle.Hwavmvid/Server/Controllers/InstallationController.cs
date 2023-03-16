@@ -112,6 +112,17 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             this.context.Applicationsites.Add(site);
             await this.context.SaveChangesAsync();
 
+            var tenant = new Applicationtenant()
+            {
+                Siteid = site.Id,
+                Name = "Master",
+                Databaseconnectionstring = connectionstring,
+                Createdon = DateTime.Now,
+            };
+
+            this.context.Applicationtenants.Add(tenant);
+            await this.context.SaveChangesAsync();
+
             string[] pagenames = new[] { "Mihcellehwavmvid Techonologies", "Developers", "Taxi driver", "Tawa gal", "Ashtrays", "Pizza Tonno", "Spaghetti napoli" };
             foreach(var pagename in pagenames)
             {
