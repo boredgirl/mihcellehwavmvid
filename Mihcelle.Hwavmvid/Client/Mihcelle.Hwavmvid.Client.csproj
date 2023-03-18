@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\blackjack\blackjackjsinterop.js" />
+    <None Include="wwwroot\blackjack\carddeck.svg" />
+    <None Include="wwwroot\blackjack\clubs.svg" />
+    <None Include="wwwroot\blackjack\diamonds.svg" />
+    <None Include="wwwroot\blackjack\hearts.svg" />
+    <None Include="wwwroot\blackjack\lasvegas.png" />
+    <None Include="wwwroot\blackjack\placeholder.svg" />
+    <None Include="wwwroot\blackjack\spades.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
@@ -32,6 +43,10 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\Mihcelle.Hwavmvid.Blackjack\wwwroot\" />
   </ItemGroup>
 
 </Project>
