@@ -56,7 +56,7 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette
                 {
                     Name = "Roulette",
                     Version = "1.0.0",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Roulette.RouletteComponent, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Roulette.Itellisense.RouletteitellisenseComponent, Mihcelle.Hwavmvid.Client",
                     Description = string.Empty,
                     Createdon = DateTime.Now,
                 };

@@ -25,7 +25,7 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette
         {
 
             migrationbuilder.CreateTable(
-                 name: "Applicationlroulettes",
+                 name: "Applicationroulettes",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
