@@ -33,6 +33,8 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
             this.RoulettecoinsService.OnItemDropped += ItemDropped;
             this.RouletteBetsService.UpdateUI += UpdateUI;
             this.RouletteBetsService.ItemRemoved += BetItemRemoved;
+
+            await this.RouletteitellisenseService.Initrouletteitellisenseservice();
             this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
 
             await base.OnInitializedAsync();

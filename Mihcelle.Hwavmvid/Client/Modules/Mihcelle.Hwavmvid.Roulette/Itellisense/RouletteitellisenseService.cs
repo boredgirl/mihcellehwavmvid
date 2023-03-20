@@ -19,7 +19,7 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
         {
             this.jsruntime = jsRuntime;
         }
-        public async Task InitRouletteService()
+        public async Task Initrouletteitellisenseservice()
         {
             this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>("import", "/roulette/rouletteitellisensejsinterop.js");
         }
