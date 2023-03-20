@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Mihcelle.Hwavmvid.Server.Data;
 using Mihcelle.Hwavmvid.Shared.Models;
 
-namespace Mihcelle.Hwavmvid.Modules.Blackjack
+namespace Mihcelle.Hwavmvid.Modules.Roulette
 {
 
     [DbContext(typeof(Applicationdbcontext))]
-    [Migration("mihcelle.hwavmvid.modules.blackjack.01.00.00.00")]
+    [Migration("mihcelle.hwavmvid.modules.roulette.01.00.00.00")]
     public class Applicationmigration : Migration
     {
 
@@ -25,7 +25,7 @@ namespace Mihcelle.Hwavmvid.Modules.Blackjack
         {
 
             migrationbuilder.CreateTable(
-                 name: "Applicationlblackjacks",
+                 name: "Applicationlroulettes",
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
@@ -34,15 +34,15 @@ namespace Mihcelle.Hwavmvid.Modules.Blackjack
                  },
                  constraints: dbtable =>
                  {
-                     dbtable.PrimaryKey("pk_application_blackjackid", item => item.Id);
-                     dbtable.ForeignKey("fk_application_blackjack_moduleid", item => item.Moduleid, "Applicationmodules", "Id");
+                     dbtable.PrimaryKey("pk_application_rouletteid", item => item.Id);
+                     dbtable.ForeignKey("fk_application_roulette_moduleid", item => item.Moduleid, "Applicationmodules", "Id");
                  });
         }
 
         protected override void Down(MigrationBuilder migrationbuilder)
         {
 
-            migrationbuilder.DropColumn("Applicationblackjacks", "Applicationblackjacks");
+            migrationbuilder.DropColumn("Applicationroulettes", "Applicationroulettes");
 
         }
     }

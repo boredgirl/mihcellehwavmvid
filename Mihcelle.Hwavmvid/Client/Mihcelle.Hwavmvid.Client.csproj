@@ -8,6 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\roulette\ballnumbers2.png" />
+    <Content Remove="wwwroot\roulette\ballraceway2.png" />
+    <Content Remove="wwwroot\roulette\hwavmvid.roulette.css" />
+    <Content Remove="wwwroot\roulette\rouletteball.svg" />
+    <Content Remove="wwwroot\roulette\roulettebetoptionsjsinterop.js" />
+    <Content Remove="wwwroot\roulette\roulettebetsjsinterop.js" />
+    <Content Remove="wwwroot\roulette\roulettecoinsjsinterop.js" />
+    <Content Remove="wwwroot\roulette\rouletteitellisensejsinterop.js" />
+    <Content Remove="wwwroot\roulette\roulettelasvegas.png" />
+    <Content Remove="wwwroot\roulette\rouletteloading.gif" />
+    <Content Remove="wwwroot\roulette\roulettesurfacejsinterop.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\blackjack\blackjackjsinterop.js" />
     <None Include="wwwroot\blackjack\carddeck.svg" />
     <None Include="wwwroot\blackjack\clubs.svg" />
@@ -16,6 +30,17 @@
     <None Include="wwwroot\blackjack\lasvegas.png" />
     <None Include="wwwroot\blackjack\placeholder.svg" />
     <None Include="wwwroot\blackjack\spades.svg" />
+    <None Include="wwwroot\roulette\ballnumbers2.png" />
+    <None Include="wwwroot\roulette\ballraceway2.png" />
+    <None Include="wwwroot\roulette\hwavmvid.roulette.css" />
+    <None Include="wwwroot\roulette\rouletteball.svg" />
+    <None Include="wwwroot\roulette\roulettebetoptionsjsinterop.js" />
+    <None Include="wwwroot\roulette\roulettebetsjsinterop.js" />
+    <None Include="wwwroot\roulette\roulettecoinsjsinterop.js" />
+    <None Include="wwwroot\roulette\rouletteitellisensejsinterop.js" />
+    <None Include="wwwroot\roulette\roulettelasvegas.png" />
+    <None Include="wwwroot\roulette\rouletteloading.gif" />
+    <None Include="wwwroot\roulette\roulettesurfacejsinterop.js" />
   </ItemGroup>
 
   <ItemGroup>
