@@ -30,12 +30,12 @@
 
         <div class="col-sm-8 col-md-8">
 
-            @if (this.RouletteitellisenseService.GetType() == typeof(RouletteitellisenseService))
+            @if (this.RouletteitellisenseService?.GetType() == typeof(RouletteitellisenseService))
             {
                 <div class="row align-items-center">
            
                     <div class="col-sm-12 p-0 text-center">
-                        <strong class="bg-primary text-light lead" style="font-size: 24px;">Total coins: @(this.RouletteitellisenseService.ContextGameValue)</strong>
+                        <strong class="bg-primary text-light lead" style="font-size: 24px;">Total coins: @(this.RouletteitellisenseService?.ContextGameValue)</strong>
                     </div>            
 
                 </div>

@@ -12,7 +12,7 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Bets
     public class RoulettebetsComponentBase : ComponentBase, IDisposable
     {
 
-        [Inject] public RouletteBetsService RouletteBetsService { get; set; }
+        [Inject] public RouletteBetsService? RouletteBetsService { get; set; }
         [Parameter] public RouletteBetItem Item { get; set; }
 
         protected override async Task OnInitializedAsync()

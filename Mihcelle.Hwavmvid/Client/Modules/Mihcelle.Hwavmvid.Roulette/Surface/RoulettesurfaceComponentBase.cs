@@ -11,8 +11,8 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Surface
     public class RoulettesurfaceComponentBase : ComponentBase, IDisposable
     {
 
-        [Inject] public RoulettesurfaceService RoulettesurfaceService { get; set; }
-        [Inject] public RouletteService RouletteService { get; set; }
+        [Inject] public RoulettesurfaceService? RoulettesurfaceService { get; set; }
+        [Inject] public RouletteService? RouletteService { get; set; }
 
         public const int NumberItemsContainerHeight = 400;
 

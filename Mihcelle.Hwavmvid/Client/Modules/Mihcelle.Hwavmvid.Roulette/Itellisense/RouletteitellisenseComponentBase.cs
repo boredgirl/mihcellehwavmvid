@@ -17,12 +17,12 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
     public class RouletteitellisenseComponentBase : ComponentBase, IAsyncDisposable
     {
 
-        [Inject] public RouletteitellisenseService RouletteitellisenseService { get; set; }
-        [Inject] public RouletteService RouletteService { get; set; }
-        [Inject] public RoulettecoinsService RoulettecoinsService { get; set; }
-        [Inject] public RouletteBetoptionsService RouletteBetoptionsService { get; set; }
-        [Inject] public RoulettesurfaceService RoulettesurfaceService { get; set; }
-        [Inject] public RouletteBetsService RouletteBetsService { get; set; }
+        [Inject] public RouletteitellisenseService? RouletteitellisenseService { get; set; }
+        [Inject] public RouletteService? RouletteService { get; set; }
+        [Inject] public RoulettecoinsService? RoulettecoinsService { get; set; }
+        [Inject] public RouletteBetoptionsService? RouletteBetoptionsService { get; set; }
+        [Inject] public RoulettesurfaceService? RoulettesurfaceService { get; set; }
+        [Inject] public RouletteBetsService? RouletteBetsService { get; set; }
 
         public RoulettecoinEvent DroppedItem { get; set; }
 
@@ -34,9 +34,7 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
             this.RouletteBetsService.UpdateUI += UpdateUI;
             this.RouletteBetsService.ItemRemoved += BetItemRemoved;
 
-            await this.RouletteitellisenseService.Initrouletteitellisenseservice();
             this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
-
             await base.OnInitializedAsync();
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
