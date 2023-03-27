@@ -135,7 +135,7 @@ if (installed == true)
         {
             if (item.IsClass)
             {
-                Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+                Programinterface? programinterfaceinstance = (Programinterface?) Activator.CreateInstance(item);
                 if (programinterfaceinstance != null)
                     programinterfaceinstance.Configure(builder.Services);
             }

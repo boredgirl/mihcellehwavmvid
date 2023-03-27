@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Components;
 using Mihcelle.Hwavmvid.Modal;
 using Mihcelle.Hwavmvid.Fileupload;
 using Mihcelle.Hwavmvid.Pager;
+using Mihcelle.Hwavmvid;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -53,5 +54,20 @@ if (cookiesprovider != null && string.IsNullOrEmpty(configuration?["installation
     await cookiesprovider.Initcookiesprovider();
     await cookiesprovider.Setcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, string.Empty, (-1));
 }
+
+try
+{
+    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterfaceclient)).IsAssignableFrom(assemblytypes));
+    foreach (var item in programitems)
+    {
+        if (item.IsClass)
+        {
+            Programinterfaceclient? programinterfaceinstance = (Programinterfaceclient?)Activator.CreateInstance(item);
+            if (programinterfaceinstance != null)
+                programinterfaceinstance.Configure(builder.Services);
+        }
+    }
+}
+catch (Exception exception) { Console.WriteLine(exception.Message); }
 
 await host.RunAsync();
