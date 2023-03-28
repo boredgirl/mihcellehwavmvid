@@ -46,15 +46,6 @@ builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 builder.Services.AddScoped<Pagerservice<Applicationpage>, Pagerservice<Applicationpage>>();
 
-WebAssemblyHost host = builder.Build();
-IConfiguration? configuration = host.Services.GetService<IConfiguration>();
-Cookiesprovider? cookiesprovider = host.Services.GetService<Cookiesprovider>();
-if (cookiesprovider != null && string.IsNullOrEmpty(configuration?["installation:createdon"]))
-{
-    await cookiesprovider.Initcookiesprovider();
-    await cookiesprovider.Setcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, string.Empty, (-1));
-}
-
 try
 {
     var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterfaceclient)).IsAssignableFrom(assemblytypes));
@@ -69,5 +60,14 @@ try
     }
 }
 catch (Exception exception) { Console.WriteLine(exception.Message); }
+
+WebAssemblyHost host = builder.Build();
+IConfiguration? configuration = host.Services.GetService<IConfiguration>();
+Cookiesprovider? cookiesprovider = host.Services.GetService<Cookiesprovider>();
+if (cookiesprovider != null && string.IsNullOrEmpty(configuration?["installation:createdon"]))
+{
+    await cookiesprovider.Initcookiesprovider();
+    await cookiesprovider.Setcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, string.Empty, (-1));
+}
 
 await host.RunAsync();
