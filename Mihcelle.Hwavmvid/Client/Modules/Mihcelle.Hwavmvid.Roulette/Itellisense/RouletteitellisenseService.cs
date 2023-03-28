@@ -9,10 +9,10 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
     public class RouletteitellisenseService : IDisposable
     {
 
-        private IJSObjectReference javascriptfile;
-        private IJSRuntime jsruntime;
+        private IJSObjectReference? javascriptfile { get; set; }
+        private IJSRuntime jsruntime { get; set; }
 
-        public string ContextGameId { get; set; }
+        public string? ContextGameId { get; set; }
         public int? ContextGameValue { get; set; } = 0;
 
         public RouletteitellisenseService(IJSRuntime jsRuntime)
@@ -23,9 +23,12 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
         {
             this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>("import", "/roulette/rouletteitellisensejsinterop.js");
         }
-        public async Task<string> Prompt(string message)
+        public async Task<string?> Prompt(string message)
         {
-            return await this.javascriptfile.InvokeAsync<string>("showPrompt", message);
+            if (this.javascriptfile != null)
+                return await this.javascriptfile.InvokeAsync<string>("showPrompt", message);
+
+            return null;
         }
         public void Dispose()
         {

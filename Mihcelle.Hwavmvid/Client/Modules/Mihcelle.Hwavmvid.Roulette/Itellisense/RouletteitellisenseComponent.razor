@@ -14,6 +14,8 @@
 @using Mihcelle.Hwavmvid.Modules.Roulette.Coins
 @using Mihcelle.Hwavmvid.Modules.Roulette.Bets
 
+@inject RouletteitellisenseService? RouletteitellisenseService
+
 <link href="/roulette/hwavmvid.roulette.css" rel="stylesheet" />
 
 <div class="container py-sm-4">
@@ -30,7 +32,7 @@
 
         <div class="col-sm-8 col-md-8">
 
-            @if (this.RouletteitellisenseService?.GetType() == typeof(RouletteitellisenseService))
+            @if (this.RouletteitellisenseService != null)
             {
                 <div class="row align-items-center">
            
