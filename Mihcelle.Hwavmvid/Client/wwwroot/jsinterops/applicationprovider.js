@@ -4,54 +4,50 @@ export function initpackagemoduledraganddrop(dotnetobjref, elementId, type) {
 
         draggablelistmap: function (dotnetobjref, elementId) {
 
-            this.addevents = async function () {
+            this.addevents = function () {
 
                 var jsitem = document.getElementById(elementId);
                 if (jsitem != null) {
 
-                    jsitem.addEventListener('dragstart', function (e) {
+                    jsitem.addEventListener("dragstart", function (e) {
 
-                        if (e.target != null) {
+                        //var id = e.target.id;
+                        //var arr = id.split("-");
+                        //var packageid = arr[arr.length - 1];
 
-                            e.dataTransfer.effectAllowed = "move";
+                        var packageid = e.target.id;
+                        if (packageid != null) {
 
-                            //var id = e.target.id;
-                            //var arr = id.split('-');
-                            //var packageid = arr[arr.length - 1];
+                            var exceptDropzone = ".packagedropzone-" + packageid;
+                            var dropzones = document.querySelectorAll(".packagedropzone:not(" + exceptDropzone + ")");
 
-                            var packageid = e.target.id;
-                            if (packageid != null) {
+                            if (dropzones != null) {
 
-                                var exceptDropzone = '.packagedropzone-' + packageid;
-                                var dropzones = document.querySelectorAll('.packagedropzone:not(' + exceptDropzone + ')');
+                                Array.prototype.forEach.call(dropzones, function (item) {
 
-                                if (dropzones != null) {
-
-                                    Array.prototype.forEach.call(dropzones, function (item) {
-
-                                        item.style.display = "block";
-                                    });
-                                }
-
-                                e.dataTransfer.setData("packageid", packageid);
+                                    item.style.display = "block";
+                                });
                             }
-                        }
-                    });
-                    jsitem.addEventListener('dragend', function (e) {
 
-                        var dropzones = document.getElementsByClassName('packagedropzone');
+                            e.dataTransfer.setData("packageid", packageid);
+                            e.dataTransfer.effectAllowed = "move";
+                        }                        
+                    });
+                    jsitem.addEventListener("dragend", function (e) {
+
+                        var dropzones = document.getElementsByClassName("packagedropzone");
                         if (dropzones != null) {
 
                             Array.prototype.forEach.call(dropzones, function (item) {
 
                                 item.style.display = "none";
-                                item.classList.remove('active-packagedropzone');
+                                item.classList.remove("active-packagedropzone");
                             });
                         }
                     });
                 }
             };
-            this.removeevents = async function () {
+            this.removeevents = function () {
 
                 var jsitem = document.getElementById(elementId);
                 if (jsitem != null) {
@@ -65,43 +61,41 @@ export function initpackagemoduledraganddrop(dotnetobjref, elementId, type) {
         },
         droppablelistmap: function (dotnetobjref, elementId) {
 
-            this.addevents = async function () {
+            this.addevents = function () {
 
                 var jsitem = document.getElementById(elementId);
                 if (jsitem != null) {
 
-                    jsitem.addEventListener('dragenter', function (e) {
+                    jsitem.addEventListener("dragenter", function (e) {
 
                         if (e.target != null)
-                            e.target.classList.add('active-packagedropzone');
+                            e.target.classList.add("active-packagedropzone");
                     });
-                    jsitem.addEventListener('dragleave', function (e) {
+                    jsitem.addEventListener("dragleave", function (e) {
 
                         if (e.target !== null)
-                            e.target.classList.remove('active-packagedropzone');
+                            e.target.classList.remove("active-packagedropzone");
                     });
-                    jsitem.addEventListener('dragover', function (e) {
+                    jsitem.addEventListener("dragover", function (e) {
 
                         e.preventDefault();
-                        e.dataTransfer.dropEffect = 'move';
+                        e.dataTransfer.dropEffect = "move";
                     });
-                    jsitem.addEventListener('drop', function (e) {
+                    jsitem.addEventListener("drop", function (e) {
 
                         e.preventDefault();
-                        if (e.target != null) {
 
-                            //var id = e.target.id;
-                            //var arr = id.split('-');
-                            //var droppedfieldid = arr[arr.length - 1];
+                        //var id = e.target.id;
+                        //var arr = id.split("-");
+                        //var droppedfieldid = arr[arr.length - 1];
 
-                            var droppedfieldid = e.target.id;
-                            var draggedfieldid = e.dataTransfer.getData('packageid');
-                            dotnetobjref.invokeMethodAsync('ItemDropped', draggedfieldid, droppedfieldid);
-                        }
+                        var droppedfieldid = e.target.id;
+                        var draggedfieldid = e.dataTransfer.getData("packageid");
+                        dotnetobjref.invokeMethodAsync("ItemDropped", draggedfieldid, droppedfieldid);
                     });
                 }
             };
-            this.removeevents = async function () {
+            this.removeevents = function () {
 
                 var jsitem = document.getElementById(elementId);
                 if (jsitem != null) {

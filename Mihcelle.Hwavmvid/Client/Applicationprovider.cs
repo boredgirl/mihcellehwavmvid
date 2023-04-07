@@ -95,7 +95,10 @@ namespace Mihcelle.Hwavmvid.Client
                             packageitem.JSObjectReference = obj;
                         }
                     }
-                    catch (Exception exception) { Console.WriteLine(exception.Message); }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.Message); 
+                    }
 
                     try
                     {

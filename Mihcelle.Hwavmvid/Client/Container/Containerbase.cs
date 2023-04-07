@@ -47,7 +47,7 @@ namespace Mihcelle.Hwavmvid.Client.Container
                         this.StateHasChanged();
                     });
 
-                    await Task.Delay(410).ContinueWith(async (task) =>
+                    await Task.Delay(1400).ContinueWith(async (task) =>
                     {
                         if (this.applicationprovider._contextcontainercolumns != null && this.applicationprovider._contextcontainercolumns.Any())
                         {
