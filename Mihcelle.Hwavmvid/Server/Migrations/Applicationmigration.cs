@@ -151,6 +151,21 @@ namespace Mihcelle.Hwavmvid.Server.Migrations
                      dbtable.ForeignKey("fk_application_module_containercolumnid", item => item.Containercolumnid, "Applicationcontainercolumns", "Id");
                  });
 
+            migrationbuilder.CreateTable(
+                 name: "Applicationmodulesettings",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     Moduleid = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     Key = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     Value = dbtable.Column<string>(type: "nvarchar", nullable: false, unicode: null, maxLength: 800),
+                     Createdon = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("pk_application_moduleid", item => item.Id);
+                     dbtable.ForeignKey("fk_application_modulesettings_moduleid", item => item.Moduleid, "Applicationmodules", "Id");
+                 });
         }
 
         protected override void Down(MigrationBuilder migrationbuilder)
