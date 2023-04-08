@@ -13,5 +13,10 @@ namespace Mihcelle.Hwavmvid.Modules.Roulette
 
         }
 
+        public void Configureapp(WebApplication application)
+        {
+
+        }
+
     }
 }

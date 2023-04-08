@@ -4,6 +4,7 @@
     {
 
         void Configure(IServiceCollection services);
+        void Configureapp(WebApplication app);
 
     }
 }

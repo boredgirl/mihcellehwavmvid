@@ -183,6 +183,24 @@ app.MapFallbackToFile("index.html");
 
 if (installed == true)
 {
+    try
+    {
+        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+        foreach (var item in programitems)
+        {
+            if (item.IsClass)
+            {
+                Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+                if (programinterfaceinstance != null)
+                    programinterfaceinstance.Configureapp(app);
+            }
+        }
+    }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
+}
+
+if (installed == true)
+{
 
     try // run modules installer migrate database and add package references to database
     {

@@ -16,27 +16,6 @@ using Mihcelle.Hwavmvid.Modal;
 using Mihcelle.Hwavmvid.Fileupload;
 using Mihcelle.Hwavmvid.Pager;
 using Mihcelle.Hwavmvid;
-using BlazorDraggableList;
-using BlazorDropdown;
-using BlazorDynamicLayout;
-using BlazorSelect;
-using BlazorSlider;
-using BlazorTabMenu;
-using BlazorTabs;
-using Hwavmvid.Accordion;
-using Hwavmvid.Alerts;
-using Hwavmvid.BrowserResize;
-using Hwavmvid.ColorPicker;
-using Hwavmvid.Devices;
-using Hwavmvid.Download;
-using Hwavmvid.Jsapigeolocation;
-using Hwavmvid.Jsapinotifications;
-using Hwavmvid.Notifications;
-using Hwavmvid.Video;
-using Hwavmvid.VideoPlayer;
-
-
-
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -67,19 +46,6 @@ builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 builder.Services.AddScoped<Pagerservice<Applicationpage>, Pagerservice<Applicationpage>>();
 builder.Services.AddScoped<Applicationmodulesettingsservice, Applicationmodulesettingsservice>();
-builder.Services.AddScoped<BlazorDraggableListService, BlazorDraggableListService>();
-builder.Services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();
-builder.Services.AddScoped<BlazorSliderService, BlazorSliderService>();
-builder.Services.AddScoped<AlertsService, AlertsService>();
-builder.Services.AddScoped<BrowserResizeService, BrowserResizeService>();
-builder.Services.AddScoped<ColorPickerService, ColorPickerService>();
-builder.Services.AddScoped<DevicesService, DevicesService>();
-builder.Services.AddScoped<DownloadService, DownloadService>();
-builder.Services.AddScoped<Jsapigeolocationservice, Jsapigeolocationservice>();
-builder.Services.AddScoped<Jsapibingmapservice, Jsapibingmapservice>();
-builder.Services.AddScoped<JsapinotificationService, JsapinotificationService>();
-builder.Services.AddScoped<VideoService, VideoService>();
-builder.Services.AddScoped<VideoPlayerService, VideoPlayerService>();
 
 try
 {

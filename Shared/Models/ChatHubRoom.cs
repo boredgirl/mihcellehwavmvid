@@ -6,7 +6,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubRoom : ChatHubBaseModel
     {
 
-        public int ModuleId { get; set; }
+        public string ModuleId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public string BackgroundColor { get; set; }
