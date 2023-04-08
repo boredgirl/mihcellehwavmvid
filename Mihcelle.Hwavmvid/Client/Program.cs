@@ -45,6 +45,7 @@ builder.Services.AddScoped<Modalservice, Modalservice>();
 builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 builder.Services.AddScoped<Pagerservice<Applicationpage>, Pagerservice<Applicationpage>>();
+builder.Services.AddScoped<Applicationmodulesettingsservice, Applicationmodulesettingsservice>();
 
 try
 {
