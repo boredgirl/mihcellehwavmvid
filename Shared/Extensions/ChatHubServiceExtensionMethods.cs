@@ -33,7 +33,7 @@ namespace Oqtane.ChatHubs.Extensions
         public static void AddUser(this List<ChatHubRoom> rooms, ChatHubUser user, string roomId)
         {
             var room = rooms.FirstOrDefault(x => x.Id.ToString() == roomId);
-            if (room != null && !room.Users.Any(x => x.UserId == user.UserId))
+            if (room != null && !room.Users.Any(x => x.Id == user.Id))
             {
                 room.Users.Add(user);
             }
@@ -43,7 +43,7 @@ namespace Oqtane.ChatHubs.Extensions
             var room = rooms.FirstOrDefault(x => x.Id.ToString() == roomId);
             if (room != null)
             {
-                var userItem = room.Users.FirstOrDefault(x => x.UserId == user.UserId);
+                var userItem = room.Users.FirstOrDefault(x => x.Id == user.Id);
                 if (userItem != null)
                 {
                     room.Users.Remove(userItem);
@@ -82,14 +82,14 @@ namespace Oqtane.ChatHubs.Extensions
         }
         public static void AddIgnoredUser(this List<ChatHubUser> ignoredUsers, ChatHubUser user)
         {
-            if (!ignoredUsers.Any(x => x.UserId == user.UserId))
+            if (!ignoredUsers.Any(x => x.Id == user.Id))
             {
                 ignoredUsers.Add(user);
             }
         }
         public static void RemoveIgnoredUser(this List<ChatHubUser> ignoredUsers, ChatHubUser user)
         {
-            var item = ignoredUsers.FirstOrDefault(x => x.UserId == user.UserId);
+            var item = ignoredUsers.FirstOrDefault(x => x.Id == user.Id);
             if (item != null)
             {
                 ignoredUsers.Remove(item);
@@ -97,14 +97,14 @@ namespace Oqtane.ChatHubs.Extensions
         }
         public static void AddIgnoredByUser(this List<ChatHubUser> ignoredByUsers, ChatHubUser user)
         {
-            if (!ignoredByUsers.Any(x => x.UserId == user.UserId))
+            if (!ignoredByUsers.Any(x => x.Id == user.Id))
             {
                 ignoredByUsers.Add(user);
             }
         }
         public static void RemoveIgnoredByUser(this List<ChatHubUser> ignoredByUsers, ChatHubUser user)
         {
-            var item = ignoredByUsers.FirstOrDefault(x => x.UserId == user.UserId);
+            var item = ignoredByUsers.FirstOrDefault(x => x.Id == user.Id);
             if (item != null)
             {
                 ignoredByUsers.Remove(item);

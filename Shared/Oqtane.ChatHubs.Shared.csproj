@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <AssemblyName>Oqtane.ChatHubs.Shared.Oqtane</AssemblyName>
     <OutputType>Library</OutputType>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Oqtane.Shared" Version="3.3.1" />
+    <ProjectReference Include="..\Mihcelle.Hwavmvid\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>
 
 </Project>

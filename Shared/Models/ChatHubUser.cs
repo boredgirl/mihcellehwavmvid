@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Oqtane.Models;
+using Mihcelle.Hwavmvid.Shared.Models;
+using Mihcelle.Hwavmvid.Shared;
 
 namespace Oqtane.ChatHubs.Models
 {
 
-    public class ChatHubUser : User
+    public class ChatHubUser : Applicationuser
     {
 
         public int? FrameworkUserId { get; set; }

@@ -1,4 +1,4 @@
-﻿using Oqtane.Models;
+﻿using Mihcelle.Hwavmvid.Shared;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
