@@ -21,10 +21,30 @@
 </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlazorDraggableList\BlazorDraggableList.csproj" />
+    <ProjectReference Include="..\..\BlazorDropdown\BlazorDropdown.csproj" />
+    <ProjectReference Include="..\..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
+    <ProjectReference Include="..\..\BlazorSelect\BlazorSelect.csproj" />
+    <ProjectReference Include="..\..\BlazorSlider\BlazorSlider.csproj" />
+    <ProjectReference Include="..\..\BlazorTabMenu\BlazorTabMenu.csproj" />
+    <ProjectReference Include="..\..\BlazorTabs\BlazorTabs.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Accordion\Hwavmvid.Accordion.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Alerts\Hwavmvid.Alerts.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.BrowserResize\Hwavmvid.BrowserResize.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.ColorPicker\Hwavmvid.ColorPicker.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Devices\Hwavmvid.Devices.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Download\Hwavmvid.Download.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Jsapinotifications\Hwavmvid.Jsapinotifications.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Notifications\Hwavmvid.Notifications.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj" />
+    <ProjectReference Include="..\..\Hwavmvid.Video\Hwavmvid.Video.csproj" />
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj" />
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj" />
     <ProjectReference Include="..\..\Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj" />
+    <ProjectReference Include="..\..\Shared\Oqtane.ChatHubs.Shared.csproj" />
     <ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>
 
