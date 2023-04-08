@@ -36,7 +36,6 @@
     <ProjectReference Include="..\..\Hwavmvid.Download\Hwavmvid.Download.csproj" />
     <ProjectReference Include="..\..\Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj" />
     <ProjectReference Include="..\..\Hwavmvid.Jsapinotifications\Hwavmvid.Jsapinotifications.csproj" />
-    <ProjectReference Include="..\..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
     <ProjectReference Include="..\..\Hwavmvid.Notifications\Hwavmvid.Notifications.csproj" />
     <ProjectReference Include="..\..\Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj" />
     <ProjectReference Include="..\..\Hwavmvid.Video\Hwavmvid.Video.csproj" />
