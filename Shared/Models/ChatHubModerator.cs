@@ -6,7 +6,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubModerator : ChatHubBaseModel
     {
 
-        public int ChatHubUserId { get; set; }
+        public string ChatHubUserId { get; set; }
         public string ModeratorDisplayName { get; set; }
 
         [NotMapped] public virtual ChatHubUser User { get; set; }

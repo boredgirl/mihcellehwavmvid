@@ -6,8 +6,8 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubCam : ChatHubBaseModel
     {
 
-        public int ChatHubRoomId { get; set; }
-        public int ChatHubConnectionId { get; set; }
+        public string ChatHubRoomId { get; set; }
+        public string ChatHubConnectionId { get; set; }
 
         public string Status { get; set; }
 

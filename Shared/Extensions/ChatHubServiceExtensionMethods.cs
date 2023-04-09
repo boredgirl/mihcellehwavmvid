@@ -57,7 +57,7 @@ namespace Oqtane.ChatHubs.Extensions
                 invitations.Add(invitation);
             }
         }
-        public static void RemoveInvitation(this List<ChatHubInvitation> invitations, int id)
+        public static void RemoveInvitation(this List<ChatHubInvitation> invitations, string id)
         {
             var item = invitations.First(item => item.Id == id);
             if (item != null)
@@ -110,7 +110,7 @@ namespace Oqtane.ChatHubs.Extensions
                 ignoredByUsers.Remove(item);
             }
         }
-        public static void AddModerator(this List<ChatHubRoom> rooms, ChatHubModerator moderator, int roomId)
+        public static void AddModerator(this List<ChatHubRoom> rooms, ChatHubModerator moderator, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null && !room.Moderators.Any(item => item.Id == moderator.Id))
@@ -118,7 +118,7 @@ namespace Oqtane.ChatHubs.Extensions
                 room.Moderators.Add(moderator);
             }
         }
-        public static void RemoveModerator(this List<ChatHubRoom> rooms, ChatHubModerator moderator, int roomId)
+        public static void RemoveModerator(this List<ChatHubRoom> rooms, ChatHubModerator moderator, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null)
@@ -130,7 +130,7 @@ namespace Oqtane.ChatHubs.Extensions
                 }
             }
         }
-        public static void AddWhitelistUser(this List<ChatHubRoom> rooms, ChatHubWhitelistUser whitelistUser, int roomId)
+        public static void AddWhitelistUser(this List<ChatHubRoom> rooms, ChatHubWhitelistUser whitelistUser, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null && !room.WhitelistUsers.Any(item => item.Id == whitelistUser.Id))
@@ -138,7 +138,7 @@ namespace Oqtane.ChatHubs.Extensions
                 room.WhitelistUsers.Add(whitelistUser);
             }
         }
-        public static void RemoveWhitelistUser(this List<ChatHubRoom> rooms, ChatHubWhitelistUser whitelistUser, int roomId)
+        public static void RemoveWhitelistUser(this List<ChatHubRoom> rooms, ChatHubWhitelistUser whitelistUser, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null)
@@ -150,7 +150,7 @@ namespace Oqtane.ChatHubs.Extensions
                 }
             }
         }
-        public static void AddBlacklistUser(this List<ChatHubRoom> rooms, ChatHubBlacklistUser blacklistUser, int roomId)
+        public static void AddBlacklistUser(this List<ChatHubRoom> rooms, ChatHubBlacklistUser blacklistUser, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null && !room.BlacklistUsers.Any(item => item.Id == blacklistUser.Id))
@@ -158,7 +158,7 @@ namespace Oqtane.ChatHubs.Extensions
                 room.BlacklistUsers.Add(blacklistUser);
             }
         }
-        public static void RemoveBlacklistUser(this List<ChatHubRoom> rooms, ChatHubBlacklistUser blacklistUser, int roomId)
+        public static void RemoveBlacklistUser(this List<ChatHubRoom> rooms, ChatHubBlacklistUser blacklistUser, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null)
@@ -170,7 +170,7 @@ namespace Oqtane.ChatHubs.Extensions
                 }
             }
         }
-        public static void AddCam(this List<ChatHubRoom> rooms, ChatHubCam cam, int roomId)
+        public static void AddCam(this List<ChatHubRoom> rooms, ChatHubCam cam, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null && !room.Cams.Any(item => item.Id == cam.Id))
@@ -178,7 +178,7 @@ namespace Oqtane.ChatHubs.Extensions
                 room.Cams.Add(cam);
             }
         }
-        public static void RemoveCam(this List<ChatHubRoom> rooms, ChatHubCam cam, int roomId)
+        public static void RemoveCam(this List<ChatHubRoom> rooms, ChatHubCam cam, string roomId)
         {
             var room = rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null)

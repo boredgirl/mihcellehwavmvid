@@ -6,7 +6,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubGeolocation : ChatHubBaseModel
     {
 
-        public int ChatHubConnectionId { get; set; }
+        public string ChatHubConnectionId { get; set; }
 
         public string state { get; set; }
 

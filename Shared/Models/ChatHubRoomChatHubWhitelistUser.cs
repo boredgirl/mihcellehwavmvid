@@ -4,8 +4,8 @@ namespace Oqtane.ChatHubs.Models
 {
     public class ChatHubRoomChatHubWhitelistUser : ChatHubBaseModel
     {
-        public int ChatHubRoomId { get; set; }
-        public int ChatHubWhitelistUserId { get; set; }
+        public string ChatHubRoomId { get; set; }
+        public string ChatHubWhitelistUserId { get; set; }
 
 
         [NotMapped] public virtual ChatHubRoom Room { get; set; }

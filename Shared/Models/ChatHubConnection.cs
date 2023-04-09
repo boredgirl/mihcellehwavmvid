@@ -6,7 +6,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubConnection : ChatHubBaseModel
     {
 
-        public int ChatHubUserId { get; set; }
+        public string ChatHubUserId { get; set; }
         public string ConnectionId { get; set; }
         public string UserAgent { get; set; }
         public string IpAddress { get; set; }

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\Tasks\**" />
+    <Content Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\Tasks\**" />
+    <EmbeddedResource Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\Tasks\**" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\Tasks\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2" />
   </ItemGroup>
 
@@ -25,12 +32,19 @@
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
+
+		<PackageReference Include="System.Composition" Version="7.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="FFMpegCore" Version="4.7.0" />
+		<PackageReference Include="Instances" Version="1.6.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
 		<ProjectReference Include="..\..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
 		<ProjectReference Include="..\..\Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj" />
+		<ProjectReference Include="..\..\Shared\Oqtane.ChatHubs.Shared.csproj" />
 		<ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
 		<ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
 	</ItemGroup>

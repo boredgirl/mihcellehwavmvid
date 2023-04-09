@@ -33,6 +33,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      UserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      FrameworkUserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     DisplayName = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
                      UserType = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
                      CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                      CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),

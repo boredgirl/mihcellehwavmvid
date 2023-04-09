@@ -5,8 +5,8 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubIgnore : ChatHubBaseModel
     {
 
-        public int ChatHubUserId { get; set; }
-        public int ChatHubIgnoredUserId { get; set; }
+        public string ChatHubUserId { get; set; }
+        public string ChatHubIgnoredUserId { get; set; }
 
 
         [NotMapped]

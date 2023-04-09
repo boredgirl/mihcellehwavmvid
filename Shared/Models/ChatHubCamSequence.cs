@@ -5,7 +5,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubCamSequence : ChatHubBaseModel
     {
 
-        public int ChatHubCamId { get; set; }
+        public string ChatHubCamId { get; set; }
         public string Filename { get; set; }
         public string FilenameExtension { get; set; }
 

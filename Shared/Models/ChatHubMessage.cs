@@ -6,8 +6,8 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubMessage : ChatHubBaseModel
     {
 
-        public int ChatHubRoomId { get; set; }
-        public int ChatHubUserId { get; set; }
+        public string ChatHubRoomId { get; set; }
+        public string ChatHubUserId { get; set; }
         public string Content { get; set; }
         public string Type { get; set; }
 

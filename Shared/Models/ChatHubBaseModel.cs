@@ -10,7 +10,7 @@ namespace Oqtane.ChatHubs.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

@@ -15,7 +15,7 @@ namespace Oqtane.ChatHubs.Models
         public string Type { get; set; }
         public string Status { get; set; }
         public string OneVsOneId { get; set; }
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; }
         
         [NotMapped] public string MessageInput { get; set; }
         [NotMapped] public int UnreadMessages { get; set; }

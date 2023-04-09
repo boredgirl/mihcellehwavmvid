@@ -5,7 +5,7 @@ namespace Oqtane.ChatHubs.Models
     public class ChatHubPhoto : ChatHubBaseModel
     {
 
-        public int ChatHubMessageId { get; set; }
+        public string ChatHubMessageId { get; set; }
         public string Source { get; set; }
         public string Thumb { get; set; }
         public string Caption { get; set; }

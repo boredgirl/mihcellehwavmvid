@@ -3,7 +3,7 @@
     public interface IChatHubBaseModel
     {
 
-        int Id { get; set; }
+        string Id { get; set; }
 
     }
 }
