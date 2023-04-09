@@ -87,7 +87,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<ChatHub>("/1/api/chathub", options =>
+                endpoints.MapHub<ChatHub>("/api/chathub", options =>
                 {
                     options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
                     options.ApplicationMaxBufferSize = Int64.MaxValue;

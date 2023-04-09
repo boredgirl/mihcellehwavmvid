@@ -1,0 +1,38 @@
+﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
+@inherits ModuleBase
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Linq
+@using Mihcelle.Hwavmvid.Modules.ChatHubs.Services
+@using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs.Models
+@using Mihcelle.Hwavmvid.Client.Modules
+
+<style type="text/css">
+
+    .roulette-background {
+
+        background-image: url('/Modules/Oqtane.ChatHubs/roulettelasvegas.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 680px !important;        
+    }
+
+</style>
+
+<div class="mt-0 mt-sm-2 p-1 px-sm-3 py-sm-5 w-100 h-100 bg-dark border border-primary roulette-background">
+
+    <div class="w-100 h-100" style="background-color: rgba(255,255,255,0.8); overflow-y: scroll !important;">
+
+
+    </div>
+
+</div>
+
+@code {
+
+}
