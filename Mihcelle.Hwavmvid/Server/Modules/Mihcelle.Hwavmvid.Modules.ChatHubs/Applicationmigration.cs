@@ -414,7 +414,27 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
         protected override void Down(MigrationBuilder migrationbuilder)
         {
-            migrationbuilder.DropColumn("Applicationchathubs", "Applicationchathubs");
+
+            migrationbuilder.DropColumn("ChatHubGeolocation", "ChatHubGeolocation");
+            migrationbuilder.DropColumn("ChatHubRoomChatHubBlacklistUser", "ChatHubRoomChatHubBlacklistUser");
+            migrationbuilder.DropColumn("ChatHubBlacklistUser", "ChatHubBlacklistUser");
+            migrationbuilder.DropColumn("ChatHubRoomChatHubWhitelistUser", "ChatHubRoomChatHubWhitelistUser");
+            migrationbuilder.DropColumn("ChatHubWhitelistUser", "ChatHubWhitelistUser");
+            migrationbuilder.DropColumn("ChatHubRoomChatHubModerator", "ChatHubRoomChatHubModerator");
+            migrationbuilder.DropColumn("ChatHubModerator", "ChatHubModerator");
+            migrationbuilder.DropColumn("ChatHubIgnore", "ChatHubIgnore");
+            migrationbuilder.DropColumn("ChatHubCamSequence", "ChatHubCamSequence");
+            migrationbuilder.DropColumn("ChatHubCam", "ChatHubCam");
+            migrationbuilder.DropColumn("ChatHubInvitation", "ChatHubInvitation");
+            migrationbuilder.DropColumn("ChatHubDevice", "ChatHubDevice");
+            migrationbuilder.DropColumn("ChatHubSetting", "ChatHubSetting");
+            migrationbuilder.DropColumn("ChatHubPhoto", "ChatHubPhoto");
+            migrationbuilder.DropColumn("ChatHubConnection", "ChatHubConnection");
+            migrationbuilder.DropColumn("ChatHubMessage", "ChatHubMessage");
+            migrationbuilder.DropColumn("ChatHubRoomChatHubUser", "ChatHubRoomChatHubUser");
+            migrationbuilder.DropColumn("ChatHubRoom", "ChatHubRoom");
+            migrationbuilder.DropColumn("ChatHubUser", "ChatHubUser");
+
         }
     }
 }
