@@ -329,6 +329,86 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                      dbtable.ForeignKey("FK_ChatHubWhitelistUser_User", item => item.ChatHubUserId, "Applicationusers", "Id");
                  });
 
+            migrationbuilder.CreateTable(
+                 name: "ChatHubRoomChatHubWhitelistUser",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubRoomId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubWhitelistUserId = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     ModifiedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("PK_ChatHubRoomChatHubWhitelistUser", item => item.Id);
+                     dbtable.ForeignKey("FK_ChatHubRoomChatHubWhitelistUser_ChatHubRoom", item => item.ChatHubRoomId, "ChatHubRoom", "Id");
+                     dbtable.ForeignKey("FK_ChatHubRoomChatHubWhitelistUser_ChatHubWhitelistUser", item => item.ChatHubWhitelistUserId, "ChatHubWhitelistUser", "Id");
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "ChatHubBlacklistUser",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubUserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     BlacklistUserDisplayName = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     ModifiedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("PK_ChatHubBlacklistUser", item => item.Id);
+                     dbtable.ForeignKey("FK_ChatHubBlacklistUser_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "ChatHubRoomChatHubBlacklistUser",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubRoomId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubBlacklistUserId = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     ModifiedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("PK_ChatHubRoomChatHubBlacklistUser", item => item.Id);
+                     dbtable.ForeignKey("FK_ChatHubRoomChatHubBlacklistUser_ChatHubRoom", item => item.ChatHubRoomId, "ChatHubRoom", "Id");
+                     dbtable.ForeignKey("FK_ChatHubRoomChatHubBlacklistUser_ChatHubBlacklistUser", item => item.ChatHubBlacklistUserId, "ChatHubBlacklistUser", "Id");
+                 });
+
+            migrationbuilder.CreateTable(
+                 name: "ChatHubGeolocation",
+                 columns: dbtable => new
+                 {
+                     Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     ChatHubConnectionId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
+                     state = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     latitude = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     longitude = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     altitude = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     altitudeaccuracy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     accuracy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     heading = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     speed = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
+                     ModifiedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                 },
+                 constraints: dbtable =>
+                 {
+                     dbtable.PrimaryKey("PK_ChatHubGeolocation", item => item.Id);
+                     dbtable.ForeignKey("FK_ChatHubGeolocation_ChatHubConnection", item => item.ChatHubConnectionId, "ChatHubConnection", "Id");
+                 });
 
         }
 
