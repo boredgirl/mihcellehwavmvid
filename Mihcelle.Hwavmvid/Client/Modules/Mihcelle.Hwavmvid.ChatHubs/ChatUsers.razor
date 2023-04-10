@@ -116,7 +116,7 @@
     [Parameter] public ChatHubRoom room { get; set; }
     [Parameter] public SettingsModal SettingsModalRef { get; set; }
 
-    public void OpenProfile_Clicked(int userId, int roomId)
+    public void OpenProfile_Clicked(string userId, string roomId)
     {
         this.SettingsModalRef.OpenDialogAsync();
     }

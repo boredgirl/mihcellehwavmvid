@@ -37,7 +37,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         public override SecurityAccessLevel SecurityAccessLevel { get { return SecurityAccessLevel.Anonymous; } }
         public override string Actions { get { return "Add,Edit"; } }
 
-        public int roomId = -1;
+        public string roomId = string.Empty;
         public string title;
         public string content;
         public string backgroundcolor;
@@ -67,11 +67,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUIStateHasChanged();
                 await this.InitContextRoomAsync();
             }
-            catch (Exception ex)
-            {
-                await logger.LogError(ex, "Error Loading Room {ChatHubRoomId} {Error}", roomId, ex.Message);
-                ModuleInstance.AddModuleMessage("Error Loading Room", MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         private void OnColorPickerContextColorChangedExecute(ColorPickerEvent obj)
@@ -96,9 +92,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         {
             try
             {
+                /*
                 if (PageState.QueryString.ContainsKey("roomid"))
                 {
-                    this.roomId = Int32.Parse(PageState.QueryString["roomid"]);
+                    this.roomId = PageState.QueryString["roomid"];
                     ChatHubRoom room = await this.ChatHubService.GetRoom(roomId, this.Moduleid);
                     if (room != null)
                     {
@@ -113,6 +110,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                         this.modifiedon = room.ModifiedOn;
                     }
                 }
+                */
             }
             catch (Exception exception) { }
         }
@@ -121,7 +119,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         {
             try
             {                
-                if (roomId == -1)
+                if (string.IsNullOrEmpty(roomId))
                 {
                     ChatHubRoom room = new ChatHubRoom()
                     {

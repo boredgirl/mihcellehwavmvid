@@ -666,7 +666,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
         }
         public void RemoveWaitingRoomItem_Clicked(ChatHubWaitingRoomItem waitingRoomItem)
         {
-            this.AddWhitelistUser_Clicked(waitingRoomItem.Id, waitingRoomItem.RoomId);
+            this.AddWhitelistUser_Clicked(waitingRoomItem.UserId, waitingRoomItem.RoomId);
 
             this.Connection.InvokeAsync("RemoveWaitingRoomItem", waitingRoomItem).ContinueWith((task) =>
             {

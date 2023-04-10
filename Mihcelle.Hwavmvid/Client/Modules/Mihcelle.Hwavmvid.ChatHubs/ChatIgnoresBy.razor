@@ -45,7 +45,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubIgnoredBy> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubIgnoredBy> obj, string apiQueryId)
     {
         if (apiQueryId == this.Moduleid)
         {
@@ -54,7 +54,7 @@
         }
     }
 
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.Moduleid == apiQueryId)
         {

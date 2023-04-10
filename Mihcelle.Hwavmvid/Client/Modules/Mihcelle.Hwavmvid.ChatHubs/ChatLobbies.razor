@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="px-1 py-2">
-                    <a href="@NavigateUrl(PageState.Page.Path, "moduleid=" + context.ModuleId.ToString() + "&" + "roomid=" + context.Id.ToString())">
+                    <a href="#">
                         <h5>
                             @context.Title
                         </h5>
@@ -80,11 +80,14 @@
                     -->
 
                     <button type="button" class="btn btn-sm btn-dark rounded-0" @onclick="@(async () => await ChatHubService.EnterRoom_Clicked(context.Id, context.ModuleId))">Enter</button>
-                    @if (ChatHubService.ConnectedUser?.Id == context.CreatorId || ChatHubService.ConnectedUser?.Username == "host")
+                    @if (ChatHubService.ConnectedUser?.Id == context.CreatorId || ChatHubService.ConnectedUser?.UserName == "host")
                     {
                         <button type="button" class="btn btn-sm btn-dark rounded-0" @onclick="@(() => EditRoomModalRef.OpenEditRoomModal(context.Id))">Edit</button>
+                        
+                        /*
                         <ActionDialog Header="@(context.Status == ChatHubRoomStatus.Enabled.ToString() ? ChatHubRoomStatus.Archived.ToString() : ChatHubRoomStatus.Enabled.ToString())" Message="@("Are you sure you want to archive this room?")" Action="@(context.Status == ChatHubRoomStatus.Enabled.ToString() ? ChatHubRoomStatus.Archived.ToString() : ChatHubRoomStatus.Enabled.ToString())" Security="SecurityAccessLevel.Edit" Class="btn btn-sm btn-dark rounded-0" OnClick="@(async () => await ChatHubService.EnableArchiveRoom_Clicked(context))" />
                         <ActionDialog Header="Delete" Message="@("Are your sure you want to delete this room?")" Action="Delete" Security="SecurityAccessLevel.Edit" Class="btn btn-sm btn-dark rounded-0" OnClick="@(async () => await ChatHubService.DeleteRoom_Clicked(context.Id))" />
+                        */
                     }
                 </div>
 

@@ -67,11 +67,11 @@
 
         <div class="p-2 text-end">
 
-            @if (roomId == -1)
+            @if (string.IsNullOrEmpty(roomId))
             {
                 <button type="button" class="btn btn-sm btn-success" @onclick="@(() => CreateRoom())">Create room</button>
             }
-            @if (roomId != -1)
+            @if (!string.IsNullOrEmpty(roomId))
             {
                 <button type="button" class="btn btn-sm btn-success" @onclick="@(() => EditRoom())">Edit room</button>
             }
