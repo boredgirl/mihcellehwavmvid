@@ -38,15 +38,18 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="FFMpegCore" Version="4.7.0" />
 		<PackageReference Include="Instances" Version="1.6.1" />
+		
 	</ItemGroup>
 
 	<ItemGroup>
+		
 		<ProjectReference Include="..\..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
 		<ProjectReference Include="..\..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
 		<ProjectReference Include="..\..\Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj" />
 		<ProjectReference Include="..\..\Shared\Oqtane.ChatHubs.Shared.csproj" />
 		<ProjectReference Include="..\Client\Mihcelle.Hwavmvid.Client.csproj" />
 		<ProjectReference Include="..\Shared\Mihcelle.Hwavmvid.Shared.csproj" />
+		
 	</ItemGroup>
 
 	<ItemGroup>

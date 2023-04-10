@@ -11,7 +11,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         public void Configure(IServiceCollection services)
         {
 
-            /*
             services.AddScoped<Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext>();
 
             services.AddMvc(options =>
@@ -69,13 +68,12 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
                     options.PayloadSerializerOptions.PropertyNamingPolicy = null;
                 });
-            */
+            
         }
 
         public void Configureapp(WebApplication app)
         {
 
-            /*
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             //app.UseTenantResolution();
@@ -96,7 +94,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
                 });
             });
-            */
 
         }
     }

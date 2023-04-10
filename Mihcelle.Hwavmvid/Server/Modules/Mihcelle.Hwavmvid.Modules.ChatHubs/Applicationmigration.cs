@@ -31,7 +31,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  columns: dbtable => new
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
-                     UserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      FrameworkUserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      DisplayName = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
                      UserType = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
@@ -42,7 +41,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  },
                  constraints: dbtable =>
                  {
-                     dbtable.PrimaryKey("PK_ChatHubUser", item => item.UserId);
+                     dbtable.PrimaryKey("PK_ChatHubUser", item => item.Id);
                  });
 
             migrationbuilder.CreateTable(
@@ -86,7 +85,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubRoomChatHubUser", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubRoomChatHubUser_ChatHubUser", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubRoomChatHubUser_ChatHubUser", item => item.ChatHubUserId, "ChatHubUser", "Id");
                      dbtable.ForeignKey("FK_ChatHubRoomChatHubUser_ChatHubRoom", item => item.ChatHubRoomId, "ChatHubRoom", "Id");
                  });
 
@@ -108,7 +107,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  {
                      dbtable.PrimaryKey("PK_ChatHubMessage", item => item.Id);
                      dbtable.ForeignKey("FK_ChatHubMessage_ChatHubRoom", item => item.ChatHubRoomId, "ChatHubRoom", "Id");
-                     dbtable.ForeignKey("FK_ChatHubMessage_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubMessage_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -171,7 +170,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubSetting", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubSetting_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubSetting_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -192,7 +191,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  },
                  constraints: dbtable =>
                  {
-                     dbtable.PrimaryKey("PK_ChatHubSetting", item => item.Id);
+                     dbtable.PrimaryKey("PK_ChatHubDevice", item => item.Id);
                      dbtable.ForeignKey("FK_ChatHubDevice_ChatHubUser", item => item.ChatHubUserId, "ChatHubUser", "Id");
                      dbtable.ForeignKey("FK_ChatHubDevice_ChatHubRoom", item => item.ChatHubRoomId, "ChatHubRoom", "Id");
                  });
@@ -213,7 +212,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubInvitation", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubInvitation_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubInvitation_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -272,7 +271,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubIgnore", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubIgnore_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubIgnore_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -290,7 +289,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubModerator", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubModerator_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubModerator_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -327,7 +326,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubWhitelistUser", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubWhitelistUser_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubWhitelistUser_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
@@ -364,7 +363,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  constraints: dbtable =>
                  {
                      dbtable.PrimaryKey("PK_ChatHubBlacklistUser", item => item.Id);
-                     dbtable.ForeignKey("FK_ChatHubBlacklistUser_User", item => item.ChatHubUserId, "Applicationusers", "Id");
+                     dbtable.ForeignKey("FK_ChatHubBlacklistUser_User", item => item.ChatHubUserId, "ChatHubUser", "Id");
                  });
 
             migrationbuilder.CreateTable(
