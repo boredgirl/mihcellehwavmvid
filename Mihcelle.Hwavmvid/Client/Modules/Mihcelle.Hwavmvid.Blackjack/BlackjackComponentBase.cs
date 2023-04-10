@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Mihcelle.Hwavmvid.Client.Modules;
 
 namespace Mihcelle.Hwavmvid.Modules.Blackjack
 {
-    public class BlackjackComponentBase : ComponentBase
+    public class BlackjackComponentBase : Modulebase
     {
 
         public BlackjackCardDeck ContextCardDeck { get; set; } = null;

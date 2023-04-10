@@ -11,10 +11,11 @@ using Mihcelle.Hwavmvid.Modules.Roulette.Shared.Items;
 using Mihcelle.Hwavmvid.Modules.Roulette.Shared.Enums;
 using Mihcelle.Hwavmvid.Modules.Roulette.Shared.Events;
 using Mihcelle.Hwavmvid.Modules.Roulette.Itellisense;
+using Mihcelle.Hwavmvid.Client.Modules;
 
 namespace Mihcelle.Hwavmvid.Modules.Roulette.Itellisense
 {
-    public class RouletteitellisenseComponentBase : ComponentBase, IAsyncDisposable
+    public class RouletteitellisenseComponentBase : Modulebase, IAsyncDisposable
     {
 
         [Inject] public RouletteitellisenseService? RouletteitellisenseService { get; set; }

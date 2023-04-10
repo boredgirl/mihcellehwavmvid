@@ -1,8 +1,9 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.Htmleditor
-@inherits ComponentBase
+@inherits Modulebase
 
 @using System.ComponentModel.DataAnnotations
 @using Mihcelle.Hwavmvid.Modal
+@using Mihcelle.Hwavmvid.Client.Modules
 
 @inject IHttpClientFactory ihttpclientfactory
 @inject NavigationManager navigationmanager
@@ -80,10 +81,6 @@
 
 
 @code {
-
-
-    [Parameter]
-    public string Moduleid { get; set; }
     
     public string _htmleditormodalelementid { get; set; } = Guid.NewGuid().ToString();
     public Applicationhtmleditor? editor { get; set; }
