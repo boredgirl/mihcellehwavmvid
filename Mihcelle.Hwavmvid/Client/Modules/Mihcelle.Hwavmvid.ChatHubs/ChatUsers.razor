@@ -20,22 +20,22 @@
 
     var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetUsers");
                         
-    <PagerComponent ElementId="WasmHwavmvid.PagerUserlist" Class="WasmHwavmvid.PagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
+    <PagerComponent ElementId="WasmHwavmvid.PagerUserlist" Class="WasmHwavmvid.PagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Oqtane.ChatHubs.Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
 
         <PagerItem>
 
-            @if (user.UserId == ChatHubService.ConnectedUser.UserId)
+            @if (user.Id == ChatHubService.ConnectedUser.Id)
             {
                 <div class="accordion-item" @key="user">
                     <div class="accordion-header">
-                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.UserId" aria-expanded="@user.UserlistItemCollapsed">
+                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.Id" aria-expanded="@user.UserlistItemCollapsed">
                             <strong class="align-middle" style="height: 16px;">@user.DisplayName</strong>
                         </button>
                     </div>
-                    <div id="collapse-@user.UserId" class="accordion-collapse collapse show">
+                    <div id="collapse-@user.Id" class="accordion-collapse collapse show">
                         <div class="accordion-body">
                             <div class="card-text">
-                                <button type="button" class="btn btn-sm btn-link" @onclick="@(() => OpenProfile_Clicked(user.UserId, room.Id))">Account Data</button>
+                                <button type="button" class="btn btn-sm btn-link" @onclick="@(() => OpenProfile_Clicked(user.Id, room.Id))">Account Data</button>
                             </div>
                         </div>
                     </div>
@@ -45,57 +45,57 @@
             {
                 <div class="accordion-item" @key="user">
                     <div class="accordion-header">
-                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.UserId" aria-expanded="@user.UserlistItemCollapsed">
+                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.Id" aria-expanded="@user.UserlistItemCollapsed">
                             <span class="align-middle" style="height: 16px;">@user.DisplayName</span>
                         </button>
                     </div>
 
-                    <div id="collapse-@user.UserId" class="accordion-collapse collapse">
+                    <div id="collapse-@user.Id" class="accordion-collapse collapse">
                         <div class="accordion-body">
 
-                            @if (!ChatHubService.IgnoredUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            @if (!ChatHubService.IgnoredUsers.Any(item => item.ChatHubUserId == user.Id))
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.IgnoreUser_Clicked(user.UserId)">Ignore User</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.IgnoreUser_Clicked(user.Id)">Ignore User</button>
                                 </div>
                             }
 
-                            @if (!room.Moderators.Any(item => item.ChatHubUserId == user.UserId))
+                            @if (!room.Moderators.Any(item => item.ChatHubUserId == user.Id))
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddModerator_Clicked(user.UserId, room.Id)">Add Modi</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddModerator_Clicked(user.Id, room.Id)">Add Modi</button>
                                 </div>
                             }
                             else
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="async () => await ChatHubService.RemoveModeratorAsync(user.UserId, room.Id)">Delete Modi</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="async () => await ChatHubService.RemoveModeratorAsync(user.Id, room.Id)">Delete Modi</button>
                                 </div>
                             }
 
-                            @if (!room.WhitelistUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            @if (!room.WhitelistUsers.Any(item => item.ChatHubUserId == user.Id))
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddWhitelistUser_Clicked(user.UserId, room.Id)">Add Whitelist User</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddWhitelistUser_Clicked(user.Id, room.Id)">Add Whitelist User</button>
                                 </div>
                             }
                             else
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveWhitelistUser_Clicked(user.UserId, room.Id))">Delete Whitelist User</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveWhitelistUser_Clicked(user.Id, room.Id))">Delete Whitelist User</button>
                                 </div>
                             }
 
-                            @if (!room.BlacklistUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            @if (!room.BlacklistUsers.Any(item => item.ChatHubUserId == user.Id))
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddBlacklistUser_Clicked(user.UserId, room.Id)">Add Blacklist User</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddBlacklistUser_Clicked(user.Id, room.Id)">Add Blacklist User</button>
                                 </div>
                             }
                             else
                             {
                                 <div>
-                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveBlacklistUser_Clicked(user.UserId, room.Id))">Delete Blacklist User</button>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveBlacklistUser_Clicked(user.Id, room.Id))">Delete Blacklist User</button>
                                 </div>
                             }
                         </div>
@@ -128,7 +128,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubUser> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubUser> obj, string apiQueryId)
     {
         if (this.room.Id == apiQueryId)
         {
@@ -136,7 +136,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.room.Id == apiQueryId)
         {

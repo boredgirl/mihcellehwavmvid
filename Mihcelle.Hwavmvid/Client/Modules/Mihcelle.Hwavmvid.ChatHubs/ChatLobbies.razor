@@ -80,7 +80,7 @@
                     -->
 
                     <button type="button" class="btn btn-sm btn-dark rounded-0" @onclick="@(async () => await ChatHubService.EnterRoom_Clicked(context.Id, context.ModuleId))">Enter</button>
-                    @if (ChatHubService.ConnectedUser?.UserId == context.CreatorId || ChatHubService.ConnectedUser?.Username == "host")
+                    @if (ChatHubService.ConnectedUser?.Id == context.CreatorId || ChatHubService.ConnectedUser?.Username == "host")
                     {
                         <button type="button" class="btn btn-sm btn-dark rounded-0" @onclick="@(() => EditRoomModalRef.OpenEditRoomModal(context.Id))">Edit</button>
                         <ActionDialog Header="@(context.Status == ChatHubRoomStatus.Enabled.ToString() ? ChatHubRoomStatus.Archived.ToString() : ChatHubRoomStatus.Enabled.ToString())" Message="@("Are you sure you want to archive this room?")" Action="@(context.Status == ChatHubRoomStatus.Enabled.ToString() ? ChatHubRoomStatus.Archived.ToString() : ChatHubRoomStatus.Enabled.ToString())" Security="SecurityAccessLevel.Edit" Class="btn btn-sm btn-dark rounded-0" OnClick="@(async () => await ChatHubService.EnableArchiveRoom_Clicked(context))" />
@@ -108,7 +108,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubRoom> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubRoom> obj, string apiQueryId)
     {
         if (apiQueryId == this.Moduleid)
         {
@@ -117,7 +117,7 @@
         }
     }
 
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.Moduleid == apiQueryId)
         {

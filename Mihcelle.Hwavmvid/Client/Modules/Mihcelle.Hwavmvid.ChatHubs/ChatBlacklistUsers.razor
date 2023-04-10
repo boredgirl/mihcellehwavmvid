@@ -9,6 +9,7 @@
 @using System.Linq
 @using Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 @using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs
 @using Oqtane.ChatHubs.Models
 @using Mihcelle.Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
@@ -22,7 +23,7 @@
 
     <h5>Blacklist users <span class="badge bg-success">NEW</span></h5>
 
-    <PagerComponent ApiQueryId="@Room.Id" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerBlacklistItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@Room.BlacklistUsers" Context="context" ItemsPerPage="@ChatHubConstants.BlacklistItems" TItemGeneric="@ChatHubBlacklistUser" Class="py-sm-3" Scrolling="@false">
+    <PagerComponent ApiQueryId="@Room.Id" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerBlacklistItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@Room.BlacklistUsers" Context="context" ItemsPerPage="@Oqtane.ChatHubs.Constants.ChatHubConstants.BlacklistItems" TItemGeneric="@ChatHubBlacklistUser" Class="py-sm-3" Scrolling="@false">
         <PagerItem>
 
             <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
@@ -53,7 +54,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubBlacklistUser> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubBlacklistUser> obj, string apiQueryId)
     {
         if (this.Room.Id == apiQueryId)
         {
@@ -61,7 +62,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(PagerEvent<ChatHubBlacklistUser> obj)
+    public async void RemoveItem(Pagerevent<ChatHubBlacklistUser> obj)
     {
         if(this.Room.Id == obj.ApiQueryId)
         {
@@ -70,7 +71,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.Room.Id == apiQueryId)
         {

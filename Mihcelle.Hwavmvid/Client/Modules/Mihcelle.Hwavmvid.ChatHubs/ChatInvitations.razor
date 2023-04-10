@@ -51,7 +51,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubInvitation> items, int apiQueryId)
+    public void RetrievedItems(List<ChatHubInvitation> items, string apiQueryId)
     {
         if (apiQueryId == this.Moduleid)
         {
@@ -59,7 +59,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(PagerEvent<ChatHubInvitation> obj)
+    public async void RemoveItem(Pagerevent<ChatHubInvitation> obj)
     {
         if (obj.ApiQueryId == this.Moduleid)
         {
@@ -69,7 +69,7 @@
         }
     }
 
-    public void OnPagerInvitationError(Exception exception, int apiQueryId)
+    public void OnPagerInvitationError(Exception exception, string apiQueryId)
     {
         if (this.Moduleid == apiQueryId)
         {

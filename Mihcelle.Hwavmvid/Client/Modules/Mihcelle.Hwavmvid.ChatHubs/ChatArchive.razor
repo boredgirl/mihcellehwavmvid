@@ -88,7 +88,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubCam> items, int apiQueryId)
+    public void RetrievedItems(List<ChatHubCam> items, string apiQueryId)
     {
         if (apiQueryId == this.Moduleid)
         {
@@ -96,7 +96,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(PagerEvent<ChatHubCam> obj)
+    public async void RemoveItem(Pagerevent<ChatHubCam> obj)
     {
         if (obj.ApiQueryId == this.Moduleid)
         {
@@ -106,9 +106,9 @@
         }
     }
 
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
-        if (this.this.Moduleid == apiQueryId)
+        if (this.Moduleid == apiQueryId)
         {
             this.ChatHubService.HandleException(exception);
         }

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using Oqtane.ChatHubs.Services;
-using Oqtane.Modules;
-using Oqtane.Services;
-using Oqtane.Shared;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
+using Mihcelle.Hwavmvid.Client.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +11,20 @@ using System.Threading.Tasks;
 using Hwavmvid.Alerts;
 using System.Net;
 using BlazorDraggableList;
-using Hwavmvid.FileUpload;
+using Mihcelle.Hwavmvid.Fileupload;
 using Hwavmvid.BrowserResize;
 using Hwavmvid.Video;
 using Oqtane.ChatHubs.Models;
-using Hwavmvid.Modal;
-using Oqtane.Models;
+using Mihcelle.Hwavmvid.Modal;
 using BlazorDropdown;
 using Hwavmvid.Notifications;
-using Hwavmvid.Pager;
+using Mihcelle.Hwavmvid.Pager;
 using BlazorDynamicLayout;
 using Hwavmvid.Jsapinotifications;
+using Mihcelle.Hwavmvid.Modules.ChatHubs;
+using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Cookies;
+using Microsoft.VisualBasic;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -31,16 +32,16 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
     {
         
         [Inject] protected IJSRuntime JsRuntime { get; set; }
-        [Inject] protected ISettingService SettingService { get; set; }
+        [Inject] protected Applicationmodulesettingsservice SettingService { get; set; }
         [Inject] protected NavigationManager NavigationManager { get; set; }
         [Inject] protected HttpClient HttpClient { get; set; }
         [Inject] protected AlertsService AlertsService { get; set; }
         [Inject] protected ChatHubService ChatHubService { get; set; }
         [Inject] protected BrowserResizeService BrowserResizeService { get; set; }
         [Inject] protected ScrollService ScrollService { get; set; }
-        [Inject] protected CookieService CookieService { get; set; }
+        [Inject] protected Cookiesprovider CookieService { get; set; }
         [Inject] protected BlazorDraggableListService BlazorDraggableListService { get; set; }
-        [Inject] protected FileUploadService FileUploadService { get; set; }
+        [Inject] protected Fileuploadservice FileUploadService { get; set; }
         [Inject] protected VideoService VideoService { get; set; }
         [Inject] protected Modalservice ModalService { get; set; }
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }
@@ -99,16 +100,14 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         {
             try
             {
+                /*
                 if (PageState.QueryString.ContainsKey("moduleid") && PageState.QueryString.ContainsKey("roomid") && int.Parse(PageState.QueryString["moduleid"]) == this.Moduleid)
                 {
                     this.contextRoom = await this.ChatHubService.GetRoom(int.Parse(PageState.QueryString["roomid"]), this.Moduleid);
                 }
+                */
             }
-            catch (Exception ex)
-            {
-                await logger.LogError(ex, "Error Loading Rooms {Error}", ex.Message);
-                ModuleInstance.AddModuleMessage("Error Loading Rooms", MessageType.Error);
-            }
+            catch (Exception exception) { }
 
             await base.OnParametersSetAsync();
         }        
@@ -117,15 +116,15 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
             if (firstRender)
             {
                 await this.ChatHubService.InitChatHubService();
-                await this.CookieService.InitCookieService();
+                await this.CookieService.Initcookiesprovider();
                 await this.ScrollService.InitScrollService();
                 await this.BrowserResizeService.InitBrowserResizeService();
                 await this.ModalService.Initmodal();
                 await this.JsapinotificationService.InitJsapinotifications();
 
                 string hostname = new Uri(NavigationManager.BaseUri).Host;
-                string cookievalue = await this.CookieService.GetCookieAsync(".AspNetCore.Identity.Application");
-                this.ChatHubService.IdentityCookie = new Cookie(".AspNetCore.Identity.Application", cookievalue, "/", hostname);
+                string cookievalue = await this.CookieService.Getcookie(".AspNetCore.Identity.Application");
+                this.ChatHubService.IdentityCookie = new Cookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, cookievalue, "/", hostname);
 
                 await this.ChatHubService.ConnectToChat(this.GuestUsername, this.Moduleid);
                 await this.ChatHubService.chatHubMap.InvokeVoidAsync("showchathubscontainer");
@@ -169,7 +168,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
                     foreach (var room in rooms)
                     {
-                        if (ChatHubService.ConnectedUser?.UserId == room.CreatorId)
+                        if (ChatHubService.ConnectedUser?.Id == room.CreatorId)
                         {
                             var activeCamModel = ChatHubService.GetCamByRoom(room, ChatHubService.Connection.ConnectionId);
                             if (activeCamModel != null)
@@ -197,7 +196,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 this.ChatHubService.NotificationsService.AddNotification(new NotificationItem() { Id = Guid.NewGuid().ToString(), Content = "Failed swap room item.", Type = NotificationType.Danger });
             }
         }        
-        public async Task LeaveRoom_Clicked(int roomId, int moduleId)
+        public async Task LeaveRoom_Clicked(string roomId, string moduleId)
         {
             await this.ChatHubService.LeaveChatRoom(roomId);
             this.RemovedWindow();
@@ -217,11 +216,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     StateHasChanged();
                 });
             }
-            catch(Exception ex)
-            {
-                await logger.LogError(ex, "Error On Browser Resize {Error}", ex.Message);
-                ModuleInstance.AddModuleMessage("Error On Browser Resize", MessageType.Error);
-            }
+            catch(Exception exception) { }
         }
         public void UserlistItem_Clicked(MouseEventArgs e, ChatHubRoom room, ChatHubUser user)
         {
@@ -277,7 +272,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         {
             foreach (var room in this.ChatHubService.Rooms)
             {
-                if (ChatHubService.ConnectedUser?.UserId == room.CreatorId)
+                if (ChatHubService.ConnectedUser?.Id == room.CreatorId)
                 {
                     var activeCamModel = ChatHubService.GetCamByRoom(room, ChatHubService.Connection.ConnectionId);
                     if (activeCamModel != null)

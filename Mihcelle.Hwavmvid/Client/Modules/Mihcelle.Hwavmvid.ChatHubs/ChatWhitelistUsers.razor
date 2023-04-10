@@ -53,7 +53,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubWhitelistUser> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubWhitelistUser> obj, string apiQueryId)
     {
         if (this.Room.Id == apiQueryId)
         {
@@ -61,7 +61,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(PagerEvent<ChatHubWhitelistUser> obj)
+    public async void RemoveItem(Pagerevent<ChatHubWhitelistUser> obj)
     {
         if (this.Room.Id == obj.ApiQueryId)
         {
@@ -70,7 +70,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.Room.Id == apiQueryId)
         {

@@ -142,7 +142,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                         Status = ChatHubRoomStatus.Enabled.ToString(),
                         ImageUrl = string.Empty,
                         OneVsOneId = string.Empty,
-                        CreatorId = ChatHubService.ConnectedUser.UserId,
+                        CreatorId = ChatHubService.ConnectedUser.Id,
                     };
 
                     room = await this.ChatHubService.CreateRoom(room);

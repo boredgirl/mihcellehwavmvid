@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Hwavmvid.ColorPicker;
+using Mihcelle.Hwavmvid.Client.Modules;
+using Mihcelle.Hwavmvid.Client;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -15,7 +17,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public HttpClient httpClient { get; set; }
-        [Inject] public ISettingService SettingService { get; set; }
+        [Inject] public Applicationmodulesettingsservice SettingService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
 
         public string backgroundColor { get; set; }
@@ -47,49 +49,26 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
                 this.regularExpressions = this.SettingService.GetSetting(settings, "RegularExpression", "").Split(";delimiter;", StringSplitOptions.RemoveEmptyEntries).ToList();
             }
-            catch (Exception ex)
-            {
-                ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         public async Task UpdateSettings()
         {
             try
             {
-                Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.Moduleid);
 
-                this.SettingService.SetSetting(settings, "BackgroundColor", this.backgroundColor);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
+                this.SettingService.SetSetting(this.Moduleid, "BackgroundColor", this.backgroundColor);
+                this.SettingService.SetSetting(this.Moduleid, "MaxUserNameCharacters", this.maxUserNameCharacters);
+                this.SettingService.SetSetting(this.Moduleid, "Framerate", this.framerate);
+                this.SettingService.SetSetting(this.Moduleid, "VideoBitsPerSecond", this.videoBitsPerSecond);
+                this.SettingService.SetSetting(this.Moduleid, "AudioBitsPerSecond", this.audioBitsPerSecond);
+                this.SettingService.SetSetting(this.Moduleid, "VideoSegmentsLength", this.videoSegmentsLength);
+                this.SettingService.SetSetting(this.Moduleid, "GeoLocationPositionInterval", this.geoLocationPositionInterval);
+                this.SettingService.SetSetting(this.Moduleid, "BingMapsApiKey", this.bingMapsApiKey);
+                this.SettingService.SetSetting(this.Moduleid, "RegularExpression", string.Join(";delimiter;", regularExpressions));
 
-                this.SettingService.SetSetting(settings, "MaxUserNameCharacters", this.maxUserNameCharacters);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "Framerate", this.framerate);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "VideoBitsPerSecond", this.videoBitsPerSecond);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "AudioBitsPerSecond", this.audioBitsPerSecond);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "VideoSegmentsLength", this.videoSegmentsLength);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "GeoLocationPositionInterval", this.geoLocationPositionInterval);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "BingMapsApiKey", this.bingMapsApiKey);
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
-
-                this.SettingService.SetSetting(settings, "RegularExpression", string.Join(";delimiter;", regularExpressions));
-                await this.SettingService.UpdateModuleSettingsAsync(settings, this.Moduleid);
             }
-            catch (Exception ex)
-            {
-                ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
-            }
+            catch (Exception ex) { }
         }
 
         public void AddRegularExpression_ClickedAsync()
@@ -99,10 +78,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 this.regularExpressions.Add(regularExpression);
                 this.regularExpression = string.Empty;
             }
-            catch (Exception ex)
-            {
-                ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         public void RemoveRegularExpression_ClickedAsync(string item)
@@ -111,10 +87,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
             {
                 this.regularExpressions.Remove(item);
             }
-            catch (Exception ex)
-            {
-                ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         private void OnColorPickerChangeExecute(ColorPickerEvent obj)

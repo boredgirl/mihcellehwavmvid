@@ -6,7 +6,6 @@
 @using System.Collections.Generic
 @using System.Linq
 @using Hwavmvid.Alerts
-@using BlazorWindows
 @using BlazorTabs
 @using Hwavmvid.Video
 @using Oqtane.ChatHubs.Models
@@ -14,11 +13,6 @@
 @using BlazorDropdown
 @using Hwavmvid.Notifications
 @using BlazorDynamicLayout
-@using Hwavmvid.Blackjack
-@using Hwavmvid.Roulette
-@using Hwavmvid.Roulettesurface
-@using Hwavmvid.Motorsport.Racewaymaps
-@using Hwavmvid.Motorsport.Shared
 @using Hwavmvid.Jsapigeolocation
 
 <link href="/Modules/Oqtane.ChatHubs/alerts.min.css" rel="stylesheet" />
@@ -120,10 +114,10 @@
 
                                 <div class="video-container w-100 h-100">
 
-                                    @if (ChatHubService.ConnectedUser?.UserId == context.CreatorId)
+                                    @if (ChatHubService.ConnectedUser?.Id == context.CreatorId)
                                     {
                                         var activeCamModel = ChatHubService.GetCamByRoom(context, ChatHubService.Connection.ConnectionId);
-                                        if (activeCamModel != null && context.CreatorId == ChatHubService.ConnectedUser.UserId)
+                                        if (activeCamModel != null && context.CreatorId == ChatHubService.ConnectedUser.Id)
                                         {
                                             var audioDefaultDevice = context.Devices.FirstOrDefault(item => item.Type == ChatHubDeviceType.Audio.ToString());
                                             var microphoneDefaultDevice = context.Devices.FirstOrDefault(item => item.Type == ChatHubDeviceType.Microphone.ToString());
@@ -184,7 +178,7 @@
                                     }
                                     else
                                     {
-                                        if (context.Creator != null && context.CreatorId != ChatHubService.ConnectedUser.UserId)
+                                        if (context.Creator != null && context.CreatorId != ChatHubService.ConnectedUser.Id)
                                         {
                                             if (!context.Creator.Connections.Any())
                                             {
@@ -354,6 +348,7 @@
 
 @code {
 
+    /*
     public override List<Resource> Resources => new List<Resource>()
     {
         new Resource { ResourceType = ResourceType.Script, Url = "https://code.jquery.com/jquery-3.6.3.slim.min.js", Integrity = "sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=", CrossOrigin = "anonymous", Level = ResourceLevel.Module },
@@ -363,4 +358,5 @@
 		// bing maps script tag
         new Resource { ResourceType = ResourceType.Script, Url = string.Concat("https://www.bing.com/api/maps/mapcontrol?key=", bingMapsApiKey), Level = ResourceLevel.Module },
 	};
+    */
 }
