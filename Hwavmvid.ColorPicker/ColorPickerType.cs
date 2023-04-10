@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.ColorPicker
+﻿namespace Mihcelle.Hwavmvid.ColorPicker
 {
     public enum ColorPickerType
     {

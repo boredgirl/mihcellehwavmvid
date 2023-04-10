@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.VideoPlayer
+﻿namespace Mihcelle.Hwavmvid.VideoPlayer
 {
     public class VideoPlayerApiItem
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hwavmvid.Devices
+namespace Mihcelle.Hwavmvid.Devices
 {
     public class DevicesItem
     {

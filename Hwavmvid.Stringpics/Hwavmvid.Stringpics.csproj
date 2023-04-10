@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <AssemblyName>Hwavmvid.Stringpics</AssemblyName>
+    <AssemblyName>Mihcelle.Hwavmvid.Stringpics</AssemblyName>
     <Version>1.0.0</Version>
     <Product>Hwavmvid.technologies</Product>
     <authors>hwavmvid vega</authors>

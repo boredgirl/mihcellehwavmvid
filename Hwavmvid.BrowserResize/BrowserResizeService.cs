@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.BrowserResize
+namespace Mihcelle.Hwavmvid.BrowserResize
 {
     public class BrowserResizeService
     {

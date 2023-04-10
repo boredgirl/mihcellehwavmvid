@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hwavmvid.ColorPicker
+namespace Mihcelle.Hwavmvid.ColorPicker
 {
     public class ColorPickerService
     {

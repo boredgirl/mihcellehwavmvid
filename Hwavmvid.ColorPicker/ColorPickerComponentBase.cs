@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Hwavmvid.ColorPicker
+namespace Mihcelle.Hwavmvid.ColorPicker
 {
     public class ColorPickerComponentBase : ComponentBase
     {

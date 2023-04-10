@@ -1,7 +1,7 @@
 ﻿using Microsoft.JSInterop;
 using System;
 
-namespace Hwavmvid.VideoPlayer
+namespace Mihcelle.Hwavmvid.VideoPlayer
 {
     public class VideoPlayerModel
     {

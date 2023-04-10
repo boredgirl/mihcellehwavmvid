@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
-namespace Hwavmvid.Accordion
+namespace Mihcelle.Hwavmvid.Accordion
 {
     public class AccordionBase : ComponentBase
     {

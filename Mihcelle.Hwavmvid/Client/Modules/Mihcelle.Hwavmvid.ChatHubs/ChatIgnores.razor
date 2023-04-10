@@ -7,6 +7,7 @@
 @inject Pagerservice<ChatHubIgnore> PagerServiceChatHubIgnore
 
 @using System.Linq
+@using Oqtane.ChatHubs
 @using Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 @using Oqtane.ChatHubs.Extensions
 @using Oqtane.ChatHubs.Models
@@ -22,7 +23,7 @@
 
     <h5><span class="oi oi-shield"></span> Ignoliste <span class="badge bg-success">NEW</span></h5>
 
-    <PagerComponent ApiQueryId="@this.Moduleid" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerIgnoreItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoreItems" TItemGeneric="@ChatHubIgnore" Class="py-sm-3" Scrolling="@false">
+    <PagerComponent ApiQueryId="@this.Moduleid" HubConnectionId="@this.ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerIgnoreItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.ChatHubService.IgnoredUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoreItems" TItemGeneric="@ChatHubIgnore" Class="py-sm-3" Scrolling="@false">
         <PagerItem>
 
             <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
@@ -51,7 +52,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void RetrievedItems(List<ChatHubIgnore> obj, int apiQueryId)
+    public void RetrievedItems(List<ChatHubIgnore> obj, string apiQueryId)
     {
         if (apiQueryId == this.Moduleid)
         {
@@ -60,7 +61,7 @@
         }
     }
 
-    public async void RemoveItem(PagerEvent<ChatHubIgnore> obj)
+    public async void RemoveItem(Pagerevent<ChatHubIgnore> obj)
     {
         if (obj.ApiQueryId == this.Moduleid)
         {
@@ -70,7 +71,7 @@
         }
     }
 
-    public void Error(Exception exception, int apiQueryId)
+    public void Error(Exception exception, string apiQueryId)
     {
         if (this.Moduleid == apiQueryId)
         {

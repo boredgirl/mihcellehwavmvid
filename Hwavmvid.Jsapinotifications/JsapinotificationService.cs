@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Jsapinotifications
+namespace Mihcelle.Hwavmvid.Jsapinotifications
 {
 
     public class JsapinotificationService : IDisposable

@@ -18,15 +18,15 @@ using Mihcelle.Hwavmvid.Modules.ChatHubs;
 using Oqtane.ChatHubs.Models;
 using Oqtane.ChatHubs.Extensions;
 using Oqtane.ChatHubs.Enums;
-using Hwavmvid.Alerts;
+using Mihcelle.Hwavmvid.Alerts;
 using BlazorDraggableList;
-using Hwavmvid.Video;
-using Hwavmvid.BrowserResize;
-using Hwavmvid.Notifications;
-using Hwavmvid.VideoPlayer;
-using Hwavmvid.Devices;
+using Mihcelle.Hwavmvid.Video;
+using Mihcelle.Hwavmvid.BrowserResize;
+using Mihcelle.Hwavmvid.Notifications;
+using Mihcelle.Hwavmvid.VideoPlayer;
+using Mihcelle.Hwavmvid.Devices;
 using System.Text.Json;
-using Hwavmvid.Jsapigeolocation;
+using Mihcelle.Hwavmvid.Jsapigeolocation;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 {

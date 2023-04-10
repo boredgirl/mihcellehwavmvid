@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hwavmvid.Motiondetection
+namespace Mihcelle.Hwavmvid.Motiondetection
 {
 
     public static class Extensions

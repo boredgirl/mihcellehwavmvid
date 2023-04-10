@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
-namespace Hwavmvid.Alerts
+namespace Mihcelle.Hwavmvid.Alerts
 {
     public class AlertsService : IAlertsService
     {

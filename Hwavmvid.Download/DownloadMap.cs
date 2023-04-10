@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Download
+namespace Mihcelle.Hwavmvid.Download
 {
     public class DownloadMap
     {

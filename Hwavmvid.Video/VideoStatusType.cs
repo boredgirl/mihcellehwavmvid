@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.Video
+﻿namespace Mihcelle.Hwavmvid.Video
 {
     public enum VideoStatusType
     {

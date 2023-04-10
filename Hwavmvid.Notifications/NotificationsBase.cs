@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Notifications
+namespace Mihcelle.Hwavmvid.Notifications
 {
     public class NotificationsBase : ComponentBase, IDisposable
     {

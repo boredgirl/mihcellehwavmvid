@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Jsapigeolocation
+namespace Mihcelle.Hwavmvid.Jsapigeolocation
 {
     public class Jsapigeolocationpermissionsevent
     {

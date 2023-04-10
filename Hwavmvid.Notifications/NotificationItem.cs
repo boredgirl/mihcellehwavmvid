@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.Notifications
+﻿namespace Mihcelle.Hwavmvid.Notifications
 {
     public class NotificationItem
     {

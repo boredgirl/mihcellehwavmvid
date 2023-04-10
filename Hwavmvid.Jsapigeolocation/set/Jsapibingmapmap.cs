@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace Hwavmvid.Jsapigeolocation
+namespace Mihcelle.Hwavmvid.Jsapigeolocation
 {
     public class Jsapibingmapmap
     {

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace Hwavmvid.Download
+namespace Mihcelle.Hwavmvid.Download
 {
     public class DownloadService : IDisposable
     {

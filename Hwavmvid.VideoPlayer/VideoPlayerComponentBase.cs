@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.VideoPlayer
+namespace Mihcelle.Hwavmvid.VideoPlayer
 {
     public class VideoPlayerComponentBase : ComponentBase, IDisposable
     {

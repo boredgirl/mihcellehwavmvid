@@ -1,8 +1,8 @@
-﻿using Hwavmvid.Alerts;
-using Hwavmvid.ColorPicker;
+﻿using Mihcelle.Hwavmvid.Alerts;
+using Mihcelle.Hwavmvid.ColorPicker;
 using Mihcelle.Hwavmvid.Modal;
 using BlazorSelect;
-using Hwavmvid.Notifications;
+using Mihcelle.Hwavmvid.Notifications;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Hwavmvid.Devices;
+using Mihcelle.Hwavmvid.Devices;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {

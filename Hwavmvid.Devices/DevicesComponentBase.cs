@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Devices
+namespace Mihcelle.Hwavmvid.Devices
 {
     public class DevicesComponentBase : ComponentBase, IDisposable
     {

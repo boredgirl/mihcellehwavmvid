@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-namespace Hwavmvid.Alerts
+namespace Mihcelle.Hwavmvid.Alerts
 {
     public class AlertsBase : ComponentBase, IDisposable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hwavmvid.Alerts
+namespace Mihcelle.Hwavmvid.Alerts
 {
     public class AlertsModel
     {

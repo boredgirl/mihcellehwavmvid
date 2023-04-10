@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.Devices
+﻿namespace Mihcelle.Hwavmvid.Devices
 {
     public class DevicesEvent
     {

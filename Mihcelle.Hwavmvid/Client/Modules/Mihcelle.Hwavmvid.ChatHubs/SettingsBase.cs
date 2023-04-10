@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Oqtane.Modules;
-using Oqtane.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Hwavmvid.ColorPicker;
+using Mihcelle.Hwavmvid.ColorPicker;
 using Mihcelle.Hwavmvid.Client.Modules;
 using Mihcelle.Hwavmvid.Client;
 

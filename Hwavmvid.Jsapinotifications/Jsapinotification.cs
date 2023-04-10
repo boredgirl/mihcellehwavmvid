@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Jsapinotifications
+namespace Mihcelle.Hwavmvid.Jsapinotifications
 {
     public class Jsapinotification
     {

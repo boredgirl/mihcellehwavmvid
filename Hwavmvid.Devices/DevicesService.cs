@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Devices
+namespace Mihcelle.Hwavmvid.Devices
 {
 
     public class DevicesService : IDisposable

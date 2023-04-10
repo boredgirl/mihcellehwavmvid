@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Video
+namespace Mihcelle.Hwavmvid.Video
 {
 
     public class VideoService : IAsyncDisposable

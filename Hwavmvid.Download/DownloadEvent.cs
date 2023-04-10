@@ -1,4 +1,4 @@
-﻿namespace Hwavmvid.Download
+﻿namespace Mihcelle.Hwavmvid.Download
 {
     public class DownloadEvent
     {

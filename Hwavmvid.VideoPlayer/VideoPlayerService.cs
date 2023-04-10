@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.VideoPlayer
+namespace Mihcelle.Hwavmvid.VideoPlayer
 {
 
     public class VideoPlayerService : IAsyncDisposable

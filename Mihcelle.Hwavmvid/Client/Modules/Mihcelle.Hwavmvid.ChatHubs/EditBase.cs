@@ -5,10 +5,10 @@ using Mihcelle.Hwavmvid.Modules.ChatHubs;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Hwavmvid.Alerts;
+using Mihcelle.Hwavmvid.Alerts;
 using System.Collections.Generic;
 using BlazorSelect;
-using Hwavmvid.ColorPicker;
+using Mihcelle.Hwavmvid.ColorPicker;
 using Oqtane.ChatHubs.Enums;
 using Oqtane.ChatHubs.Models;
 using Mihcelle.Hwavmvid.Client.Modules;
@@ -112,18 +112,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                         this.modifiedby = room.ModifiedBy;
                         this.modifiedon = room.ModifiedOn;
                     }
-                    else
-                    {
-                        await logger.LogError("Error Loading Room {ChatHubRoomId} {Error}", roomId);
-                        ModuleInstance.AddModuleMessage("Error Loading ChatHub", MessageType.Error);
-                    }
                 }
             }
-            catch (Exception ex)
-            {
-                await logger.LogError(ex, "Error Loading Room {ChatHubRoomId} {Error}", roomId, ex.Message);
-                ModuleInstance.AddModuleMessage("Error Loading Room", MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         public async Task SaveRoom()
@@ -146,8 +137,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     };
 
                     room = await this.ChatHubService.CreateRoom(room);
-                    await logger.LogInformation("Room Added {ChatHubRoom}", room);
-                    NavigationManager.NavigateTo(NavigateUrl());
+                    NavigationManager.NavigateTo(NavigationManager.Uri, true);
                 }
                 else
                 {                    
@@ -160,17 +150,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                         room.Type = this.type;
 
                         await this.ChatHubService.UpdateRoom(room);
-
-                        await logger.LogInformation("Room Updated {ChatHubRoom}", room);
-                        NavigationManager.NavigateTo(NavigateUrl());
+                        NavigationManager.NavigateTo(NavigationManager.Uri, true);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                await logger.LogError(ex, "Error Saving Room {ChatHubRoomId} {Error}", roomId, ex.Message);
-                ModuleInstance.AddModuleMessage("Error Saving Room", MessageType.Error);
-            }
+            catch (Exception exception) { }
         }
 
         private void UpdateUIStateHasChanged()

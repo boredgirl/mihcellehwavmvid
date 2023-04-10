@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Hwavmvid.Jsapigeolocation
+namespace Mihcelle.Hwavmvid.Jsapigeolocation
 {
 
     public class Jsapigeolocationservice : IDisposable
