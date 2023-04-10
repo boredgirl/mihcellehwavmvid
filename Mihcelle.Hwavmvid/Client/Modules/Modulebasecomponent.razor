@@ -1,0 +1,22 @@
+﻿@namespace Mihcelle.Hwavmvid.Client.Modules
+@inherits Modulebase
+
+@using Mihcelle.Hwavmvid.Client.Modules
+
+<div class="position-relative">
+
+    <DynamicComponent Type="@Componenttype"></DynamicComponent>
+
+    <AuthorizeView Roles="Host">
+        <Authorized>
+            <button @onclick="async() => await Deletemodule(this.Moduleid)" @onclick:stopPropagation=true type="button" class="btn btn-sm btn-primary px-2 py-2 rounded-0" style="position: absolute; top: 4px; right: 4px;">
+                <small class="py-2">Delete module item</small>
+            </button>
+        </Authorized>
+    </AuthorizeView>
+
+</div>
+
+@code {
+
+}

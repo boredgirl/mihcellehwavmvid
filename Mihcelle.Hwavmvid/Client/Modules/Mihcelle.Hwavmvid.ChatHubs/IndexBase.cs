@@ -28,7 +28,7 @@ using Mihcelle.Hwavmvid.Stringpics;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class IndexBase : ModuleBase, IDisposable
+    public class IndexBase : Modulebase, IDisposable
     {
         
         [Inject] protected IJSRuntime JsRuntime { get; set; }

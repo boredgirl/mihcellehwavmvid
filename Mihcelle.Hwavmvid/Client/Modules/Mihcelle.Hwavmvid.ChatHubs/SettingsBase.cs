@@ -10,7 +10,7 @@ using Mihcelle.Hwavmvid.Client;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class SettingsBase : ModuleBase, IDisposable
+    public class SettingsBase : Modulebase, IDisposable
     {
 
         [Inject] public NavigationManager NavigationManager { get; set; }

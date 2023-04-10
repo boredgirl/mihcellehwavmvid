@@ -63,13 +63,6 @@ namespace Mihcelle.Hwavmvid.Client.Container
             }
         }
 
-        public async Task Deletemodule(string moduleid)
-        {
-            var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            await client.DeleteAsync(string.Concat("api/module/", moduleid));
-            this.navigationmanager.NavigateTo(this.navigationmanager.Uri, true);
-        }
-
         public void Dispose()
         {
             this.applicationprovider._oncontextpagechanged -= async () => await this.Contextpagechanged();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class ImageModalBase : ModuleBase
+    public class ImageModalBase : Modulebase
     {
 
         [Inject] protected NavigationManager NavigationManager { get; set; }

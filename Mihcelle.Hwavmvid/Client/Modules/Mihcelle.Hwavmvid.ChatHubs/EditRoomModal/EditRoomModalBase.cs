@@ -17,7 +17,7 @@ using Mihcelle.Hwavmvid.Devices;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class EditRoomModalBase : ModuleBase, IDisposable
+    public class EditRoomModalBase : Modulebase, IDisposable
     {
 
         [Inject] public IJSRuntime JsRuntime { get; set; }

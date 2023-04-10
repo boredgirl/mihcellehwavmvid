@@ -5,7 +5,7 @@ using Mihcelle.Hwavmvid.Modal;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class SettingsModalBase : ModuleBase
+    public class SettingsModalBase : Modulebase
     {
 
         [Inject] public ChatHubService ChatHubService { get; set; }

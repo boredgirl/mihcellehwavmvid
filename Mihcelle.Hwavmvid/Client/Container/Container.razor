@@ -1,5 +1,7 @@
 ﻿@inherits Containerbase
 
+@using Mihcelle.Hwavmvid.Client.Modules
+
 @if (this.applicationprovider?._contextcontainer != null && this.applicationprovider?._contextcontainercolumns != null)
 {
 
@@ -15,24 +17,11 @@
                     @foreach (var module in column.Modules)
                     {
 
-                        var dictitem = new Dictionary<string, object>();
-                        dictitem.Add("Moduleid", module.Id);
-
+                        //var dictitem = new Dictionary<string, object>();
+                        //dictitem.Add("Moduleid", module.Id);
                         Type componenttype = Type.GetType(module.Assemblytype);
 
-                        <div class="position-relative">
-
-                            <DynamicComponent Type="@componenttype" Parameters="@dictitem"></DynamicComponent>
-
-                            <AuthorizeView Roles="Host">
-                                <Authorized>
-                                    <button @onclick="async() => await Deletemodule(module.Id)" @onclick:stopPropagation=true type="button" class="btn btn-sm btn-primary px-2 py-2 rounded-0" style="position: absolute; top: 4px; right: 4px;">
-                                        <small class="py-2">Delete module item</small>
-                                    </button>
-                                </Authorized>
-                            </AuthorizeView>
-
-                        </div>
+                        <Modulebasecomponent Moduleid="@module.Id" Componenttype="@componenttype"></Modulebasecomponent>
 
                     }
 
@@ -50,8 +39,5 @@
 
 
 @code {
-
-
-
 
 }
