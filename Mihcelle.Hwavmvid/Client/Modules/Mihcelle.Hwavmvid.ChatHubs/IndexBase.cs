@@ -24,7 +24,7 @@ using Mihcelle.Hwavmvid.Jsapinotifications;
 using Mihcelle.Hwavmvid.Modules.ChatHubs;
 using Mihcelle.Hwavmvid.Client;
 using Mihcelle.Hwavmvid.Cookies;
-using Microsoft.VisualBasic;
+using Mihcelle.Hwavmvid.Stringpics;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -134,7 +134,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
                 await base.OnAfterRenderAsync(firstRender);
 
-                Stringpics.StringpicsItellisense itellisense = new Stringpics.StringpicsItellisense();
+                StringpicsItellisense itellisense = new StringpicsItellisense();
                 string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                 await this.ChatHubService.ConsoleLog(consoleitem);
 
