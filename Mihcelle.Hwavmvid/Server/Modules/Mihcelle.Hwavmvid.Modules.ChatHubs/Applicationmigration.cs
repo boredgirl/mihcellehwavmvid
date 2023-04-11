@@ -335,7 +335,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      ChatHubRoomId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
-                     ChatHubWhitelistUserId = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ChatHubWhitelistUserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                      CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
                      ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
@@ -372,7 +372,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                  {
                      Id = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      ChatHubRoomId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
-                     ChatHubBlacklistUserId = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
+                     ChatHubBlacklistUserId = dbtable.Column<string>(type: "nvarchar(410)", nullable: false, unicode: null),
                      CreatedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
                      CreatedBy = dbtable.Column<string>(type: "nvarchar(841)", nullable: false, unicode: null),
                      ModifiedOn = dbtable.Column<DateTime>(type: "date", nullable: false, unicode: null),
