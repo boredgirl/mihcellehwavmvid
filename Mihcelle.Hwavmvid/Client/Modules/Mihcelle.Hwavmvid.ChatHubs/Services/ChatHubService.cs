@@ -149,7 +149,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 
         public async Task InitChatHubService()
         {
-            this.chatHubScriptJsObjRef = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/chathubjsinterop.js");
+            this.chatHubScriptJsObjRef = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", "/chathubs/chathubjsinterop.js");
             this.chatHubMap = await this.chatHubScriptJsObjRef.InvokeAsync<IJSObjectReference>("initchathub");
         }
 

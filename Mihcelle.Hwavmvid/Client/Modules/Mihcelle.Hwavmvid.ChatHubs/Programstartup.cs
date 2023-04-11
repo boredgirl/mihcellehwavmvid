@@ -46,8 +46,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 services.AddScoped<VideoService, VideoService>();
                 services.AddScoped<VideoPlayerService, VideoPlayerService>();
 
-                services.AddScoped<Modalservice, Modalservice>();
-
                 services.AddScoped<Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubRoom>, Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubRoom>>();
                 services.AddScoped<Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubUser>, Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubUser>>();
                 services.AddScoped<Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubCam>, Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubCam>>();
