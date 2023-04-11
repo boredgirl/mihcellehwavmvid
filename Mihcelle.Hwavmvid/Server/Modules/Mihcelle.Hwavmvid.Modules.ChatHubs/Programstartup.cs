@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs;
+using Mihcelle.Hwavmvid.Server;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -83,16 +84,13 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.MapHub<ChatHub>("/api/chathub", options =>
             {
-                endpoints.MapHub<ChatHub>("/api/chathub", options =>
-                {
-                    options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
-                    options.ApplicationMaxBufferSize = Int64.MaxValue;
-                    options.TransportMaxBufferSize = Int64.MaxValue;
-                    options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
-                    options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
-                });
+                options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
+                options.ApplicationMaxBufferSize = long.MaxValue;
+                options.TransportMaxBufferSize = long.MaxValue;
+                options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
+                options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
             });
 
         }
