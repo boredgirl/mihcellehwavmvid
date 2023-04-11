@@ -37,7 +37,7 @@ namespace Mihcelle.Hwavmvid.Video
         }
         public async Task InitVideo()
         {
-            this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazorvideojsinterop.js");
+            this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Video/blazorvideojsinterop.js");
         }
         public async Task InitVideoMap(string id1, string id2, VideoType type, VideoSourceType sourceType, int framerate, int videoBitsPerSecond, int audioBitsPerSecond, int videoSegmentsLength, string audioDefaultDeviceId, string microphoneDefaultDeviceId, string webcamDefaultDeviceId)
         {

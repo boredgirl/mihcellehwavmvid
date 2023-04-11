@@ -30,7 +30,7 @@ namespace Mihcelle.Hwavmvid.Jsapigeolocation
         {
             if (this.Module == null)
             {
-                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/jsapigeolocationjsinterop.js");
+                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Jsapigeolocation/jsapigeolocationjsinterop.js");
             }
         }
         public async Task InitGeolocationMap(string componentid, string elementid)

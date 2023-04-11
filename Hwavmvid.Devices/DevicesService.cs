@@ -32,7 +32,7 @@ namespace Mihcelle.Hwavmvid.Devices
         {
             if (this.Module == null)
             {
-                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazordevicesjsinterop.js");
+                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Devices/blazordevicesjsinterop.js");
             }
         }
         public async Task InitDevicesMap()

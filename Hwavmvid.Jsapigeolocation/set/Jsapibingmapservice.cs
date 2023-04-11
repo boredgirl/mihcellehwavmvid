@@ -28,7 +28,7 @@ namespace Mihcelle.Hwavmvid.Jsapigeolocation
         {
             if (this.Module == null)
             {
-                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/jsapibingmapjsinterop.js");
+                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Jsapigeolocation/jsapibingmapjsinterop.js");
             }
         }
         public async Task Initbingmapmap(string componentid, string elementid)

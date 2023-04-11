@@ -26,7 +26,7 @@ namespace Mihcelle.Hwavmvid.Notifications
         }
         public async Task InitNotificationsServiceAsync()
         {
-            this.moduleTask = await this.jsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazornotificationsjsinterop.js");
+            this.moduleTask = await this.jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Notifications/blazornotificationsjsinterop.js");
             this.notificationsMap = await this.moduleTask.InvokeAsync<IJSObjectReference>("initnotifications", this.dotNetObjectReference);
         }
 

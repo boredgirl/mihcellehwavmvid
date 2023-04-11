@@ -34,7 +34,7 @@ namespace Mihcelle.Hwavmvid.Download
         {
             if (this.JsImport == null)
             {
-                this.JsImport = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/downloadjsinterop.js");
+                this.JsImport = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Download/downloadjsinterop.js");
             }
 
             if (this.JsImport != null)

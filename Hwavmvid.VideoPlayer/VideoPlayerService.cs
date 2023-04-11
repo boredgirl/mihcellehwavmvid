@@ -30,7 +30,7 @@ namespace Mihcelle.Hwavmvid.VideoPlayer
         {
             if (this.Module == null)
             {
-                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazorvideoplayerjsinterop.js");
+                this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.VideoPlayer/blazorvideoplayerjsinterop.js");
             }
         }
         public async Task InitVideoMap(string mapid, string parameterId1, string parameterId2)

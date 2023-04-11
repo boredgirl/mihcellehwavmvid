@@ -18,8 +18,7 @@ namespace Mihcelle.Hwavmvid.Jsapinotifications
 
         public async Task InitJsapinotifications()
         {
-            this.javascriptFile = await jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", "/Modules/Oqtane.ChatHubs/jsapinotificationjsinterop.js");
+            this.javascriptFile = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Mihcelle.Hwavmvid.Jsapinotifications/jsapinotificationjsinterop.js");
         }
 
         public async Task<bool> RequestPermission()
