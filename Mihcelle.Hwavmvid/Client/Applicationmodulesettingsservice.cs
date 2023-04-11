@@ -15,14 +15,18 @@ namespace Mihcelle.Hwavmvid.Client
 
         public async Task<Dictionary<string, string>?> GetModuleSettingsAsync(string moduleid)
         {
-            var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            var dictitem = await client.GetFromJsonAsync<Dictionary<string, string>>("modulesettings/" + moduleid);
-            return dictitem;
+            try
+            {
+                var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
+                var dictitem = await client.GetFromJsonAsync<Dictionary<string, string>>("modulesettings/" + moduleid);
+                return dictitem;
+            }
+            catch (Exception exception) { return null; }
         }
 
-        public string GetSetting(Dictionary<string, string> modulesettings, string key, string defaultvalue)
+        public string GetSetting(Dictionary<string, string>? modulesettings, string key, string defaultvalue)
         {
-            if (string.IsNullOrEmpty(modulesettings[key]))
+            if (modulesettings == null || string.IsNullOrEmpty(modulesettings[key]))
                 return defaultvalue;
 
             return modulesettings[key];
