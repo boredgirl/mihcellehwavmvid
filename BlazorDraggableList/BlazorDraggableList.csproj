@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <AssemblyName>BlazorDraggableList</AssemblyName>
     <OutputType>Library</OutputType>
@@ -12,12 +12,14 @@
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>
 	<PackageProjectUrl>https://mihcelle.hwavmvid.com/</PackageProjectUrl>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.2" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
