@@ -32,6 +32,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
             try
             {
+
+                services.AddScoped<Services.ChatHubService, Services.ChatHubService>();
+                services.AddScoped<Services.ScrollService, Services.ScrollService>();
                 services.AddScoped<BlazorDraggableListService, BlazorDraggableListService>();
                 services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();
                 services.AddScoped<BlazorSliderService, BlazorSliderService>();
@@ -45,6 +48,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 services.AddScoped<JsapinotificationService, JsapinotificationService>();
                 services.AddScoped<VideoService, VideoService>();
                 services.AddScoped<VideoPlayerService, VideoPlayerService>();
+                services.AddScoped<NotificationsService,  NotificationsService>();
 
                 services.AddScoped<Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubRoom>, Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubRoom>>();
                 services.AddScoped<Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubUser>, Mihcelle.Hwavmvid.Pager.Pagerservice<ChatHubUser>>();
