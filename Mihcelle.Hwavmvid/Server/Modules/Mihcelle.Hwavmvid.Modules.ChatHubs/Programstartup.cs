@@ -12,32 +12,29 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         public void Configure(IServiceCollection services)
         {
 
+            
             services.AddScoped<Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext>();
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            })
-            .AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.WriteIndented = false;
-                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
-                options.JsonSerializerOptions.AllowTrailingCommas = true;
-                options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
-                options.JsonSerializerOptions.DefaultBufferSize = 4096;
-                options.JsonSerializerOptions.MaxDepth = 41;
-                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-                options.JsonSerializerOptions.PropertyNamingPolicy = null;
-            });
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.WriteIndented = false;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                    options.JsonSerializerOptions.AllowTrailingCommas = true;
+                    options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+                    options.JsonSerializerOptions.DefaultBufferSize = 4096;
+                    options.JsonSerializerOptions.MaxDepth = 41;
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
 
             services.AddMemoryCache();
-            //services.TryAddHttpClientWithAuthenticationCookie();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
 
             services.AddServerSideBlazor()
                 .AddHubOptions(options => options.MaximumReceiveMessageSize = 512 * 1024);
 
+            /*
             services.AddCors(option =>
             {
                 option.AddPolicy("wasmcorspolicy", (builder) =>
@@ -48,6 +45,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                            .AllowAnyHeader();
                 });
             });
+            */
 
             services.AddSignalR()
                 .AddHubOptions<ChatHub>(options =>
@@ -74,15 +72,15 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
         public void Configureapp(WebApplication app)
         {
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
             //app.UseTenantResolution();
-            app.UseBlazorFrameworkFiles();
-            app.UseRouting();
-            app.UseCors("wasmcorspolicy");
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseBlazorFrameworkFiles();
+            //app.UseRouting();
+            //app.UseCors("wasmcorspolicy");
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.MapHub<ChatHub>("/api/chathub", options =>
             {
@@ -92,7 +90,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
                 options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
             });
-
+            
         }
     }
 }

@@ -14,9 +14,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
     public class Applicationdbcontext : Mihcelle.Hwavmvid.Server.Data.Applicationdbcontext, Moduleinstallerinterface
     {
 
+        public virtual DbSet<ChatHubUser> ChatHubUser { get; set; }
         public virtual DbSet<ChatHubRoom> ChatHubRoom { get; set; }
         public virtual DbSet<ChatHubRoomChatHubUser> ChatHubRoomChatHubUser { get; set; }
-        public virtual DbSet<ChatHubUser> ChatHubUser { get; set; }
         public virtual DbSet<ChatHubMessage> ChatHubMessage { get; set; }
         public virtual DbSet<ChatHubConnection> ChatHubConnection { get; set; }
         public virtual DbSet<ChatHubPhoto> ChatHubPhoto { get; set; }
