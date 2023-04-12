@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Repository;
-using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Providers;
 using Mihcelle.Hwavmvid.Shared.Models;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Commands

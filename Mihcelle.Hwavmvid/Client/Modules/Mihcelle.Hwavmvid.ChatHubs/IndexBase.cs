@@ -123,7 +123,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 await this.JsapinotificationService.InitJsapinotifications();
 
                 string hostname = new Uri(NavigationManager.BaseUri).Host;
-                string cookievalue = await this.CookieService.Getcookie(".AspNetCore.Identity.Application");
+                string cookievalue = await this.CookieService.Getcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename);
                 this.ChatHubService.IdentityCookie = new Cookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, cookievalue, "/", hostname);
 
                 await this.ChatHubService.ConnectToChat(this.GuestUsername, this.Moduleid);

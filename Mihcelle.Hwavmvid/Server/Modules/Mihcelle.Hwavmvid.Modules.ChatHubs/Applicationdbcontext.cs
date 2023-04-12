@@ -7,6 +7,7 @@ using Mihcelle.Hwavmvid.Server;
 using Mihcelle.Hwavmvid.Shared.Models;
 using Oqtane.ChatHubs.Models;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -40,9 +41,16 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            try { base.OnModelCreating(builder); } catch { }
+            // Discriminator Oqtane User Model
+            //modelBuilder.Entity<User>().HasDiscriminator<string>("UserType").HasValue<User>("User").HasValue<ChatHubUser>("ChatHubUser");
+
+            modelBuilder.Entity<Applicationuser>().ToTable<Applicationuser>("Applicationusers");
+            modelBuilder.Entity<ChatHubUser>().HasBaseType<Applicationuser>().ToTable<ChatHubUser>("ChatHubUser");
+
+
+            try { base.OnModelCreating(modelBuilder); } catch { }
         }
 
         public async Task Removemodule(string moduleid)

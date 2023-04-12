@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Composition.Hosting;
-using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Providers;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Repository;
 using System.Resources;

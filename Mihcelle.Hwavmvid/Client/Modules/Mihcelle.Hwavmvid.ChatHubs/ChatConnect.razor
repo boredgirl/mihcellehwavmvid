@@ -1,5 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 @inherits Modulebase
+
 @inject ChatHubService ChatHubService
 @inject AlertsService AlertsService
 
@@ -17,7 +18,7 @@
     </Authorizing>
     <Authorized>
 
-        @if (ChatHubService.Connection != null && ChatHubService.Connection.State != HubConnectionState.Connected)
+        @if (this.ChatHubService != null && this.ChatHubService.Connection != null && ChatHubService.Connection.State != HubConnectionState.Connected)
         {
             <div class="p-2 p-xl-4 bg-white w-100 mb-0 mb-sm-2 border border-primary">
                 <div class="p-0 p-sm-1">
@@ -31,7 +32,7 @@
 
         <div class="p-2 p-xl-4 bg-white w-100 mb-2 border border-primary">
             <div class="p-0 p-sm-1">
-                <input type="text" id="guestUsernameInput-@this.Moduleid.ToString()" class="form-control" @bind-value="@GuestUsername" placeholder="Choose your desired guestname" style="max-width: 320px;" />
+                <input type="text" id="guestUsernameInput-@this.Moduleid" class="form-control" @bind-value="@this.GuestUsername" placeholder="Choose your desired guestname" style="max-width: 320px;" />
             </div>
             <div class="p-0 p-sm-1">
                 <button type="button" class="btn btn-sm btn-link bg-white border border-light" @onclick="@(async () => await TryConnect())">Establish new connection</button>

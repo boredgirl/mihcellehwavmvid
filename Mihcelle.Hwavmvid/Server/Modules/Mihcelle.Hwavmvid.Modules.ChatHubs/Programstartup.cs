@@ -14,6 +14,8 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
             
             services.AddScoped<Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext, Mihcelle.Hwavmvid.Modules.ChatHubs.Applicationdbcontext>();
+            services.AddScoped<Mihcelle.Hwavmvid.Modules.ChatHubs.Providers.ChatHubService, Mihcelle.Hwavmvid.Modules.ChatHubs.Providers.ChatHubService>();
+            services.AddScoped<Mihcelle.Hwavmvid.Modules.ChatHubs.Repository.ChatHubRepository, Mihcelle.Hwavmvid.Modules.ChatHubs.Repository.ChatHubRepository>();
 
             services.AddMvc()
                 .AddJsonOptions(options =>

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Mihcelle.Hwavmvid.Pager;
 using Microsoft.AspNetCore.Http;
 
-namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
+namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Providers
 {
     public class ChatHubService
     {

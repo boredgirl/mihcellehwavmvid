@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
-using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Providers;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Repository;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Commands;
 using Mihcelle.Hwavmvid.Modules;

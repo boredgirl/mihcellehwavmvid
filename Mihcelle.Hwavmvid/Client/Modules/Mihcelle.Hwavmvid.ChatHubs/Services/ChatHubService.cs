@@ -92,6 +92,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 
         public ChatHubService(IHttpClientFactory ihttpclientfactory, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, AlertsService AlertsService, BlazorDraggableListService blazorDraggableListService, BrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService Notificationservice, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice)
         {
+
             this.ihttpclientfactory = ihttpclientfactory;
             this.NavigationManager = navigationManager;
             this.JSRuntime = JSRuntime;
@@ -160,6 +161,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
 
         public void BuildHubConnection(string username, string moduleId)
         {
+
             StringBuilder urlBuilder = new StringBuilder();
             var chatHubConnection = this.NavigationManager.BaseUri + "api/chathub";
 
@@ -169,8 +171,8 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
             var url = urlBuilder.ToString();
             Connection = new HubConnectionBuilder().WithUrl(url, options =>
             {
-                options.Cookies.Add(this.IdentityCookie);
-                options.Headers.Add("moduleid", moduleId.ToString());
+                //options.Cookies.Add(this.IdentityCookie);
+                options.Headers.Add("moduleid", moduleId);
                 options.Headers.Add("platform", "Oqtane");
                 options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
             })

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Repository;
 using System.Drawing;
-using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Providers;
 using Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs;
 using Oqtane.ChatHubs.Models;
 using Oqtane.ChatHubs.Enums;
