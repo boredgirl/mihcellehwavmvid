@@ -112,7 +112,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                             //UserId = user.UserId,
                             //SiteId = user.SiteId,
                             UserName = Oqtane.ChatHubs.Constants.ChatHubConstants.ChatHubUserPrefix + user.UserName,
-                            DisplayName = this.CreateDisplaynameFromUsername(user.UserName),
+                            DisplayName = user.UserName,
                             Email = user.Email,
                             CreatedBy = user.UserName,
                             CreatedOn = DateTime.Now,
@@ -244,12 +244,16 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
         }
         private ChatHubUser OnConnectedUser(ChatHubUser chatHubUser)
         {
+
+            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            var useragent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString();
+
             ChatHubConnection ChatHubConnection = new ChatHubConnection()
             {
                 ChatHubUserId = chatHubUser.Id,
                 ConnectionId = Context.ConnectionId,
-                IpAddress = Context.GetHttpContext().Connection.RemoteIpAddress.ToString(),
-                UserAgent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString(),
+                IpAddress = ip,
+                UserAgent = useragent,
                 Status = ChatHubConnectionStatus.Active.ToString(),
                 CreatedOn = DateTime.Now,
                 CreatedBy = chatHubUser.UserName,
