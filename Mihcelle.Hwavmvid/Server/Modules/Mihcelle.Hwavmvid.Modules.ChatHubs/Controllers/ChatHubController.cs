@@ -24,7 +24,7 @@ using Mihcelle.Hwavmvid.Download;
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Controllers
 {
 
-    [Route("{site}/api/[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     public class ChatHubController : Controller
     {
 
@@ -392,7 +392,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetIgnoreItems")]
         [AllowAnonymous]
-        public async Task<Pagerapiitem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int id, string connectionId)
+        public async Task<Pagerapiitem<ChatHubIgnore>> GetIgnoreItems(int page, int items, string id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -406,7 +406,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetIgnoredByItems")]
         [AllowAnonymous]
-        public async Task<Pagerapiitem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int id, string connectionId)
+        public async Task<Pagerapiitem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, string id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)

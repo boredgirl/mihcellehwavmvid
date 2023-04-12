@@ -473,7 +473,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Providers
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<Pagerapiitem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int moduleId, ChatHubUser user)
+        public async Task<Pagerapiitem<ChatHubIgnore>> GetIgnoreItems(int page, int items, string moduleId, ChatHubUser user)
         {
             try
             {
@@ -516,7 +516,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Providers
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<Pagerapiitem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int moduleId, ChatHubUser user)
+        public async Task<Pagerapiitem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, string moduleId, ChatHubUser user)
         {
             try
             {

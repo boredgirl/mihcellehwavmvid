@@ -1491,7 +1491,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
         }
         
         [AllowAnonymous]
-        public async Task<ChatHubVisitorsDisplay> GetVisitorsDisplay(int moduleId)
+        public async Task<ChatHubVisitorsDisplay> GetVisitorsDisplay(string moduleId)
         {
             
             // do please bebi add module id to connection model in database to query by connections by module id
