@@ -1379,9 +1379,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
             }
         }
         [AllowAnonymous]
-        public async Task CreateExampleData()
+        public async Task CreateExampleData(string moduleid)
         {
-            string moduleId = Context.GetHttpContext().Request.Headers["moduleid"];
+
             var contextUser = await this.GetChatHubUserAsync();
             List<string> colors = new List<string>() { "lightskyblue", "lightpink", "lightgrey", "lightgoldenrodyellow", "lightcoral", "lightblue", "lavender", "thistle" };
 
@@ -1390,7 +1390,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 for(var i = 1; i <= 200; i++)
                 {
                     var item = new ChatHubRoom();
-                    item.ModuleId = moduleId;
+                    item.ModuleId = moduleid;
                     item.Title = "post" + i;
                     item.Content = "some description";
                     item.Status = ChatHubRoomStatus.Enabled.ToString();
@@ -1408,9 +1408,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     await this.chatHubRepository.AddRoom(item);
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                throw new HubException("Failed to create example data.");
+                throw new HubException(exception.Message);
             }
         }
 

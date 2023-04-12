@@ -284,9 +284,7 @@
                 string replacement = string.Format("<a href=\"{0}\" target=\"_blank\" title=\"{0}\">{0}</a>", "$0");
                 message = Regex.Replace(message, pattern, replacement);
             }
-        }
-        catch (Exception exception) { }
-
+        } catch (Exception exception) { }
         return message;
     }
 

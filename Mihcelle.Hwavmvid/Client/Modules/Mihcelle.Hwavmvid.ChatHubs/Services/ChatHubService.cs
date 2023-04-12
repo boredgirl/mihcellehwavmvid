@@ -950,9 +950,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
                 }
             });
         }
-        public async Task CreateExampleData()
+        public void CreateExampleData(string moduleid)
         {
-            await this.Connection.InvokeAsync("CreateExampleData").ContinueWith((task) =>
+            this.Connection.InvokeAsync("CreateExampleData", moduleid).ContinueWith((task) =>
             {
                 if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
                 {
