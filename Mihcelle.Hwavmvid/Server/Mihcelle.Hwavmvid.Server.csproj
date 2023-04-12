@@ -15,6 +15,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\bk.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\chat-room-image-deprecated.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\chat-room-image.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\cl500.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\hub-exception.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\images\rooms\placeholder.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\images\uploads\placeholder.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\loading-flower.gif" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\loading.gif" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\macdonalds.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\temp\placeholder.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\videos\images\rooms\placeholder.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\videos\images\uploads\placeholder.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\videos\placeholder.png" />
+    <None Remove="wwwroot\modules\mihcelle.hwavmvid.chathubs\videos\temp\placeholder.png" />
+    <None Remove="Modules\Mihcelle.Hwavmvid.Modules.ChatHubs\wasmchatlogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2" />
   </ItemGroup>
 

@@ -3,11 +3,11 @@
     public static class ChatHubConstants
     {
         public const string ChatHubUserPrefix = "wasm_";
-        public const string ModulePath = "Modules/Oqtane.ChatHubs";
-        public const string RoomImagesPath = "Modules/Oqtane.Chathubs/images/rooms";
-        public const string UploadImagesPath = "Modules/Oqtane.Chathubs/images/uploads";
-        public const string UploadVideosPath = "Modules/Oqtane.Chathubs/videos";
-        public const string ApplicationTempPath = "Modules/Oqtane.Chathubs/temp";
+        public const string ModulePath = "Modules/Mihcelle.Hwavmvid.ChatHubs";
+        public const string RoomImagesPath = "Modules/Mihcelle.Hwavmvid.ChatHubs/images/rooms";
+        public const string UploadImagesPath = "Modules/Mihcelle.Hwavmvid.ChatHubs/images/uploads";
+        public const string UploadVideosPath = "Modules/Mihcelle.Hwavmvid.ChatHubs/videos";
+        public const string ApplicationTempPath = "Modules/Mihcelle.Hwavmvid.ChatHubs/temp";
         public const int FrontPageItems = 24;
         public const int UserlistItems = 16;
         public const int ArchiveItems = 32;
