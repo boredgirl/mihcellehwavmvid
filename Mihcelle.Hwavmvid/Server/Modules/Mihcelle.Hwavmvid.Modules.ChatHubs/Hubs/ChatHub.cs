@@ -139,17 +139,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                             throw new HubException("Failed to add user to role..");
                         }
 
-                        /*
-                        var userRole = new UserRole()
-                        {
-                            UserId = newChatHubUser.UserId,
-                            RoleId = 3,
-                            EffectiveDate = null,
-                            ExpiryDate = null,
-                        };
-                        this.userRoles.AddUserRole(userRole);
-                        */
-
                         return newChatHubUser;
                     }
                 }
@@ -193,7 +182,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 CreatedOn = DateTime.Now,
                 ModifiedBy = username,
                 ModifiedOn = DateTime.Now,
-                FrameworkUserId = null,
+                FrameworkUserId = string.Empty,
                 UserType = ChatHubUserType.User.ToString(),
                 PasswordHash = "guest",
                 EmailConfirmed = true,
