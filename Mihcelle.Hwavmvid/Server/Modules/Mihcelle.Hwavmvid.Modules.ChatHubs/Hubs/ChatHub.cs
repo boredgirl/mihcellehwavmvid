@@ -220,7 +220,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ConnectionId = Context.ConnectionId,
                 IpAddress = Context.GetHttpContext().Connection.RemoteIpAddress.ToString(),
                 UserAgent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString(),
-                Status = Enum.GetName(typeof(ChatHubConnectionStatus), ChatHubConnectionStatus.Active)
+                Status = Enum.GetName(typeof(ChatHubConnectionStatus), ChatHubConnectionStatus.Active),
+                CreatedOn = DateTime.Now,
+                CreatedBy = chatHubUser.UserName,
+                ModifiedBy = chatHubUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             ChatHubConnection = this.chatHubRepository.AddConnection(ChatHubConnection);
 
@@ -228,7 +232,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
             {
                 UsernameColor = "#7744aa",
                 MessageColor = "#44aa77",
-                ChatHubUserId = chatHubUser.Id
+                ChatHubUserId = chatHubUser.Id,
+                CreatedOn = DateTime.Now,
+                CreatedBy = chatHubUser.UserName,
+                ModifiedBy = chatHubUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             ChatHubSetting = this.chatHubRepository.AddSetting(ChatHubSetting);
 
@@ -243,7 +251,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 IpAddress = Context.GetHttpContext().Connection.RemoteIpAddress.ToString(),
                 UserAgent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString(),
                 Status = ChatHubConnectionStatus.Active.ToString(),
+                CreatedOn = DateTime.Now,
                 CreatedBy = chatHubUser.UserName,
+                ModifiedBy = chatHubUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             ChatHubConnection = this.chatHubRepository.AddConnection(ChatHubConnection);            
 
@@ -255,7 +266,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     UsernameColor = "#7744aa",
                     MessageColor = "#44aa77",
                     ChatHubUserId = chatHubUser.Id,
+                    CreatedOn = DateTime.Now,
                     CreatedBy = chatHubUser.UserName,
+                    ModifiedBy = chatHubUser.UserName,
+                    ModifiedOn = DateTime.Now,
                 };
                 ChatHubSetting = this.chatHubRepository.AddSetting(ChatHubSetting);
             }
