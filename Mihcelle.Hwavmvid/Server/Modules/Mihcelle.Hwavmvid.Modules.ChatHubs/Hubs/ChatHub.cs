@@ -381,6 +381,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
         [AllowAnonymous]
         public async Task EnterChatRoom(string roomId)
         {
+
             var contextUser = await this.GetChatHubUserAsync();
             var contextConnection = this.chatHubRepository.Connections().ByConnectionId(Context.ConnectionId);
             var contextConnections = await this.chatHubRepository.GetConnectionsByUserId(contextUser.Id).Active().ToListAsync();
@@ -456,6 +457,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                         VideoUrl = String.Empty,
                         VideoUrlExtension = String.Empty,
                         CreatedBy = contextUser.UserName,
+                        CreatedOn = DateTime.Now,
+                        ModifiedBy = contextUser.UserName,
+                        ModifiedOn = DateTime.Now,
                     };
 
                     cam = await this.chatHubRepository.AddCam(cam);
@@ -566,6 +570,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ChatHubUserId = contextUser.Id,
                 Content = message ?? string.Empty,
                 Type = this.GetMessageType(),
+                CreatedBy = contextUser.UserName,
+                CreatedOn = DateTime.Now,
+                ModifiedBy = contextUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             await this.chatHubRepository.AddMessage(chatHubMessage);
             ChatHubMessage chatHubMessageClientModel = this.chatHubService.CreateChatHubMessageClientModel(chatHubMessage, contextUser);
@@ -599,7 +607,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ChatHubUserId = contextUser.Id,
                 Content = string.Empty,
                 Type = Enum.GetName(typeof(ChatHubMessageType), ChatHubMessageType.Commands),
-                CommandMetaDatas = commandMetaDatas
+                CommandMetaDatas = commandMetaDatas,
+                CreatedBy = contextUser.UserName,
+                CreatedOn = DateTime.Now,
+                ModifiedBy = contextUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             await this.chatHubRepository.AddMessage(chatHubMessage);
             ChatHubMessage chatHubMessageClientModel = this.chatHubService.CreateChatHubMessageClientModel(chatHubMessage, contextUser);
@@ -614,7 +626,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ChatHubRoomId = roomId,
                 ChatHubUserId = targetUser.Id,
                 Content = message ?? string.Empty,
-                Type = Enum.GetName(typeof(ChatHubMessageType), chatHubMessageType)
+                Type = Enum.GetName(typeof(ChatHubMessageType), chatHubMessageType),
+                CreatedBy = "System",
+                CreatedOn = DateTime.Now,
+                ModifiedBy = "System",
+                ModifiedOn = DateTime.Now,
             };
             await this.chatHubRepository.AddMessage(chatHubMessage);
             ChatHubMessage chatHubMessageClientModel = this.chatHubService.CreateChatHubMessageClientModel(chatHubMessage, targetUser);
@@ -628,7 +644,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ChatHubRoomId = roomId,
                 ChatHubUserId = contextUser.Id,
                 Content = message ?? string.Empty,
-                Type = Enum.GetName(typeof(ChatHubMessageType), chatHubMessageType)
+                Type = Enum.GetName(typeof(ChatHubMessageType), chatHubMessageType),
+                CreatedBy = contextUser.UserName,
+                CreatedOn = DateTime.Now,
+                ModifiedBy = contextUser.UserName,
+                ModifiedOn = DateTime.Now,
             };
             await this.chatHubRepository.AddMessage(chatHubMessage);
             ChatHubMessage chatHubMessageClientModel = this.chatHubService.CreateChatHubMessageClientModel(chatHubMessage, contextUser);
@@ -762,6 +782,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                         ChatHubCamId = camId,
                         Filename = filename,
                         FilenameExtension = fileExtension,
+                        CreatedBy = contextUser.UserName,
+                        CreatedOn = DateTime.Now,
+                        ModifiedBy = contextUser.UserName,
+                        ModifiedOn = DateTime.Now,
                     };
                     await this.chatHubRepository.AddCamSequence(sequence);
 
@@ -903,6 +927,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     ChatHubUserId = contextUser.Id,
                     Type = Enum.GetName(typeof(ChatHubMessageType), ChatHubMessageType.Image),
                     Content = "Snapshot",
+                    CreatedBy = contextUser.UserName,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = contextUser.UserName,
+                    ModifiedOn = DateTime.Now,
                 };
                 chatHubMessage = await this.chatHubRepository.AddMessage(chatHubMessage);
 
@@ -916,6 +944,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     Message = chatHubMessage,
                     Width = 600,
                     Height = 400,
+                    CreatedBy = contextUser.UserName,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = contextUser.UserName,
+                    ModifiedOn = DateTime.Now,
                 };
 
                 chatHubPhoto = this.chatHubRepository.AddPhoto(chatHubPhoto);
@@ -1003,7 +1035,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                         moderator = new ChatHubModerator()
                         {
                             ChatHubUserId = targetUser.Id,
-                            ModeratorDisplayName = targetUser.DisplayName
+                            ModeratorDisplayName = targetUser.DisplayName,
+                            CreatedBy = contextUser.UserName,
+                            CreatedOn = DateTime.Now,
+                            ModifiedBy = contextUser.UserName,
+                            ModifiedOn = DateTime.Now,
                         };
                         moderator = this.chatHubRepository.AddModerator(moderator);
                     }
@@ -1012,6 +1048,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     {
                         ChatHubRoomId = roomId,
                         ChatHubModeratorId = moderator.Id,
+                        CreatedBy = contextUser.UserName,
+                        CreatedOn = DateTime.Now,
+                        ModifiedBy = contextUser.UserName,
+                        ModifiedOn = DateTime.Now,
                     };
                     this.chatHubRepository.AddRoomModerator(room_moderator);
 
@@ -1078,6 +1118,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     {
                         ChatHubRoomId = roomId,
                         ChatHubWhitelistUserId = whitelistUser.Id,
+                        CreatedBy = contextUser.UserName,
+                        CreatedOn = DateTime.Now,
+                        ModifiedBy = contextUser.UserName,
+                        ModifiedOn = DateTime.Now,
                     };
                     this.chatHubRepository.AddRoomWhitelistUser(room_whitelistuser);
 
@@ -1147,6 +1191,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                     {
                         ChatHubRoomId = roomId,
                         ChatHubBlacklistUserId = blacklistUser.Id,
+                        CreatedBy = contextUser.UserName,
+                        CreatedOn = DateTime.Now,
+                        ModifiedBy = contextUser.UserName,
+                        ModifiedOn = DateTime.Now,
                     };
                     this.chatHubRepository.AddRoomBlacklistUser(room_blacklistuser);
 
@@ -1203,7 +1251,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 Guid = Guid.NewGuid(),
                 RoomId = room.Id,
                 UserId = user.Id,
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
             };
 
             var roomCreator = await this.chatHubRepository.GetUserByIdAsync(room.CreatorId);

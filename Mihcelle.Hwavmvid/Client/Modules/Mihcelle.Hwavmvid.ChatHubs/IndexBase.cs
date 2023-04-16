@@ -141,12 +141,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     await this.BrowserResizeService.RegisterWindowResizeCallback();
                     await BrowserHasResized();
 
-                    /*
+                    //await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
+
                     StringpicsItellisense itellisense = new StringpicsItellisense();
                     string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                     await this.ChatHubService.ConsoleLog(consoleitem);
-
-                    await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
 
                     bool granted = await this.JsapinotificationService.RequestPermission();
                     if (granted)
@@ -156,12 +155,11 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                             Title = "App Notifications enabled",
                             Dir = "auto",
                             Lang = "en-US",
-                            Body = consoleitem,
+                            Body = string.Concat(consoleitem, "it may becomw wosre wallha"),
                             Tag = "hwavmvid",
                             Icon = string.Empty,
                             Data = string.Empty,
                         });
-                    */
                 } catch (Exception exception) { 
                     Console.WriteLine(exception.Message); }
             }
