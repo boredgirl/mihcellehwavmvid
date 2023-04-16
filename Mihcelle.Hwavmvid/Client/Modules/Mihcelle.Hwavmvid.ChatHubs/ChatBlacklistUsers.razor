@@ -19,7 +19,7 @@
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
 
-    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetBlacklistUserItems");
+    var getItemsApiUrl = "api/chathub/GetBlacklistUserItems";
 
     <h5>Blacklist users <span class="badge bg-success">NEW</span></h5>
 

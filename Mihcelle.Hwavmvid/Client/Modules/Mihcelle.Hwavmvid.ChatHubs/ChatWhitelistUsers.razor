@@ -18,7 +18,7 @@
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
 
-    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetWhitelistUserItems");
+    var getItemsApiUrl = "api/chathub/GetWhitelistUserItems";
 
     <h5>Whitelist users <span class="badge bg-success">NEW</span></h5>
 

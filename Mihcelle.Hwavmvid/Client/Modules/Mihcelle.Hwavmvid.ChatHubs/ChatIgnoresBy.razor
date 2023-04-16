@@ -17,7 +17,7 @@
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
 
-    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetIgnoredByItems");
+    var getItemsApiUrl = "api/chathub/GetIgnoredByItems";
 
     <h5><span class="oi oi-bug"></span> Ignored by users list <span class="badge bg-success">NEW</span></h5>
 

@@ -18,7 +18,7 @@
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
 
-    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetUsers");
+    var getItemsApiUrl = "api/chathub/GetUsers";
                         
     <PagerComponent ElementId="WasmHwavmvid.PagerUserlist" Class="WasmHwavmvid.PagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Oqtane.ChatHubs.Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
 

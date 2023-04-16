@@ -17,7 +17,7 @@
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
 
-    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetModeratorItems");
+    var getItemsApiUrl = "api/chathub/GetModeratorItems";
 
     <h5>Moderators <span class="badge bg-success">NEW</span></h5>
 
