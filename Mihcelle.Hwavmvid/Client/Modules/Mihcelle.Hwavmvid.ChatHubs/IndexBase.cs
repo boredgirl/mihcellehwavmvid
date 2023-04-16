@@ -146,7 +146,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                     await this.ChatHubService.ConsoleLog(consoleitem);
 
-                    await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
+                    //await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
 
                     bool granted = await this.JsapinotificationService.RequestPermission();
                     if (granted)
