@@ -302,17 +302,14 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Repository
             this._db.SaveChanges();            
             return ChatHubUser;
         }
-        public ChatHubRoomChatHubUser AddRoomUser(ChatHubRoomChatHubUser ChatHubRoomChatHubUser)
+        public async Task AddRoomUser(ChatHubRoomChatHubUser ChatHubRoomChatHubUser)
         {
             var item = this.GetRoomUser(ChatHubRoomChatHubUser.ChatHubRoomId, ChatHubRoomChatHubUser.ChatHubUserId);
             if (item == null)
             {
-                this._db.ChatHubRoomChatHubUser.Add(ChatHubRoomChatHubUser);
-                this._db.SaveChanges();
-                return ChatHubRoomChatHubUser;
+                await this._db.ChatHubRoomChatHubUser.AddAsync(ChatHubRoomChatHubUser);
+                await this._db.SaveChangesAsync();
             }
-
-            return item;
         }
         public ChatHubPhoto AddPhoto(ChatHubPhoto ChatHubPhoto)
         {
@@ -449,11 +446,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Repository
 
             return item;
         }
-        public async Task<ChatHubCam> AddCam(ChatHubCam ChatHubCam)
+        public async Task AddCam(ChatHubCam ChatHubCam)
         {
             this._db.ChatHubCam.Add(ChatHubCam);
             await this._db.SaveChangesAsync();
-            return ChatHubCam;
         }
         public async Task<ChatHubCamSequence> AddCamSequence(ChatHubCamSequence ChatHubCamSequence)
         {

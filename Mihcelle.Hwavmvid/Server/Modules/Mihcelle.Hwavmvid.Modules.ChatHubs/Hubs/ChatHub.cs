@@ -462,7 +462,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                         ModifiedOn = DateTime.Now,
                     };
 
-                    cam = await this.chatHubRepository.AddCam(cam);
+                    await this.chatHubRepository.AddCam(cam);
                     var camClientModel = cam.ClientModel();
                     await Clients.Group(contextRoom.Id.ToString()).SendAsync("AddCam", this.chatHubService.CreateChatHubCamClientModel(camClientModel), contextRoom.Id.ToString());
                 }
@@ -471,8 +471,12 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 {
                     ChatHubRoomId = contextRoom.Id,
                     ChatHubUserId = contextUser.Id,
+                    CreatedBy = contextUser.UserName,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = contextUser.UserName,
+                    ModifiedOn = DateTime.Now,
                 };
-                chatHubRepository.AddRoomUser(room_user);
+                await chatHubRepository.AddRoomUser(room_user);
 
                 ChatHubRoom chatHubRoomClientModel = await this.chatHubService.CreateChatHubRoomClientModelAsync(contextRoom);
                 chatHubRoomClientModel.Messages = recentMessagesClientModels;
