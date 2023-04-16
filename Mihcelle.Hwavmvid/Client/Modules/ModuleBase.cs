@@ -10,6 +10,7 @@ namespace Mihcelle.Hwavmvid.Client.Modules
     public class Modulebase : ComponentBase
     {
 
+
         [Inject] public IServiceProvider iserviceprovider { get; set; }
         [Inject] public IHttpClientFactory ihttpclientfactory { get; set; }
         [Inject] public NavigationManager navigationmanager { get; set; }
@@ -18,6 +19,7 @@ namespace Mihcelle.Hwavmvid.Client.Modules
         [Parameter] public Type Componenttype { get; set; }
 
         protected Moduleservice<Modulepreferences> moduleservice { get; set; }
+        protected Dictionary<string, object> servpara { get; set; }
 
         protected override Task OnInitializedAsync()
         {
@@ -26,6 +28,9 @@ namespace Mihcelle.Hwavmvid.Client.Modules
             this.moduleservice = new Moduleservice<Modulepreferences>();
             this.moduleservice.Preferences = new Modulepreferences();
             this.moduleservice.Preferences.ModuleId = this.Moduleid;
+
+            this.servpara = new Dictionary<string, object>();
+            servpara.Add("Moduleparams", this.moduleservice);
 
             return base.OnInitializedAsync();
         }

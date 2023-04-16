@@ -112,7 +112,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
             if (firstRender)
             {
-
                 try
                 {
 
@@ -142,11 +141,12 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                     await this.BrowserResizeService.RegisterWindowResizeCallback();
                     await BrowserHasResized();
 
+                    /*
                     StringpicsItellisense itellisense = new StringpicsItellisense();
                     string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                     await this.ChatHubService.ConsoleLog(consoleitem);
 
-                    //await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
+                    await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
 
                     bool granted = await this.JsapinotificationService.RequestPermission();
                     if (granted)
@@ -161,8 +161,9 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                             Icon = string.Empty,
                             Data = string.Empty,
                         });
+                    */
                 } catch (Exception exception) { 
-                    Console.WriteLine(exception.ToString()); }
+                    Console.WriteLine(exception.Message); }
             }
 
             await base.OnAfterRenderAsync(firstRender);
