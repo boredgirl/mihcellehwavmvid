@@ -1,8 +1,5 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
-
-@inject NavigationManager NavigationManager
-@inject Pagerservice<ChatHubUser> PagerServiceChatHubUser
+@inherits ComponentBase
 
 @using Mihcelle.Hwavmvid.Fileupload
 @using Mihcelle.Hwavmvid.Video
@@ -14,6 +11,9 @@
 @using Mihcelle.Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
 @using Mihcelle.Hwavmvid.Client.Modules
+
+@inject NavigationManager NavigationManager
+@inject Pagerservice<ChatHubUser> PagerServiceChatHubUser
 
 <div class="w-100 my-3" style="height: @(string.Format("{0}px", UserlistWindowHeight)); overflow: auto;">
 
@@ -133,6 +133,7 @@
 </div>
 
 @code {
+
 
     [Inject] public VideoService VideoService { get; set; }
     [Inject] public ChatHubService ChatHubService { get; set; }

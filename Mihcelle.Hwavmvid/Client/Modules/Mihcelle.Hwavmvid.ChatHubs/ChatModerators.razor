@@ -1,9 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
+@inherits ComponentBase
 @implements IDisposable 
-
-@inject ChatHubService ChatHubService
-@inject Pagerservice<ChatHubModerator> PagerServiceChatHubModerator
 
 @using System.Linq
 @using Mihcelle.Hwavmvid.Modules.ChatHubs.Services
@@ -13,6 +10,9 @@
 @using Oqtane.ChatHubs.Constants
 @using Microsoft.AspNetCore.SignalR.Client
 @using Mihcelle.Hwavmvid.Client.Modules
+
+@inject ChatHubService ChatHubService
+@inject Pagerservice<ChatHubModerator> PagerServiceChatHubModerator
 
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {

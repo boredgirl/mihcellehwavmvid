@@ -1,7 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
+@inherits ComponentBase
 @implements IDisposable
-@inject ChatHubService ChatHubService
 
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.SignalR.Client
@@ -10,6 +9,8 @@
 @using System.Collections.Generic
 @using System.Linq
 @using Mihcelle.Hwavmvid.Client.Modules
+
+@inject ChatHubService ChatHubService
 
 <AuthorizeView>
     <Authorizing>

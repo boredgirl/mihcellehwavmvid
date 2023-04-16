@@ -1,7 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
+@inherits ComponentBase
 @implements IDisposable
-@inject ChatHubService ChatHubService
 
 @using System.Linq
 @using System.Collections.Generic
@@ -11,6 +10,9 @@
 @using Oqtane.ChatHubs.Models
 @using Mihcelle.Hwavmvid.Jsapigeolocation
 @using Mihcelle.Hwavmvid.Client.Modules
+
+@inject ChatHubService ChatHubService
+@inject NavigationManager NavigationManager
 
 <AuthorizeView>
     <Authorizing>

@@ -14,6 +14,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
     public class SettingsBase : Modulebase, IDisposable
     {
 
+
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public ChatHubService ChatHubService { get; set; }
         [Inject] public HttpClient httpClient { get; set; }

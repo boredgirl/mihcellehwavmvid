@@ -1,5 +1,5 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
+@inherits ComponentBase
 @implements IDisposable
 
 @using Mihcelle.Hwavmvid.Pager
@@ -10,6 +10,7 @@
 @using System.Linq
 @using Mihcelle.Hwavmvid.Client.Modules
 
+@inject NavigationManager NavigationManager
 @inject ChatHubService ChatHubService
 @inject Pagerservice<ChatHubRoom> PagerServiceChatHubRoom
 

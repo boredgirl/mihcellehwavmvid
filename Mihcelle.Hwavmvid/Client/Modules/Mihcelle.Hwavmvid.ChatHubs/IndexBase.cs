@@ -28,7 +28,7 @@ using Mihcelle.Hwavmvid.Stringpics;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class IndexBase : ComponentBase, IDisposable
+    public class IndexBase : Modulebase, IDisposable
     {
         
 

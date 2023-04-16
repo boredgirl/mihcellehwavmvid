@@ -1,10 +1,6 @@
 ﻿@namespace Mihcelle.Hwavmvid.Modules.ChatHubs
-@inherits IndexBase
+@inherits ComponentBase
 @implements IDisposable 
-
-@inject NavigationManager NavigationManager
-@inject ChatHubService ChatHubService
-@inject Pagerservice<ChatHubWhitelistUser> PagerServiceChatHubWhitelistUser
 
 @using System.Linq
 @using Mihcelle.Hwavmvid.Modules.ChatHubs.Services
@@ -14,6 +10,10 @@
 @using Oqtane.ChatHubs.Constants
 @using Microsoft.AspNetCore.SignalR.Client
 @using Mihcelle.Hwavmvid.Client.Modules
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+@inject Pagerservice<ChatHubWhitelistUser> PagerServiceChatHubWhitelistUser
 
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
@@ -42,6 +42,7 @@
 }
 
 @code {
+
 
     [Parameter] public ChatHubRoom Room { get; set; }
 
