@@ -21,7 +21,7 @@
 
     <h5><span class="oi oi-bug"></span> Ignored by users list <span class="badge bg-success">NEW</span></h5>
 
-    <PagerComponent ApiQueryId="@this.Moduleid" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerIgnoredByItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredByUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoredByItems" TItemGeneric="@ChatHubIgnoredBy" Class="py-sm-3" Scrolling="@false">
+    <PagerComponent ApiQueryId="@this.ChatHubService.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerIgnoredByItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredByUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoredByItems" TItemGeneric="@ChatHubIgnoredBy" Class="py-sm-3" Scrolling="@false">
         <PagerItem>
 
             <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
@@ -46,7 +46,7 @@
 
     public void RetrievedItems(List<ChatHubIgnoredBy> obj, string apiQueryId)
     {
-        if (apiQueryId == this.Moduleid)
+        if (apiQueryId == this.ChatHubService.ModuleId)
         {
             this.ChatHubService.IgnoredByUsers.AddRange(obj);
             this.ChatHubService.RunUpdateUI();
@@ -55,7 +55,7 @@
 
     public void Error(Exception exception, string apiQueryId)
     {
-        if (this.Moduleid == apiQueryId)
+        if (this.ChatHubService.ModuleId == apiQueryId)
         {
             this.ChatHubService.HandleException(exception);
         }

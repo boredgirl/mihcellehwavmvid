@@ -47,6 +47,8 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }
         [Inject] protected JsapinotificationService JsapinotificationService { get; set; }
 
+        [Parameter] public Moduleservice<Modulepreferences> Moduleparams { get; set; }
+
         public ChatHubRoom contextRoom { get; set; }
 
         public string GuestUsername { get; set; } = "mihw_guest";
@@ -75,18 +77,6 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 
         protected override async Task OnInitializedAsync()
         {
-            this.ChatHubService.ModuleId = this.Moduleid;
-
-            Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.Moduleid);
-            this.BackgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#fff0f0");
-            this.maxUserNameCharacters = Int32.Parse(this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20"));
-            this.framerate = Int32.Parse(this.SettingService.GetSetting(settings, "Framerate", "24"));
-            this.videoBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000"));
-            this.audioBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800"));
-            this.videoSegmentsLength = Int32.Parse(this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400"));
-
-            this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
-
             this.BlazorDynamicLayoutService.TabItemClickedEvent += OnTabItemClickedExecute;
             this.BlazorDynamicLayoutService.OnErrorEvent += OnBlazorDynamicLayoutErrorExecute;
             this.VideoService.OnError += OnVideoErrorExecute;
@@ -98,8 +88,13 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         }
         protected override async Task OnParametersSetAsync()
         {
+
             try
             {
+
+                if (!string.IsNullOrEmpty(this.Moduleparams.Preferences.ModuleId)) ;
+                    this.ChatHubService.ModuleId = this.Moduleparams.Preferences.ModuleId;
+
                 /*
                 if (PageState.QueryString.ContainsKey("moduleid") && PageState.QueryString.ContainsKey("roomid") && int.Parse(PageState.QueryString["moduleid"]) == this.Moduleid)
                 {
@@ -115,6 +110,16 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         {
             if (firstRender)
             {
+
+                Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.ChatHubService.ModuleId);
+                this.BackgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#fff0f0");
+                this.maxUserNameCharacters = Int32.Parse(this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20"));
+                this.framerate = Int32.Parse(this.SettingService.GetSetting(settings, "Framerate", "24"));
+                this.videoBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000"));
+                this.audioBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800"));
+                this.videoSegmentsLength = Int32.Parse(this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400"));
+                this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
+
                 await this.ChatHubService.InitChatHubService();
                 await this.CookieService.Initcookiesprovider();
                 await this.ScrollService.InitScrollService();
@@ -126,7 +131,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 string cookievalue = await this.CookieService.Getcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename);
                 this.ChatHubService.IdentityCookie = new Cookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, cookievalue, "/", hostname);
 
-                await this.ChatHubService.ConnectToChat(this.GuestUsername, this.Moduleid);
+                await this.ChatHubService.ConnectToChat(this.GuestUsername, this.ChatHubService.ModuleId);
                 await this.ChatHubService.chatHubMap.InvokeVoidAsync("showchathubscontainer");
 
                 await this.BrowserResizeService.RegisterWindowResizeCallback();
@@ -138,7 +143,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
                 string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                 await this.ChatHubService.ConsoleLog(consoleitem);
 
-                await this.ChatHubService.GetVisitorsDisplay(this.Moduleid);
+                await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
 
                 bool granted = await this.JsapinotificationService.RequestPermission();
                 if (granted)

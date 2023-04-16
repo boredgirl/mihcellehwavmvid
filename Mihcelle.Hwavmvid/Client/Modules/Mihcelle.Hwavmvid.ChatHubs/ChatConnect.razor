@@ -32,7 +32,7 @@
 
         <div class="p-2 p-xl-4 bg-white w-100 mb-2 border border-primary">
             <div class="p-0 p-sm-1">
-                <input type="text" id="guestUsernameInput-@this.Moduleid" class="form-control" @bind-value="@this.GuestUsername" placeholder="Choose your desired guestname" style="max-width: 320px;" />
+                <input type="text" id="guestUsernameInput-@this.ChatHubService.ModuleId" class="form-control" @bind-value="@this.GuestUsername" placeholder="Choose your desired guestname" style="max-width: 320px;" />
             </div>
             <div class="p-0 p-sm-1">
                 <button type="button" class="btn btn-sm btn-link bg-white border border-light" @onclick="@(async () => await TryConnect())">Establish new connection</button>
@@ -48,7 +48,7 @@
 
     public async Task TryConnect()
     {
-        var connected = await this.ChatHubService.ConnectToChat(this.GuestUsername, this.Moduleid);
+        var connected = await this.ChatHubService.ConnectToChat(this.GuestUsername, this.ChatHubService.ModuleId);
         if(connected)
         {
             this.GuestUsername = string.Empty;

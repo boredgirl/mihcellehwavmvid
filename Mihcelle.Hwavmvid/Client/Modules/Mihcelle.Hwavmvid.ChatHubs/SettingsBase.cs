@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Mihcelle.Hwavmvid.ColorPicker;
 using Mihcelle.Hwavmvid.Client.Modules;
 using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Modules.ChatHubs.Services;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
@@ -14,6 +15,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
     {
 
         [Inject] public NavigationManager NavigationManager { get; set; }
+        [Inject] public ChatHubService ChatHubService { get; set; }
         [Inject] public HttpClient httpClient { get; set; }
         [Inject] public Applicationmodulesettingsservice SettingService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
@@ -36,7 +38,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
             {
                 this.ColorPickerService.OnColorPickerContextColorChangedEvent += this.OnColorPickerChangeExecute;
 
-                Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.Moduleid);
+                Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.ChatHubService.ModuleId);
                 this.backgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#f0f0f0");
                 this.maxUserNameCharacters = this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20");
                 this.framerate = this.SettingService.GetSetting(settings, "Framerate", "24");
@@ -55,15 +57,15 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
             try
             {
 
-                this.SettingService.SetSetting(this.Moduleid, "BackgroundColor", this.backgroundColor);
-                this.SettingService.SetSetting(this.Moduleid, "MaxUserNameCharacters", this.maxUserNameCharacters);
-                this.SettingService.SetSetting(this.Moduleid, "Framerate", this.framerate);
-                this.SettingService.SetSetting(this.Moduleid, "VideoBitsPerSecond", this.videoBitsPerSecond);
-                this.SettingService.SetSetting(this.Moduleid, "AudioBitsPerSecond", this.audioBitsPerSecond);
-                this.SettingService.SetSetting(this.Moduleid, "VideoSegmentsLength", this.videoSegmentsLength);
-                this.SettingService.SetSetting(this.Moduleid, "GeoLocationPositionInterval", this.geoLocationPositionInterval);
-                this.SettingService.SetSetting(this.Moduleid, "BingMapsApiKey", this.bingMapsApiKey);
-                this.SettingService.SetSetting(this.Moduleid, "RegularExpression", string.Join(";delimiter;", regularExpressions));
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "BackgroundColor", this.backgroundColor);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "MaxUserNameCharacters", this.maxUserNameCharacters);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "Framerate", this.framerate);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "VideoBitsPerSecond", this.videoBitsPerSecond);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "AudioBitsPerSecond", this.audioBitsPerSecond);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "VideoSegmentsLength", this.videoSegmentsLength);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "GeoLocationPositionInterval", this.geoLocationPositionInterval);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "BingMapsApiKey", this.bingMapsApiKey);
+                this.SettingService.SetSetting(this.ChatHubService.ModuleId, "RegularExpression", string.Join(";delimiter;", regularExpressions));
 
             }
             catch (Exception ex) { }

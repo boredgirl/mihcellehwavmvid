@@ -5,7 +5,12 @@
 
 <div class="position-relative">
 
-    <DynamicComponent Type="@Componenttype"></DynamicComponent>
+    @{
+        Dictionary<string, object> servpara = new Dictionary<string, object>();
+        servpara.Add("Moduleparams", this.moduleservice);
+    }
+
+    <DynamicComponent Type="@Componenttype" Parameters="@servpara"></DynamicComponent>
 
     <AuthorizeView Roles="Host">
         <Authorized>

@@ -203,19 +203,22 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 throw new HubException("Failed to add user to role..");
             }
 
+            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            var useragent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString();
+
             ChatHubConnection ChatHubConnection = new ChatHubConnection()
             {
                 ChatHubUserId = chatHubUser.Id,
                 ConnectionId = Context.ConnectionId,
-                IpAddress = Context.GetHttpContext().Connection.RemoteIpAddress.ToString(),
-                UserAgent = Context.GetHttpContext().Request.Headers["User-Agent"].ToString(),
+                IpAddress = ip,
+                UserAgent = useragent,
                 Status = Enum.GetName(typeof(ChatHubConnectionStatus), ChatHubConnectionStatus.Active),
                 CreatedOn = DateTime.Now,
                 CreatedBy = chatHubUser.UserName,
                 ModifiedBy = chatHubUser.UserName,
                 ModifiedOn = DateTime.Now,
             };
-            ChatHubConnection = this.chatHubRepository.AddConnection(ChatHubConnection);
+            await this.chatHubRepository.AddConnection(ChatHubConnection);
 
             ChatHubSettings ChatHubSetting = new ChatHubSettings()
             {
@@ -231,7 +234,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
 
             return chatHubUser;
         }
-        private ChatHubUser OnConnectedUser(ChatHubUser chatHubUser)
+        private async Task<ChatHubUser> OnConnectedUser(ChatHubUser chatHubUser)
         {
 
             var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
@@ -249,7 +252,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
                 ModifiedBy = chatHubUser.UserName,
                 ModifiedOn = DateTime.Now,
             };
-            ChatHubConnection = this.chatHubRepository.AddConnection(ChatHubConnection);            
+            await this.chatHubRepository.AddConnection(ChatHubConnection);            
 
             ChatHubSettings ChatHubSetting = this.chatHubRepository.GetSettingByUser(chatHubUser);
             if(ChatHubSetting == null)
@@ -280,7 +283,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Hubs
             ChatHubUser user = await this.IdentifyUser();
             if (user != null)
             {
-                user = this.OnConnectedUser(user);
+                user = await this.OnConnectedUser(user);
             }
             else
             {

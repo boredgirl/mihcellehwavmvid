@@ -47,7 +47,7 @@
                         headers.Add("connectionId", ChatHubService.Connection?.ConnectionId);
                         headers.Add("displayName", ChatHubService.ConnectedUser?.DisplayName);
                         headers.Add("roomId", room.Id.ToString());
-                        headers.Add("moduleId", this.Moduleid.ToString());
+                        headers.Add("moduleId", this.ChatHubService.ModuleId.ToString());
                     }
 
                     <FileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@(FileUploadInputFileElementId)" DropzoneElementId="@(FileUploadDropzoneContainerElementId)"></FileUploadComponent>

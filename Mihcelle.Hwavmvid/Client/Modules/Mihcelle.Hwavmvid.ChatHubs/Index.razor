@@ -33,7 +33,7 @@
 
 </style>
 
-<div id="chathub-module-@this.Moduleid" class="chathubs-container p-sm-3 mb-4" style="opacity: 0; background-color: @BackgroundColor">
+<div id="chathub-module-@this.ChatHubService.ModuleId" class="chathubs-container p-sm-3 mb-4" style="opacity: 0; background-color: @BackgroundColor">
 
     <TabContainer ElementId="chathubs-navigation-tabs">
 
@@ -236,7 +236,7 @@
                                 @context.Item.Title&nbsp;
                                 <span class="badge bg-primary @(context.Item.UnreadMessages != 0 ? "" : "d-none")">@context.Item.UnreadMessages</span>
 
-                                <span class="position-absolute" @onclick="async () => await LeaveRoom_Clicked(context.Item.Id, this.Moduleid)" style="top: 0px; right: 0px;">
+                                <span class="position-absolute" @onclick="async () => await LeaveRoom_Clicked(context.Item.Id, this.ChatHubService.ModuleId)" style="top: 0px; right: 0px;">
                                     <span class="oi oi-circle-x"></span>
                                 </span>
 

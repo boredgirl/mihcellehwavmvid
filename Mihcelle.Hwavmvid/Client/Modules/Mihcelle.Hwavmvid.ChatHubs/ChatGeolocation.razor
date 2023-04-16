@@ -65,7 +65,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.Moduleid);
+        Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.ChatHubService.ModuleId);
         this.geoLocatiionPositionInterval = Int32.Parse(this.SettingService.GetSetting(settings, "GeoLocationPositionInterval", "41000"));
         this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUI(sender, e);
         await base.OnInitializedAsync();

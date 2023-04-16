@@ -24,6 +24,7 @@ using Mihcelle.Hwavmvid.Download;
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Controllers
 {
 
+    [ApiController]
     [Route("api/[controller]/[action]")]
     public class ChatHubController : Controller
     {

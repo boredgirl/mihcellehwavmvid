@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Oqtane.ChatHubs.Models;
 using Microsoft.Extensions.Caching.Memory;
 using Mihcelle.Hwavmvid.Shared.Models;
+using Microsoft.VisualBasic;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Repository
 {
@@ -290,11 +291,10 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Repository
             await this._db.SaveChangesAsync();
             return ChatHubMessage;
         }
-        public ChatHubConnection AddConnection(ChatHubConnection ChatHubConnection)
+        public async Task AddConnection(ChatHubConnection ChatHubConnection)
         {
-            this._db.ChatHubConnection.Add(ChatHubConnection);
-            this._db.SaveChanges();            
-            return ChatHubConnection;
+            await this._db.ChatHubConnection.AddAsync(ChatHubConnection);
+            await this._db.SaveChangesAsync();            
         }
         public ChatHubUser AddUser(ChatHubUser ChatHubUser)
         {

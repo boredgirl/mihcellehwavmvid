@@ -28,7 +28,7 @@
             var archiveItemApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetArchiveItems");
         }
 
-        <PagerComponent ApiQueryId="@this.Moduleid" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
+        <PagerComponent ApiQueryId="@this.ChatHubService.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
             <PagerItem>
 
                 <div class="mb-2 mb-sm-3 p-0 p-sm-1" style="width: 340px; display: inline-block; text-align: center;">
@@ -57,11 +57,11 @@
 
                     <div class="text-center my-1">
 
-                        <button type="button" @onclick="() => PagerServiceChatHubCam.RemoveItem(context, this.Moduleid)" class="btn btn-sm btn-primary">Delete</button>
+                        <button type="button" @onclick="() => PagerServiceChatHubCam.RemoveItem(context, this.ChatHubService.ModuleId)" class="btn btn-sm btn-primary">Delete</button>
                     
                         @{
-                            var mp4downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + this.Moduleid.ToString() + "/" + ".mp4");
-                            var mp3downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + this.Moduleid.ToString() + "/" + ".mp3");
+                            var mp4downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + this.ChatHubService.ModuleId.ToString() + "/" + ".mp4");
+                            var mp3downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + this.ChatHubService.ModuleId.ToString() + "/" + ".mp3");
                         }
 
                         <DownloadComponent Id="@string.Concat(".mp4", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp4" DownloadButtonName=".mp4" ApiUrl="@mp4downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></DownloadComponent>
@@ -90,7 +90,7 @@
 
     public void RetrievedItems(List<ChatHubCam> items, string apiQueryId)
     {
-        if (apiQueryId == this.Moduleid)
+        if (apiQueryId == this.ChatHubService.ModuleId)
         {
             this.ChatHubService.VideoCaptures.AddRange(items);
             this.ChatHubService.RunUpdateUI();
@@ -98,7 +98,7 @@
     }
     public async void RemoveItem(Pagerevent<ChatHubCam> obj)
     {
-        if (obj.ApiQueryId == this.Moduleid)
+        if (obj.ApiQueryId == this.ChatHubService.ModuleId)
         {
             await this.ChatHubService.DeleteCam(obj.Item.Id);
             this.ChatHubService.VideoCaptures.Remove(obj.Item);
@@ -108,7 +108,7 @@
 
     public void Error(Exception exception, string apiQueryId)
     {
-        if (this.Moduleid == apiQueryId)
+        if (this.ChatHubService.ModuleId == apiQueryId)
         {
             this.ChatHubService.HandleException(exception);
         }
