@@ -28,9 +28,10 @@ using Mihcelle.Hwavmvid.Stringpics;
 
 namespace Mihcelle.Hwavmvid.Modules.ChatHubs
 {
-    public class IndexBase : Modulebase, IDisposable
+    public class IndexBase : ComponentBase, IDisposable
     {
         
+
         [Inject] protected IJSRuntime JsRuntime { get; set; }
         [Inject] protected Applicationmodulesettingsservice SettingService { get; set; }
         [Inject] protected NavigationManager NavigationManager { get; set; }
@@ -108,57 +109,63 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs
         }        
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+
             if (firstRender)
             {
 
-                Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.ChatHubService.ModuleId);
-                this.BackgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#fff0f0");
-                this.maxUserNameCharacters = Int32.Parse(this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20"));
-                this.framerate = Int32.Parse(this.SettingService.GetSetting(settings, "Framerate", "24"));
-                this.videoBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000"));
-                this.audioBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800"));
-                this.videoSegmentsLength = Int32.Parse(this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400"));
-                this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
+                try
+                {
 
-                await this.ChatHubService.InitChatHubService();
-                await this.CookieService.Initcookiesprovider();
-                await this.ScrollService.InitScrollService();
-                await this.BrowserResizeService.InitBrowserResizeService();
-                await this.ModalService.Initmodal();
-                await this.JsapinotificationService.InitJsapinotifications();
+                    Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(this.ChatHubService.ModuleId);
+                    this.BackgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#fff0f0");
+                    this.maxUserNameCharacters = Int32.Parse(this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20"));
+                    this.framerate = Int32.Parse(this.SettingService.GetSetting(settings, "Framerate", "24"));
+                    this.videoBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000"));
+                    this.audioBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800"));
+                    this.videoSegmentsLength = Int32.Parse(this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400"));
+                    this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
 
-                string hostname = new Uri(NavigationManager.BaseUri).Host;
-                string cookievalue = await this.CookieService.Getcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename);
-                this.ChatHubService.IdentityCookie = new Cookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, cookievalue, "/", hostname);
+                    await this.ChatHubService.InitChatHubService();
+                    await this.CookieService.Initcookiesprovider();
+                    await this.ScrollService.InitScrollService();
+                    await this.BrowserResizeService.InitBrowserResizeService();
+                    await this.ModalService.Initmodal();
+                    await this.JsapinotificationService.InitJsapinotifications();
 
-                await this.ChatHubService.ConnectToChat(this.GuestUsername, this.ChatHubService.ModuleId);
-                await this.ChatHubService.chatHubMap.InvokeVoidAsync("showchathubscontainer");
+                    string hostname = new Uri(NavigationManager.BaseUri).Host;
+                    string cookievalue = await this.CookieService.Getcookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename);
+                    this.ChatHubService.IdentityCookie = new Cookie(Mihcelle.Hwavmvid.Shared.Constants.Authentication.Authcookiename, cookievalue, "/", hostname);
 
-                await this.BrowserResizeService.RegisterWindowResizeCallback();
-                await BrowserHasResized();
+                    await this.ChatHubService.ConnectToChat(this.GuestUsername, this.ChatHubService.ModuleId);
+                    await this.ChatHubService.chatHubMap.InvokeVoidAsync("showchathubscontainer");
 
-                await base.OnAfterRenderAsync(firstRender);
+                    await this.BrowserResizeService.RegisterWindowResizeCallback();
+                    await BrowserHasResized();
 
-                StringpicsItellisense itellisense = new StringpicsItellisense();
-                string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
-                await this.ChatHubService.ConsoleLog(consoleitem);
+                    StringpicsItellisense itellisense = new StringpicsItellisense();
+                    string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
+                    await this.ChatHubService.ConsoleLog(consoleitem);
 
-                await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
+                    await this.ChatHubService.GetVisitorsDisplay(this.ChatHubService.ModuleId);
 
-                bool granted = await this.JsapinotificationService.RequestPermission();
-                if (granted)
-                    await this.JsapinotificationService.ShowNotification(new Jsapinotification()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Title = "App Notifications enabled",
-                        Dir = "auto",
-                        Lang = "en-US",
-                        Body = consoleitem,
-                        Tag = "hwavmvid",
-                        Icon = string.Empty,
-                        Data = string.Empty,
-                    });
+                    bool granted = await this.JsapinotificationService.RequestPermission();
+                    if (granted)
+                        await this.JsapinotificationService.ShowNotification(new Jsapinotification()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "App Notifications enabled",
+                            Dir = "auto",
+                            Lang = "en-US",
+                            Body = consoleitem,
+                            Tag = "hwavmvid",
+                            Icon = string.Empty,
+                            Data = string.Empty,
+                        });
+                } catch (Exception exception) { 
+                    Console.WriteLine(exception.ToString()); }
             }
+
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         private async void OnDraggableListDropEventExecute(object sender, BlazorDraggableListEvent e)

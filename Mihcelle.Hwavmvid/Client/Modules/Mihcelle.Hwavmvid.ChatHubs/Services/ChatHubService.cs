@@ -246,9 +246,7 @@ namespace Mihcelle.Hwavmvid.Modules.ChatHubs.Services
         {
             try
             {
-                if (this.Connection?.State == HubConnectionState.Connected
-                 || this.Connection?.State == HubConnectionState.Connecting
-                 || this.Connection?.State == HubConnectionState.Reconnecting)
+                if (this.Connection != null && this.Connection?.State == HubConnectionState.Connected || this.Connection?.State == HubConnectionState.Connecting || this.Connection?.State == HubConnectionState.Reconnecting)
                 {
                     this.AlertsService.NewAlert($"The client is already connected. Trying establish new connection with guest name { GuestUsername }.", "Javascript Application", PositionType.Fixed);
                 }

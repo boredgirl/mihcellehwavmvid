@@ -25,7 +25,7 @@
     <div class="p-md-2 mt-2 text-center bg-white border border-primary">
 
         @{
-            var archiveItemApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetArchiveItems");
+            var archiveItemApiUrl = "api/chathub/GetArchiveItems";
         }
 
         <PagerComponent ApiQueryId="@this.ChatHubService.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
